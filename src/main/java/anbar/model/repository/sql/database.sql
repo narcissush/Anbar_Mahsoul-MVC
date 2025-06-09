@@ -40,7 +40,7 @@ create table transaction(
                             storekeppers_id references storekeppers,
                             transaction_type nvarchar2(10),
                             quantity number,
-                            transaction_date date
+                            transaction_date date DEFAULT sysdate
 );
 
 create sequence transaction_seq start with 1 increment by 1;
@@ -65,8 +65,13 @@ select t.id           as transaction_id,
        s.birth_date   as storekeppers_birth_date,
        s.phone_number as storekeppers_phone_number,
        s.username     as storekeppers_username,
-       s.password     as storekeppers_password
-from transaction t
+       s.password     as storekeppers_password,
+
+       t.transaction_type,
+       t.quantity,
+       t.transaction_date
+
+from transaction  t  -- برای جداول اسم مستعار as ندارد
 join products p on t.product_id = p.id
 join storekeppers s on t.storekeppers_id = s.id;
 
