@@ -1,9 +1,15 @@
 package anbar.model.entity;
 
 import anbar.model.entity.enums.Transaction_type;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 
+@Data
+@SuperBuilder
+@NoArgsConstructor
 public class Transaction {
 
     private  int id;
