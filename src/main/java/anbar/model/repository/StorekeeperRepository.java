@@ -10,13 +10,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StorekeeperRepository implements AutoCloseable{
+public class StorekeeperRepository implements AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
     public StorekeeperRepository() throws SQLException {
         connection = ConnectionProvider.getConnectionProvider().getconnection();
     }
+
     public int nextId() throws SQLException {
         preparedStatement = connection.prepareStatement("select storekeeper_seq.nextval from DUAL");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -25,9 +26,8 @@ public class StorekeeperRepository implements AutoCloseable{
     }
 
     public void save(Storekeeper storekeeper) throws SQLException {
-
+        storekeeper.setId(nextId());
         preparedStatement = connection.prepareStatement("insert into storekeepers values (?,?,?,?,?,?,?,?,?)");
-
         preparedStatement.setInt(1, storekeeper.getId());
         preparedStatement.setString(2, storekeeper.getNationalId());
         preparedStatement.setString(3, storekeeper.getName());
@@ -38,10 +38,9 @@ public class StorekeeperRepository implements AutoCloseable{
         preparedStatement.setString(8, storekeeper.getUsername());
         preparedStatement.setString(9, storekeeper.getPassword());
         preparedStatement.execute();
-
     }
 
-    public void edit(Storekeeper storekeeper,int i) throws SQLException {
+    public void edit(Storekeeper storekeeper, int i) throws SQLException {
         preparedStatement = connection.prepareStatement("update storekeepers set NATIONALID=?,NAME=?,FAMILY=?,GENDER=?,BIRTH_DATE=?,PHONE_NUMBER=?,USERNAME=?,PASSWORD=? where id = ?");
         preparedStatement.setString(1, storekeeper.getNationalId());
         preparedStatement.setString(2, storekeeper.getName());
@@ -74,6 +73,8 @@ public class StorekeeperRepository implements AutoCloseable{
         return storekeepersList;
     }
 
+//    todo :  findById
+
     public List<Storekeeper> findByNationalId(String nationalId) throws SQLException {
         List<Storekeeper> storekeepersList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from storekeepers where nationalid=?");
@@ -85,7 +86,7 @@ public class StorekeeperRepository implements AutoCloseable{
         return storekeepersList;
     }
 
-    public List<Storekeeper> findByNameAndFamily(String name,String family) throws SQLException {
+    public List<Storekeeper> findByNameAndFamily(String name, String family) throws SQLException {
         List<Storekeeper> storekeepersList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from storekeepers where name LIKE ? and family LIKE ?");
         preparedStatement.setString(1, name);
@@ -98,7 +99,7 @@ public class StorekeeperRepository implements AutoCloseable{
         return storekeepersList;
     }
 
-
+//    todo :  findByUsername, findByUserAndPassword
 
     @Override
     public void close() throws Exception {

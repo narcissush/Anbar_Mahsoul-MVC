@@ -1,4 +1,4 @@
-package anbar.service;
+package anbar.model.service;
 
 import anbar.model.entity.Storekeeper;
 import anbar.model.repository.StorekeeperRepository;
@@ -30,6 +30,9 @@ public class StorekeeperService {
         }
     }
 
+//  todo :  findById
+
+
     public static List<Storekeeper> findByNationalId(String  nationalId) throws Exception {
         try(StorekeeperRepository storekeeperRepository = new StorekeeperRepository()){
             return storekeeperRepository.findByNationalId(nationalId);
@@ -42,5 +45,5 @@ public class StorekeeperService {
         }
     }
 
-
+//    todo :  findByUsername, findByUserAndPassword
 }

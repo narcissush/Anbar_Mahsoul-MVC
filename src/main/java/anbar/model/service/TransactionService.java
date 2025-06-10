@@ -1,4 +1,4 @@
-package anbar.service;
+package anbar.model.service;
 
 import anbar.model.entity.Transaction;
 import anbar.model.entity.enums.Brand;

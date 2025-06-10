@@ -11,13 +11,14 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductRepository implements AutoCloseable{
-private Connection connection;
-private PreparedStatement preparedStatement;
+public class ProductRepository implements AutoCloseable {
+    private Connection connection;
+    private PreparedStatement preparedStatement;
 
     public ProductRepository() throws SQLException {
-      connection = ConnectionProvider.getConnectionProvider().getconnection();
+        connection = ConnectionProvider.getConnectionProvider().getconnection();
     }
+
     public int nextId() throws SQLException {
         preparedStatement = connection.prepareStatement("select product_seq.nextval from DUAL");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -26,10 +27,9 @@ private PreparedStatement preparedStatement;
     }
 
     public void save(Product product) throws SQLException {
-
+        product.setId(nextId());
         preparedStatement = connection.prepareStatement("insert into Products values (?,?,?,?,?,?,?,?,?)");
-
-        preparedStatement.setInt(1,product.getId());
+        preparedStatement.setInt(1, product.getId());
         preparedStatement.setString(2, product.getBrand().name());
         preparedStatement.setString(3, product.getModel());
         preparedStatement.setString(4, product.getOs().name());
@@ -42,7 +42,7 @@ private PreparedStatement preparedStatement;
 
     }
 
-    public void edit(Product product,int id) throws SQLException {
+    public void edit(Product product, int id) throws SQLException {
         preparedStatement = connection.prepareStatement("update Products set brand=?,model=?,os=?,has_charger=?,has_headset=?,price=?,count=?,manufacture_date=? where id=?");
 
         preparedStatement.setString(1, product.getBrand().name());
@@ -76,7 +76,9 @@ private PreparedStatement preparedStatement;
         return productsList;
     }
 
-    public List<Product> findByPrice(int price1,int price2) throws SQLException {
+//    todo : findByTitle Like
+
+    public List<Product> findByPrice(int price1, int price2) throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from Products where price between ? and ?");
 
@@ -89,8 +91,6 @@ private PreparedStatement preparedStatement;
         }
         return productsList;
     }
-
-
 
     @Override
     public void close() throws Exception {

@@ -1,4 +1,4 @@
-package anbar.service;
+package anbar.model.service;
 
 import anbar.model.entity.Product;
 import anbar.model.repository.ProductRepository;
@@ -30,11 +30,12 @@ public class ProductService {
         }
     }
 
+//    todo : findByTitle Like
+
     public static List<Product> findByPrice(int price1,int price2) throws Exception {
         try(ProductRepository productRepository = new ProductRepository()){
             return productRepository.findByPrice(price1,price2);
         }
     }
-
 
 }

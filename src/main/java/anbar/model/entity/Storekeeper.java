@@ -7,6 +7,7 @@ import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+
 @Data
 @SuperBuilder
 @NoArgsConstructor
@@ -21,6 +22,4 @@ public class Storekeeper implements Serializable {
     private String phoneNumber;
     private String username;
     private String password;
-
-
 }

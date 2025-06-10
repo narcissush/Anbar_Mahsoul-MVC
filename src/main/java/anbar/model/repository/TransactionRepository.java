@@ -10,7 +10,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TransactionRepository implements AutoCloseable{
+public class TransactionRepository implements AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
 
@@ -18,12 +18,15 @@ public class TransactionRepository implements AutoCloseable{
         connection = ConnectionProvider.getConnectionProvider().getconnection();
     }
 
-    public void save(Transaction transaction) throws SQLException {
-        preparedStatement = connection.prepareStatement("select transaction_seq.nextval from dual");
+    public int nextId() throws SQLException {
+        preparedStatement = connection.prepareStatement("select transaction_seq.nextval from DUAL");
         ResultSet resultSet = preparedStatement.executeQuery();
         resultSet.next();
-        transaction.setId(resultSet.getInt("nextval"));
+        return resultSet.getInt("nextval");
+    }
 
+    public void save(Transaction transaction) throws SQLException {
+        transaction.setId(nextId());
         preparedStatement = connection.prepareStatement("insert into transactions (id, storekeeper_id, product_id)values (?, ?, ?)");
         preparedStatement.setInt(1, transaction.getId());
         preparedStatement.setInt(2, transaction.getStorekeeper().getId());
@@ -37,12 +40,10 @@ public class TransactionRepository implements AutoCloseable{
         preparedStatement.setInt(2, transaction.getProduct().getId());
         preparedStatement.setString(3, transaction.getTransaction_type().name());
         preparedStatement.setInt(4, transaction.getQuantity());
-        preparedStatement.setDate(3, transaction.getTransaction_date() == null? null: Date.valueOf(transaction.getTransaction_date()));
+        preparedStatement.setDate(3, transaction.getTransaction_date() == null ? null : Date.valueOf(transaction.getTransaction_date()));
         preparedStatement.setInt(5, transaction.getId());
         preparedStatement.execute();
     }
-
-
 
     public void delete(int id) throws SQLException {
         preparedStatement = connection.prepareStatement(
@@ -65,8 +66,8 @@ public class TransactionRepository implements AutoCloseable{
     public List<Transaction> findByProductBrand(Brand brand) throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
         connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transaction_report where brand=?");
-
+        preparedStatement = connection.prepareStatement("select * from transaction_report where product_brand=?");
+        preparedStatement.setString(1, brand.name());
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             transactionList.add(EntityMapper.transactionMapper(resultSet));
@@ -74,10 +75,10 @@ public class TransactionRepository implements AutoCloseable{
         return transactionList;
     }
 
-    public List<Transaction> findByStoreKeeperNameAndFamily(String name,String family) throws SQLException {
+    public List<Transaction> findByStoreKeeperNameAndFamily(String name, String family) throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
         connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transaction_report where storekeeper_name like ? and family_name like ?");
+        preparedStatement = connection.prepareStatement("select * from transaction_report where storekeepers_name like ? and storekeepers_family like ?");
         preparedStatement.setString(1, name + "%");
         preparedStatement.setString(2, family + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -86,9 +87,6 @@ public class TransactionRepository implements AutoCloseable{
         }
         return transactionList;
     }
-
-
-
 
     @Override
     public void close() throws Exception {
