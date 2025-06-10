@@ -15,6 +15,7 @@ import java.time.LocalDate;
 
 public class Product implements Serializable {
     private int id;
+    private String title;
     private Brand brand;
     private String model;
     private Os os;

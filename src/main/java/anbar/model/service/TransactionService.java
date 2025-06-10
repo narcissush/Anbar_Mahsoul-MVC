@@ -14,14 +14,24 @@ public class TransactionService {
     }
 
     public static void edit(Transaction transaction) throws Exception {
+
         try(TransactionRepository transactionRepository = new TransactionRepository()){
+            if (transactionRepository.findById(transaction.getId()) != null) {
             transactionRepository.edit(transaction);
+            }else{
+                throw new Exception("Product not found");
+            }
+
         }
     }
 
     public static void delete(int id) throws Exception {
         try(TransactionRepository transactionRepository = new TransactionRepository()){
+            if (transactionRepository.findById(id) != null) {
             transactionRepository.delete (id);
+            }else{
+                throw new Exception("Product not found");
+            }
         }
     }
 

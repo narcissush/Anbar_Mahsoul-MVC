@@ -12,14 +12,22 @@ public class StorekeeperService {
         }
     }
 
-    public static void edit(Storekeeper storekeeper,int id) throws Exception {
-        try(StorekeeperRepository storekeeperRepository = new StorekeeperRepository()){
-            storekeeperRepository.edit(storekeeper,id);
+    public static void edit(Storekeeper storekeeper) throws Exception {
+        try (StorekeeperRepository storekeeperRepository = new StorekeeperRepository()) {
+            if (storekeeperRepository.findById(storekeeper.getId()) != null) {
+                storekeeperRepository.edit(storekeeper);
+            }
+            throw new Exception("Product not found");
         }
-    }
+        }
+
 
     public static void delete(int id) throws Exception {
-        try(StorekeeperRepository storekeeperRepository = new StorekeeperRepository()){
+
+        try (StorekeeperRepository storekeeperRepository = new StorekeeperRepository()) {
+            if (storekeeperRepository.findById(id) != null) {
+                storekeeperRepository.delete (id);
+            }
             storekeeperRepository.delete (id);
         }
     }
@@ -30,7 +38,13 @@ public class StorekeeperService {
         }
     }
 
-//  todo :  findById
+    public static Storekeeper findById( int id) throws Exception {
+        try(StorekeeperRepository storekeeperRepository = new StorekeeperRepository()){
+            return storekeeperRepository.findById(id);
+        }
+    }
+
+
 
 
     public static List<Storekeeper> findByNationalId(String  nationalId) throws Exception {
@@ -45,5 +59,15 @@ public class StorekeeperService {
         }
     }
 
-//    todo :  findByUsername, findByUserAndPassword
+public static List<Storekeeper> findByUserAndPassword(String  username,String password) throws Exception {
+    try(StorekeeperRepository storekeeperRepository = new StorekeeperRepository()){
+        return storekeeperRepository.findByUsernameAndPassword(username,password);
+    }
+}
+    public static List<Storekeeper> findByUsername(String  username) throws Exception {
+        try(StorekeeperRepository storekeeperRepository = new StorekeeperRepository()){
+            return storekeeperRepository.findByUsername(username);
+        }
+    }
+
 }

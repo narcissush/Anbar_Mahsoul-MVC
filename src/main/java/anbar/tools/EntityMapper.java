@@ -16,7 +16,7 @@ public class EntityMapper {
         return Storekeeper
                 .builder()
                 .id(resultSet.getInt("id"))
-                .nationalId(resultSet.getString("nationalid"))
+                .nationalId(resultSet.getString("national_id"))
                 .name(resultSet.getString("name"))
                 .family(resultSet.getString("family"))
                 .gender(Gender.valueOf(resultSet.getString("gender")))
@@ -31,6 +31,7 @@ public class EntityMapper {
 
         return Product.builder()
                 .id(resultSet.getInt("id"))
+                .title(resultSet.getString("title"))
                 .brand(Brand.valueOf(resultSet.getString("brand")))
                 .model(resultSet.getString("model"))
                 .os(Os.valueOf(resultSet.getString("os")))
@@ -47,7 +48,7 @@ public class EntityMapper {
         Storekeeper storekeeper = Storekeeper
                 .builder()
                 .id(resultSet.getInt("storekeepers_id"))
-                .nationalId(resultSet.getString("storekeepers_nationalid"))
+                .nationalId(resultSet.getString("storekeepers_national_id"))
                 .name(resultSet.getString("storekeepers_name"))
                 .family(resultSet.getString("storekeepers_family"))
                 .gender(Gender.valueOf(resultSet.getString("storekeepers_gender")))
@@ -59,15 +60,16 @@ public class EntityMapper {
 
         Product product =Product
                 .builder()
-                .id(resultSet.getInt("product_id"))
-                .brand(Brand.valueOf(resultSet.getString("product_brand")))
-                .model(resultSet.getString("product_model"))
-                .os(Os.valueOf(resultSet.getString("product_os")))
-                .price(resultSet.getInt("product_price"))
-                .count(resultSet.getInt("product_count"))
-                .hasHeadset(resultSet.getBoolean("product_has_headset"))
-                .hasCharger(resultSet.getBoolean("product_has_charger"))
-                .manufactureDate(resultSet.getDate("product_manufacture_date").toLocalDate())
+                .id(resultSet.getInt("products_id"))
+                .title(resultSet.getString("products_title"))
+                .brand(Brand.valueOf(resultSet.getString("products_brand")))
+                .model(resultSet.getString("products_model"))
+                .os(Os.valueOf(resultSet.getString("products_os")))
+                .price(resultSet.getInt("products_price"))
+                .count(resultSet.getInt("products_count"))
+                .hasHeadset(resultSet.getBoolean("products_has_headset"))
+                .hasCharger(resultSet.getBoolean("products_has_charger"))
+                .manufactureDate(resultSet.getDate("products_manufacture_date").toLocalDate())
                 .build();
 
         return Transaction
@@ -77,7 +79,7 @@ public class EntityMapper {
                 .product(product)
                 .transaction_type(Transaction_type.valueOf(resultSet.getString("transaction_type")))
                 .quantity(resultSet.getInt("quantity"))
-                .transaction_date(resultSet.getDate("transaction_date").toLocalDate())
+                .transaction_dateTime(resultSet.getTimestamp("transaction_date").toLocalDateTime())
 
                 .build();
     }

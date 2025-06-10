@@ -1,7 +1,7 @@
 create table products
 (
     id               number primary key,
---     title nvarchar2(30)
+    title            nvarchar2(30),
     brand            nvarchar2(10),
     model            nvarchar2(20),
     os               nvarchar2(10),
@@ -13,14 +13,14 @@ create table products
 
 );
 
-create sequence product_seq start with 1 increment by 1;
+create sequence products_seq start with 1 increment by 1;
 
 
-----store_keeper
+----storekeeper
 create table storekeepers
 (
     id           number primary key,
-    nationalid   nvarchar2(10) not null,  -- todo : national_id
+    national_id  nvarchar2(10) not null,
     name         nvarchar2(30),
     family       nvarchar2(30),
     gender       nvarchar2(8),
@@ -31,37 +31,38 @@ create table storekeepers
 
 );
 
-create sequence storekeeper_seq start with 1 increment by 1;
+create sequence storekeepers_seq start with 1 increment by 1;
 
 
 --storekeepers_products
 create table transactions
 (
     id               int primary key,
-    product_id references products,
-    storekeeper_id references storekeepers,
+    products_id references products,
+    storekeepers_id references storekeepers,
     transaction_type nvarchar2(10),
     quantity         number,
-    transaction_date date DEFAULT sysdate       -- todo : timestamp
+    transaction_date timestamp DEFAULT sysdate
 );
 
-create sequence transaction_seq start with 1 increment by 1;
+create sequence transactions_seq start with 1 increment by 1;
 
 
 ----report transaction
-create view transaction_report as
+create view transactions_report as
 select t.id               as transaction_id,
-       t.product_id,
-       p.brand            as product_brand,
-       p.model            as product_model,
-       p.os               as product_os,
-       p.has_charger      as product_has_charger,
-       p.has_headset      as product_has_headset,
-       p.price            as product_price,
-       p.count            as product_count,
-       p.manufacture_date as product_manufacture_date,
-       t.storekeeper_id,
-       s.nationalid       as storekeepers_nationalid,
+       t.products_id,
+       p.title            as products_title,
+       p.brand            as products_brand,
+       p.model            as products_model,
+       p.os               as products_os,
+       p.has_charger      as products_has_charger,
+       p.has_headset      as products_has_headset,
+       p.price            as products_price,
+       p.count            as products_count,
+       p.manufacture_date as products_manufacture_date,
+       t.storekeepers_id,
+       s.national_id      as storekeepers_national_id,
        s.name             as storekeepers_name,
        s.family           as storekeepers_family,
        s.gender           as storekeepers_gender,
@@ -75,13 +76,13 @@ select t.id               as transaction_id,
        t.transaction_date
 
 from TRANSACTIONS t -- برای جداول اسم مستعار as ندارد
-         join products p on t.product_id = p.id
-         join storekeepers s on t.storekeeper_id = s.id;
+         join products p on t.products_id = p.id
+         join storekeepers s on t.storekeepers_id = s.id;
 
 
 
 select *
-from transaction_report;
+from transactions_report;
 
 select *
 from storekeepers;

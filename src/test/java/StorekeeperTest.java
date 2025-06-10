@@ -3,7 +3,7 @@ import anbar.model.entity.enums.Gender;
 import anbar.model.service.StorekeeperService;
 
 
-
+import javax.sound.midi.Soundbank;
 import java.time.LocalDate;
 
 public class StorekeeperTest {
@@ -20,11 +20,12 @@ public class StorekeeperTest {
                 .username("mina")
                 .password("mina123")
                 .build();
-       //StorekeeperService.save(storekeeper);
+        StorekeeperService.save(storekeeper);
         //StorekeeperService.edit(storekeeper,3);
         //StorekeeperService.delete(3);
         //System.out.println(StorekeeperService.findByNationalId("0080386822"));
-        System.out.println(StorekeeperService.findByNameAndFamily("neda", "gorji"));
+        //System.out.println(StorekeeperService.findByNameAndFamily("neda", "gorji"));
+        System.out.println(StorekeeperService.findByUserAndPassword("mina1", "mina123"));
 
         //System.out.println(StorekeeperService.findAll());
     }
