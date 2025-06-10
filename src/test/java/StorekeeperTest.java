@@ -1,6 +1,6 @@
 import anbar.model.entity.Storekeeper;
 import anbar.model.entity.enums.Gender;
-import anbar.service.StorekeeperService;
+import anbar.model.service.StorekeeperService;
 
 
 

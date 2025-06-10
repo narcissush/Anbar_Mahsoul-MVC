@@ -1,16 +1,4 @@
-import anbar.model.entity.Product;
-import anbar.model.entity.Storekeeper;
-import anbar.model.entity.Transaction;
-import anbar.model.entity.enums.Brand;
-import anbar.model.entity.enums.Gender;
-import anbar.model.entity.enums.Os;
-import anbar.model.entity.enums.Transaction_type;
-import anbar.service.ProductService;
-import anbar.service.StorekeeperService;
-import anbar.service.TransactionService;
-
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import anbar.model.service.TransactionService;
 
 public class TransactionTest {
     public static void main(String[] args) throws Exception {

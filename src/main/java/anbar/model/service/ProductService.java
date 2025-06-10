@@ -12,15 +12,23 @@ public class ProductService {
         }
     }
 
-    public static void edit(Product product,int id) throws Exception {
+    public static void edit(Product product) throws Exception {
         try(ProductRepository productRepository = new ProductRepository()){
-            productRepository.edit(product,id);
+//            if (productRepository.findById(product.getId()) != null) {
+                productRepository.edit(product);
+//            }else{
+//                throw new Exception("Product not found");   // ProductNotFoundException
+//            }
         }
     }
 
     public static void delete(int id) throws Exception {
         try(ProductRepository productRepository = new ProductRepository()){
-            productRepository.delete (id);
+//            if (productRepository.findById(product.getId()) != null) {
+                productRepository.delete(id);
+//            }else{
+//                throw new Exception("Product not found");   // ProductNotFoundException
+//            }
         }
     }
 
