@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductRepository implements AutoCloseable{
-    private Connection connection;
-    private PreparedStatement preparedStatement;
+private Connection connection;
+private PreparedStatement preparedStatement;
 
     public ProductRepository() throws SQLException {
       connection = ConnectionProvider.getConnectionProvider().getconnection();
@@ -41,7 +41,7 @@ public class ProductRepository implements AutoCloseable{
 
     }
 
-    public void edit(Product product) throws SQLException {
+    public void edit(Product product,int id) throws SQLException {
         preparedStatement = connection.prepareStatement("update Products set brand=?,model=?,os=?,has_charger=?,has_headset=?,price=?,count=?,manufacture_date=? where id=?");
 
         preparedStatement.setString(1, product.getBrand().name());
@@ -52,19 +52,19 @@ public class ProductRepository implements AutoCloseable{
         preparedStatement.setInt(6, product.getPrice());
         preparedStatement.setInt(7, product.getCount());
         preparedStatement.setDate(8, Date.valueOf(product.getManufactureDate()));
-        preparedStatement.setInt(9, product.getId());
+        preparedStatement.setInt(9, id);
         preparedStatement.execute();
 
     }
 
-    public void remove(int id) throws SQLException {
+    public void delete(int id) throws SQLException {
         preparedStatement = connection.prepareStatement("delete from products where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
 
     }
 
-    public List<Product> getAllProducts() throws SQLException {
+    public List<Product> findAll() throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from products");
         ResultSet resultSet = preparedStatement.executeQuery();
@@ -85,7 +85,7 @@ public class ProductRepository implements AutoCloseable{
         return productsList;
     }
 
-    public List<Product> getProductsByBrand_Price(int price1,int price2) throws SQLException {
+    public List<Product> findByPrice(int price1,int price2) throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from Products where price between ? and ?");
 

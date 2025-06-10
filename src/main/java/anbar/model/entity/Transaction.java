@@ -5,16 +5,17 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 @Data
 @SuperBuilder
 @NoArgsConstructor
-public class Transaction {
+public class Transaction implements Serializable {
 
     private  int id;
-    private  int product_id;
-    private  int storekepper_id;
+    private  Product product;
+    private  Storekeeper storekeeper;
 
     private Transaction_type transaction_type;
     private  int quantity ;

@@ -1,71 +1,58 @@
 package anbar.tools;
 
 import anbar.model.entity.Product;
-import anbar.model.entity.Storekepper;
+import anbar.model.entity.Storekeeper;
 import anbar.model.entity.Transaction;
-import jdk.nashorn.internal.runtime.Debug;
+import anbar.model.entity.enums.Brand;
+import anbar.model.entity.enums.Gender;
+import anbar.model.entity.enums.Os;
+import anbar.model.entity.enums.Transaction_type;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EntityMapper {
-    public static Storekepper storekepperMapper(ResultSet resultSet) throws SQLException {
-        return storekepper
+    public static Storekeeper storekeeperMapper(ResultSet resultSet) throws SQLException {
+        return Storekeeper
                 .builder()
-                .id(resultSet.getInt("ID"))
-                .name(resultSet.getString("NAME"))
-                .family(resultSet.getString("FAMILY"))
-                .nationalId(resultSet.getString("NATIONAL_ID"))
-                .birthDate(resultSet.getDate("BIRTH_DATE") == null ? null : resultSet.getDate("BIRTH_DATE").toLocalDate())
+                .id(resultSet.getInt("id"))
+                .nationalId(resultSet.getString("nationalid"))
+                .name(resultSet.getString("name"))
+                .family(resultSet.getString("family"))
+                .gender(Gender.valueOf(resultSet.getString("gender")))
+                .birthDate(resultSet.getDate("birthdate").toLocalDate())
+                .phoneNumber(resultSet.getString("mobile"))
+                .username(resultSet.getString("username"))
+                .password(resultSet.getString("password"))
                 .build();
     }
 
     public static Product productMapper(ResultSet resultSet) throws SQLException {
-        return Product
-                .builder()
-                .id(resultSet.getInt("ID"))
-                .title(resultSet.getString("TITLE"))
-                .author(resultSet.getString("AUTHOR"))
-                .isbn(resultSet.getString("ISBN"))
+
+        return Product.builder()
+                .id(resultSet.getInt("id"))
+                .brand(Brand.valueOf(resultSet.getString("brand")))
+                .model(resultSet.getString("model"))
+                .os(Os.valueOf(resultSet.getString("os")))
+                .price(resultSet.getInt("price"))
+                .count(resultSet.getInt("count"))
+                .hasHeadset(resultSet.getBoolean("has_headset"))
+                .hasCharger(resultSet.getBoolean("has_charger"))
+                .manufactureDate(resultSet.getDate("manufacture_date").toLocalDate())
                 .build();
     }
 
     public static Transaction transactionMapper(ResultSet resultSet) throws SQLException {
-        storekepper storekepper =
-                Storekepper
-                        .builder()
-                        .id(resultSet.getInt("storekepper_ID"))
-                        .name(resultSet.getString("storekepper_NAME"))
-                        .family(resultSet.getString("storekepper_FAMILY"))
-                        .nationalId(resultSet.getString("storekepper_NATIONAL_ID"))
-                        .birthDate(resultSet.getDate("storekepper_BIRTH_DATE") == null ? null : resultSet.getDate("storekepper_BIRTH_DATE").toLocalDate())
-                        .build();
-
-        Product product = Product
-                .builder()
-                .id(resultSet.getInt("product_ID"))
-                .title(resultSet.getString("product_TITLE"))
-                .author(resultSet.getString("product_AUTHOR"))
-                .isbn(resultSet.getString("product_ISBN"))
-                .build();
 
         return Transaction
                 .builder()
                 .id(resultSet.getInt("transaction_ID"))
-                .storekepper(storekepper)
-                .product(product)
-                .transactionDate(
-                        resultSet.getDate("transaction_DATE") == null ? null :resultSet.getDate("transaction_DATE").toLocalDate()
-                )
-                .returnDate(
-                        resultSet.getDate("RETURN_DATE") == null ? null : resultSet.getDate("RETURN_DATE").toLocalDate()
-                )
-                .build();
-    }
+                .storekeeper(storekeeperMapper(resultSet))
+                .product(productMapper(resultSet))
+                .transaction_type(Transaction_type.valueOf(resultSet.getString("transaction_type")))
+                .quantity(resultSet.getInt("quantity"))
+                .transaction_date(resultSet.getDate("transaction_date").toLocalDate())
 
-    private static class storekepper {
-        public static Debug builder() {
-            return null;
-        }
+                .build();
     }
 }

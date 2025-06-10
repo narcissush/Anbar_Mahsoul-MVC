@@ -16,7 +16,7 @@ create sequence products_seq start with 1 increment by 1;
 
 
 ----storekepper
-create table storekeppers (
+create table storekeepers (
                               id number primary key,
                               nationalid nvarchar2(10) not null ,
                               name nvarchar2(30),
@@ -29,7 +29,7 @@ create table storekeppers (
 
 );
 
-create sequence storekeppers_seq start with 1 increment by 1;
+create sequence storekeepers_seq start with 1 increment by 1;
 
 
 
@@ -37,7 +37,7 @@ create sequence storekeppers_seq start with 1 increment by 1;
 create table transaction(
                             id int primary key ,
                             product_id references products,
-                            storekeppers_id references storekeppers,
+                            storekeepers_id references storekeepers,
                             transaction_type nvarchar2(10),
                             quantity number,
                             transaction_date date DEFAULT sysdate
@@ -57,15 +57,15 @@ select t.id           as transaction_id,
        p.has_headset  as product_has_headset,
        p.price        as product_price,
        p.count        as product_count,
-       t.storekeppers_id,
-       s.nationalid   as storekeppers_natiobalid,
-       s.name         as storekeppers_name,
-       s.family       as storekeppers_family,
-       s.gender       as storekeppers_gender,
-       s.birth_date   as storekeppers_birth_date,
-       s.phone_number as storekeppers_phone_number,
-       s.username     as storekeppers_username,
-       s.password     as storekeppers_password,
+       t.storekeepers_id,
+       s.nationalid   as storekeepers_natiobalid,
+       s.name         as storekeepers_name,
+       s.family       as storekeepers_family,
+       s.gender       as storekeepers_gender,
+       s.birth_date   as storekeepers_birth_date,
+       s.phone_number as storekeepers_phone_number,
+       s.username     as storekeepers_username,
+       s.password     as storekeepers_password,
 
        t.transaction_type,
        t.quantity,
@@ -73,11 +73,16 @@ select t.id           as transaction_id,
 
 from transaction  t  -- برای جداول اسم مستعار as ندارد
 join products p on t.product_id = p.id
-join storekeppers s on t.storekeppers_id = s.id;
+join storekeepers s on t.storekeepers_id = s.id;
 
 
 
 select * from transaction_report;
+
+select * from storekeepers;
+select * from products;
+
+select * from Products where price between 9000 and 12000;
 
 
 

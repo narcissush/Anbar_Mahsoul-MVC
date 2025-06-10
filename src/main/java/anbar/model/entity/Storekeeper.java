@@ -1,7 +1,6 @@
 package anbar.model.entity;
 
 import anbar.model.entity.enums.Gender;
-import jdk.nashorn.internal.runtime.Debug;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -12,7 +11,7 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 
-public class Storekepper implements Serializable {
+public class Storekeeper implements Serializable {
     private int id;
     private String nationalId;
     private String name;
@@ -23,7 +22,5 @@ public class Storekepper implements Serializable {
     private String username;
     private String password;
 
-    public static Debug builder() {
-        return null;
-    }
+
 }

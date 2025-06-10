@@ -2,14 +2,16 @@ package anbar.tools;
 
 import lombok.Getter;
 import org.apache.commons.dbcp2.BasicDataSource;
+import java.sql.Connection;
+
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ConnectionProvider {
     @Getter
-    private static ConnectionProvider ConnectionProvider =new ConnectionProvider();
-    private static BasicDataSource dataSource=new BasicDataSource();
+    private static final ConnectionProvider ConnectionProvider =new ConnectionProvider();
+    private static final BasicDataSource dataSource=new BasicDataSource();
 
     private ConnectionProvider(){};
 
