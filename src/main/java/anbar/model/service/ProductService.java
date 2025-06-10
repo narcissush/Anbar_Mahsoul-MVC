@@ -7,52 +7,52 @@ import java.util.List;
 
 public class ProductService {
     public static void save(Product product) throws Exception {
-        try(ProductRepository productRepository = new ProductRepository()){
+        try (ProductRepository productRepository = new ProductRepository()) {
             productRepository.save(product);
         }
     }
 
     public static void edit(Product product) throws Exception {
-        try(ProductRepository productRepository = new ProductRepository()){
+        try (ProductRepository productRepository = new ProductRepository()) {
             if (productRepository.findById(product.getId()) != null) {
                 productRepository.edit(product);
-            }else{
+            } else {
                 throw new Exception("Product not found");
             }
         }
     }
 
     public static void delete(int id) throws Exception {
-        try(ProductRepository productRepository = new ProductRepository()){
+        try (ProductRepository productRepository = new ProductRepository()) {
             if (productRepository.findById(id) != null) {
                 productRepository.delete(id);
-            }else{
+            } else {
                 throw new Exception("Product not found");
             }
         }
     }
 
     public static List<Product> findAll() throws Exception {
-        try(ProductRepository ProductRepository = new ProductRepository()){
+        try (ProductRepository ProductRepository = new ProductRepository()) {
             return ProductRepository.findAll();
         }
     }
 
     public static Product findById(int id) throws Exception {
-        try(ProductRepository ProductRepository = new ProductRepository()){
+        try (ProductRepository ProductRepository = new ProductRepository()) {
             return ProductRepository.findById(id);
         }
     }
 
-public static List<Product> findByTitle(String title) throws Exception {
-    try(ProductRepository productRepository = new ProductRepository()){
-        return productRepository.findByTitle(title);
+    public static List<Product> findByTitle(String title) throws Exception {
+        try (ProductRepository productRepository = new ProductRepository()) {
+            return productRepository.findByTitle(title);
+        }
     }
-}
 
-    public static List<Product> findByPrice(int price1,int price2) throws Exception {
-        try(ProductRepository productRepository = new ProductRepository()){
-            return productRepository.findByPrice(price1,price2);
+    public static List<Product> findByPrice(int price1, int price2) throws Exception {
+        try (ProductRepository productRepository = new ProductRepository()) {
+            return productRepository.findByPrice(price1, price2);
         }
     }
 

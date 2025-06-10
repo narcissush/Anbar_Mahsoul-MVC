@@ -74,16 +74,16 @@ public class StorekeeperRepository implements AutoCloseable {
     }
 
 
-public Storekeeper findById(int id) throws SQLException {
-    Storekeeper storekeeper = null;
-    preparedStatement = connection.prepareStatement("select * from storekeepers where id=?");
-    preparedStatement.setInt(1, id);
-    ResultSet resultSet = preparedStatement.executeQuery();
-    while (resultSet.next()) {
-        storekeeper = EntityMapper.storekeeperMapper(resultSet);
+    public Storekeeper findById(int id) throws SQLException {
+        Storekeeper storekeeper = null;
+        preparedStatement = connection.prepareStatement("select * from storekeepers where id=?");
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            storekeeper = EntityMapper.storekeeperMapper(resultSet);
+        }
+        return storekeeper;
     }
-    return storekeeper;
-}
 
     public List<Storekeeper> findByNationalId(String nationalId) throws SQLException {
         List<Storekeeper> storekeepersList = new ArrayList<>();
@@ -109,19 +109,19 @@ public Storekeeper findById(int id) throws SQLException {
         return storekeepersList;
     }
 
-//    todo :  findByUsername, findByUserAndPassword
-public List<Storekeeper> findByUsernameAndPassword(String username, String password) throws SQLException {
-    List<Storekeeper> storekeepersList = new ArrayList<>();
-    preparedStatement = connection.prepareStatement("select * from storekeepers where username=? and password=?");
-    preparedStatement.setString(1, username);
-    preparedStatement.setString(2, password);
+    //    todo :  findByUsername, findByUserAndPassword
+    public List<Storekeeper> findByUsernameAndPassword(String username, String password) throws SQLException {
+        List<Storekeeper> storekeepersList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from storekeepers where username=? and password=?");
+        preparedStatement.setString(1, username);
+        preparedStatement.setString(2, password);
 
-    ResultSet resultSet = preparedStatement.executeQuery();
-    while (resultSet.next()) {
-        storekeepersList.add(EntityMapper.storekeeperMapper(resultSet));
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            storekeepersList.add(EntityMapper.storekeeperMapper(resultSet));
+        }
+        return storekeepersList;
     }
-    return storekeepersList;
-}
 
     public List<Storekeeper> findByUsername(String username) throws SQLException {
         List<Storekeeper> storekeepersList = new ArrayList<>();

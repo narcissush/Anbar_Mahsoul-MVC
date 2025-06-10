@@ -75,13 +75,10 @@ public class ProductRepository implements AutoCloseable {
         return productsList;
     }
 
-    //    todo : findByTitle Like
     public List<Product> findByTitle(String title) throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from Products where TITLE Like ?");
-
         preparedStatement.setString(1, title + "%");
-
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             productsList.add(EntityMapper.productMapper(resultSet));
@@ -92,9 +89,7 @@ public class ProductRepository implements AutoCloseable {
     public Product findById(int id) throws SQLException {
         Product product = null;
         preparedStatement = connection.prepareStatement("select * from Products where id=?");
-
         preparedStatement.setInt(1, id);
-
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             product = EntityMapper.productMapper(resultSet);
@@ -105,10 +100,8 @@ public class ProductRepository implements AutoCloseable {
     public List<Product> findByPrice(int price1, int price2) throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from Products where price between ? and ?");
-
         preparedStatement.setInt(1, price1);
         preparedStatement.setInt(2, price2);
-
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             productsList.add(EntityMapper.productMapper(resultSet));

@@ -77,6 +77,7 @@ public class TransactionRepository implements AutoCloseable {
         }
         return transactionList;
     }
+
     public List<Transaction> findById(int id) throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
         connection = ConnectionProvider.getConnectionProvider().getconnection();
