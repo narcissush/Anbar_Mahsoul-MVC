@@ -9,22 +9,22 @@ public class ProductTest {
 
     public static void main(String[] args) throws Exception {
         Product product = Product.builder()
-                .id(3)
-                .brand(Brand.Samsung)
-                .model("Note11")
+                .id(4)
+                .brand(Brand.Xiaomi)
+                .model("Note")
                 .os(Os.Android)
-                .price(1000)
-                .count(22)
+                .price(800)
+                .count(90)
                 .hasHeadset(true)
                 .hasCharger(true)
                 .manufactureDate(LocalDate.now())
                 .build();
-        ProductService.save(product);
+        //ProductService.save(product);
         //ProductService.edit(product,1);
         //ProductService.delete(3);
-        //System.out.println(ProductService.findByPrice(900,1500));
+        System.out.println(ProductService.findByPrice(900,1500));
 
-        System.out.println(ProductService.findAll());
+        //System.out.println(ProductService.findAll());
     }
 
 }

@@ -69,8 +69,7 @@ public class TransactionRepository implements AutoCloseable{
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Transaction transaction = EntityMapper.transactionMapper(resultSet);
-            transactionList.add(transaction);
+            transactionList.add(EntityMapper.transactionMapper(resultSet));
         }
         return transactionList;
     }
@@ -83,8 +82,7 @@ public class TransactionRepository implements AutoCloseable{
         preparedStatement.setString(2, family + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Transaction transaction = EntityMapper.transactionMapper(resultSet);
-            transactionList.add(transaction);
+            transactionList.add(EntityMapper.transactionMapper(resultSet));
         }
         return transactionList;
     }

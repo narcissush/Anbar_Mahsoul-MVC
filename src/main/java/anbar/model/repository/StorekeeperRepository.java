@@ -4,6 +4,7 @@ package anbar.model.repository;
 import anbar.model.entity.Storekeeper;
 import anbar.model.entity.enums.Gender;
 import anbar.tools.ConnectionProvider;
+import anbar.tools.EntityMapper;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -67,20 +68,8 @@ public class StorekeeperRepository implements AutoCloseable{
         preparedStatement = connection.prepareStatement("select * from storekeepers");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Storekeeper storekeeper = Storekeeper
-                    .builder()
-                    .id(resultSet.getInt("id"))
-                    .nationalId(resultSet.getString("nationalid"))
-                    .name(resultSet.getString("name"))
-                    .family(resultSet.getString("family"))
-                    .gender(Gender.valueOf(resultSet.getString("gender")))
-                    .birthDate(resultSet.getDate("birth_date").toLocalDate())
-                    .phoneNumber(resultSet.getString("phone_number"))
-                    .username(resultSet.getString("username"))
-                    .password(resultSet.getString("password"))
-                    .build();
 
-            storekeepersList.add(storekeeper);
+            storekeepersList.add(EntityMapper.storekeeperMapper(resultSet));
         }
         return storekeepersList;
     }
@@ -91,20 +80,7 @@ public class StorekeeperRepository implements AutoCloseable{
         preparedStatement.setString(1, nationalId);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Storekeeper storekeeper = Storekeeper
-                    .builder()
-                    .id(resultSet.getInt("id"))
-                    .nationalId(resultSet.getString("nationalid"))
-                    .name(resultSet.getString("name"))
-                    .family(resultSet.getString("family"))
-                    .gender(Gender.valueOf(resultSet.getString("gender")))
-                    .birthDate(resultSet.getDate("birth_date").toLocalDate())
-                    .phoneNumber(resultSet.getString("phone_number"))
-                    .username(resultSet.getString("username"))
-                    .password(resultSet.getString("password"))
-                    .build();
-
-            storekeepersList.add(storekeeper);
+            storekeepersList.add(EntityMapper.storekeeperMapper(resultSet));
         }
         return storekeepersList;
     }
@@ -117,20 +93,7 @@ public class StorekeeperRepository implements AutoCloseable{
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Storekeeper storekeeper = Storekeeper
-                    .builder()
-                    .id(resultSet.getInt("id"))
-                    .nationalId(resultSet.getString("nationalid"))
-                    .name(resultSet.getString("name"))
-                    .family(resultSet.getString("family"))
-                    .gender(Gender.valueOf(resultSet.getString("gender")))
-                    .birthDate(resultSet.getDate("birth_date").toLocalDate())
-                    .phoneNumber(resultSet.getString("phone_number"))
-                    .username(resultSet.getString("username"))
-                    .password(resultSet.getString("password"))
-                    .build();
-
-            storekeepersList.add(storekeeper);
+            storekeepersList.add(EntityMapper.storekeeperMapper(resultSet));
         }
         return storekeepersList;
     }

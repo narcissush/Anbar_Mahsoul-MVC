@@ -10,15 +10,15 @@ public class StorekeeperTest {
     public static void main(String[] args) throws Exception {
         Storekeeper storekeeper = Storekeeper
                 .builder()
-                .id(3)
-                .nationalId("1122334455")
-                .name("neda")
-                .family("gorji")
+                .id(4)
+                .nationalId("2233445566")
+                .name("mina")
+                .family("minavand")
                 .gender(Gender.women)
                 .birthDate(LocalDate.now())
-                .phoneNumber("09129331219")
-                .username("neda")
-                .password("neda123")
+                .phoneNumber("09121234567")
+                .username("mina")
+                .password("mina123")
                 .build();
        //StorekeeperService.save(storekeeper);
         //StorekeeperService.edit(storekeeper,3);

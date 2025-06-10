@@ -5,6 +5,7 @@ import anbar.model.entity.Product;
 import anbar.model.entity.enums.Brand;
 import anbar.model.entity.enums.Os;
 import anbar.tools.ConnectionProvider;
+import anbar.tools.EntityMapper;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -69,18 +70,8 @@ private PreparedStatement preparedStatement;
         preparedStatement = connection.prepareStatement("select * from products");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Product product = Product.builder()
-                    .id(resultSet.getInt("id"))
-                    .brand(Brand.valueOf(resultSet.getString("brand")))
-                    .model(resultSet.getString("model"))
-                    .os(Os.valueOf(resultSet.getString("os")))
-                    .price(resultSet.getInt("price"))
-                    .count(resultSet.getInt("count"))
-                    .hasHeadset(resultSet.getBoolean("has_headset"))
-                    .hasCharger(resultSet.getBoolean("has_charger"))
-                    .manufactureDate(resultSet.getDate("manufacture_date").toLocalDate())
-                    .build();
-            productsList.add(product);
+
+            productsList.add(EntityMapper.productMapper(resultSet));
         }
         return productsList;
     }
@@ -94,18 +85,7 @@ private PreparedStatement preparedStatement;
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            Product product = Product.builder()
-                    .id(resultSet.getInt("id"))
-                    .brand(Brand.valueOf(resultSet.getString("brand")))
-                    .model(resultSet.getString("model"))
-                    .os(Os.valueOf(resultSet.getString("os")))
-                    .price(resultSet.getInt("price"))
-                    .count(resultSet.getInt("count"))
-                    .hasHeadset(resultSet.getBoolean("has_headset"))
-                    .hasCharger(resultSet.getBoolean("has_charger"))
-                    .manufactureDate(resultSet.getDate("manufacture_date").toLocalDate())
-                    .build();
-            productsList.add(product);
+            productsList.add(EntityMapper.productMapper(resultSet));
         }
         return productsList;
     }
