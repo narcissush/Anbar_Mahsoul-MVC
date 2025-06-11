@@ -17,55 +17,35 @@ public class TransactionTest {
 //        Product product = Product
 //                .builder()
 //                .id(4)
-//                .title("mobile")
-//                .brand(Brand.Apple)
-//                .model("Iphone11")
-//                .os(Os.iOS)
-//                .price(800)
-//                .count(40)
-//                .hasHeadset(true)
-//                .hasCharger(true)
-//                .manufactureDate(LocalDate.now())
 //                .build();
 //
 //        Storekeeper storekeeper = Storekeeper
 //                .builder()
 //                .id(1)
-//                .nationalId("1122334400")
-//                .name("narges")
-//                .family("hajizadeh")
-//                .gender(Gender.women)
-//                .birthDate(LocalDate.now())
-//                .phoneNumber("09121234567")
-//                .username("narges")
-//                .password("narges")
 //                .build();
 
-        Storekeeper storekeeper = StorekeeperService.findById(1);
-        Product product = ProductService.findById(4);
-
-        System.out.println(storekeeper);
-        System.out.println(product);
+        Storekeeper storekeeper = StorekeeperService.findById(5);
+        Product product = ProductService.findById(3);
 
 
         Transaction transaction = Transaction
                 .builder()
-                .id(9)
-                .storekeeper(storekeeper)
+                .id(2)
                 .product(product)
-                .transaction_type(Transaction_type.OutBound)
-                .quantity(1000)
+                .storekeeper(storekeeper)
+                .transaction_type(Transaction_type.InBound)
+                .quantity(4000)
                 .transaction_dateTime(LocalDateTime.now())
                 .build();
 
-        System.out.println(transaction);
-
-//        TransactionService.save(transaction);
-//        TransactionService.edit(transaction);
-        //TransactionService.delete(3);
+        //TransactionService.save(transaction);
+       //TransactionService.edit(transaction);
+        //TransactionService.delete(2);
         //System.out.println(TransactionService.findByNationalId("0080386822"));
-        //System.out.println(TransactionService.findByNameAndFamily("neda", "gorji"));
+        System.out.println(TransactionService.findByProductBrand(Brand.Samsung));
+        System.out.println(TransactionService.findByStoreKeeperNameAndFamily("narges","hajizadeh"));
 
-        System.out.println(TransactionService.findAll());
+
+        //System.out.print(TransactionService.findAll());
     }
 }

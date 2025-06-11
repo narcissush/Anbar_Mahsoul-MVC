@@ -34,12 +34,12 @@ create table storekeepers
 create sequence storekeepers_seq start with 1 increment by 1;
 
 
---storekeepers_products
+--transactions
 create table transactions
 (
-    id               int primary key,
-    products_id references products,
-    storekeepers_id references storekeepers,
+    id int primary key,
+    products_id number references products(id),
+    storekeepers_id number references storekeepers(id),
     transaction_type nvarchar2(10),
     quantity         number,
     transaction_date timestamp DEFAULT sysdate
@@ -81,17 +81,6 @@ from TRANSACTIONS t -- برای جداول اسم مستعار as ندارد
 
 
 
-select *
-from transactions_report;
-
-select *
-from storekeepers;
-select *
-from products;
-
-select *
-from Products
-where price between 9000 and 12000;
 
 
 

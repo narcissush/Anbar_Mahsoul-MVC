@@ -12,20 +12,20 @@ public class ProductServiceTest {
                 .builder()
                 .id(3)
                 .title("mobile")
-                .brand(Brand.Apple)
-                .model("Iphone11")
-                .os(Os.iOS)
-                .price(800)
-                .count(40)
-                .hasHeadset(true)
-                .hasCharger(true)
+                .brand(Brand.Huawei)
+                .model("Huawei16")
+                .os(Os.Android)
+                .price(750)
+                .count(80)
+                .hasHeadset(false)
+                .hasCharger(false)
                 .manufactureDate(LocalDate.now())
                 .build();
 //        ProductService.save(product);
 //        ProductService.edit(product);
-        ProductService.delete(1);
-        System.out.println(ProductService.findByTitle("mobile1"));
-//        System.out.println(ProductService.findByPrice(8000,11000));
+//       ProductService.delete(1);
+//        System.out.println(ProductService.findByTitle("mobile"));
+//        System.out.println(ProductService.findByPrice(700,800));
 
 //        System.out.println(ProductService.findAll());
     }

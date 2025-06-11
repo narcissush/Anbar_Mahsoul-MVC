@@ -10,22 +10,23 @@ public class StorekeeperTest {
     public static void main(String[] args) throws Exception {
         Storekeeper storekeeper = Storekeeper
                 .builder()
-                .id(4)
-                .nationalId("2233445566")
-                .name("mina")
-                .family("minavand")
-                .gender(Gender.women)
-                .birthDate(LocalDate.now())
-                .phoneNumber("09121234567")
-                .username("mina")
-                .password("mina123")
+                .id(6)
+                .nationalId("0040506070")
+                .name("mohsen")
+                .family("roshanai")
+                .birthDate(LocalDate.of(1990, 1, 1))
+                .gender(Gender.men)
+                .phoneNumber("09123987298")
+                .username("mohsen")
+                .password("mohsen123")
                 .build();
-        StorekeeperService.save(storekeeper);
-        //StorekeeperService.edit(storekeeper,3);
-        //StorekeeperService.delete(3);
+        //StorekeeperService.save(storekeeper);
+        //StorekeeperService.edit(storekeeper);
+        //StorekeeperService.delete(1);
         //System.out.println(StorekeeperService.findByNationalId("0080386822"));
-        //System.out.println(StorekeeperService.findByNameAndFamily("neda", "gorji"));
-        System.out.println(StorekeeperService.findByUserAndPassword("mina1", "mina123"));
+        //System.out.println(StorekeeperService.findByNameAndFamily("mohsen", "roshanai"));
+        //System.out.println(StorekeeperService.findByUserAndPassword("narges", "narges123"));
+        System.out.println(StorekeeperService.findByUsername("mohsen"));
 
         //System.out.println(StorekeeperService.findAll());
     }

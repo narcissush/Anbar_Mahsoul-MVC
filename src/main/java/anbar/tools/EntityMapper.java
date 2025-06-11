@@ -75,8 +75,8 @@ public class EntityMapper {
         return Transaction
                 .builder()
                 .id(resultSet.getInt("transaction_ID"))
-                .storekeeper(storekeeper)
                 .product(product)
+                .storekeeper(storekeeper)
                 .transaction_type(Transaction_type.valueOf(resultSet.getString("transaction_type")))
                 .quantity(resultSet.getInt("quantity"))
                 .transaction_dateTime(resultSet.getTimestamp("transaction_date").toLocalDateTime())

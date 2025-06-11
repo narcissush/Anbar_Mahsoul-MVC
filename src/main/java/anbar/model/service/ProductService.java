@@ -32,17 +32,19 @@ public class ProductService {
         }
     }
 
+    public static Product findById(int id) throws Exception {
+        try (ProductRepository ProductRepository = new ProductRepository()) {
+            return ProductRepository.findById(id);
+        }
+    }
+
     public static List<Product> findAll() throws Exception {
         try (ProductRepository ProductRepository = new ProductRepository()) {
             return ProductRepository.findAll();
         }
     }
 
-    public static Product findById(int id) throws Exception {
-        try (ProductRepository ProductRepository = new ProductRepository()) {
-            return ProductRepository.findById(id);
-        }
-    }
+
 
     public static List<Product> findByTitle(String title) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {

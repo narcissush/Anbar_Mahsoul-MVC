@@ -15,8 +15,7 @@ public class StorekeeperService {
     public static void edit(Storekeeper storekeeper) throws Exception {
         try (StorekeeperRepository storekeeperRepository = new StorekeeperRepository()) {
             if (storekeeperRepository.findById(storekeeper.getId()) != null) {
-                storekeeperRepository.edit(storekeeper);
-            }
+                storekeeperRepository.edit(storekeeper);            }
             throw new Exception("Product not found");
         }
     }
@@ -32,15 +31,15 @@ public class StorekeeperService {
         }
     }
 
-    public static List<Storekeeper> findAll() throws Exception {
-        try (StorekeeperRepository storekeeperRepository = new StorekeeperRepository()) {
-            return storekeeperRepository.findAll();
-        }
-    }
-
     public static Storekeeper findById(int id) throws Exception {
         try (StorekeeperRepository storekeeperRepository = new StorekeeperRepository()) {
             return storekeeperRepository.findById(id);
+        }
+    }
+
+    public static List<Storekeeper> findAll() throws Exception {
+        try (StorekeeperRepository storekeeperRepository = new StorekeeperRepository()) {
+            return storekeeperRepository.findAll();
         }
     }
 

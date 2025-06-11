@@ -2,7 +2,6 @@ package anbar.model.repository;
 
 
 import anbar.model.entity.Storekeeper;
-import anbar.model.entity.enums.Gender;
 import anbar.tools.ConnectionProvider;
 import anbar.tools.EntityMapper;
 
@@ -62,18 +61,6 @@ public class StorekeeperRepository implements AutoCloseable {
 
     }
 
-    public List<Storekeeper> findAll() throws SQLException {
-        List<Storekeeper> storekeepersList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from storekeepers");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-
-            storekeepersList.add(EntityMapper.storekeeperMapper(resultSet));
-        }
-        return storekeepersList;
-    }
-
-
     public Storekeeper findById(int id) throws SQLException {
         Storekeeper storekeeper = null;
         preparedStatement = connection.prepareStatement("select * from storekeepers where id=?");
@@ -83,6 +70,17 @@ public class StorekeeperRepository implements AutoCloseable {
             storekeeper = EntityMapper.storekeeperMapper(resultSet);
         }
         return storekeeper;
+    }
+
+    public List<Storekeeper> findAll() throws SQLException {
+        List<Storekeeper> storekeepersList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from storekeepers");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+
+            storekeepersList.add(EntityMapper.storekeeperMapper(resultSet));
+        }
+        return storekeepersList;
     }
 
     public List<Storekeeper> findByNationalId(String nationalId) throws SQLException {
@@ -109,7 +107,7 @@ public class StorekeeperRepository implements AutoCloseable {
         return storekeepersList;
     }
 
-    //    todo :  findByUsername, findByUserAndPassword
+
     public List<Storekeeper> findByUsernameAndPassword(String username, String password) throws SQLException {
         List<Storekeeper> storekeepersList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from storekeepers where username=? and password=?");

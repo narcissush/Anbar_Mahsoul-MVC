@@ -7,6 +7,7 @@ import anbar.tools.ConnectionProvider;
 import anbar.tools.EntityMapper;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,7 +44,13 @@ public class TransactionRepository implements AutoCloseable {
         preparedStatement.setInt(2, transaction.getStorekeeper().getId());
         preparedStatement.setString(3, transaction.getTransaction_type().name());
         preparedStatement.setInt(4, transaction.getQuantity());
-        preparedStatement.setTimestamp(5, transaction.getTransaction_dateTime() == null ? null : Timestamp.valueOf(transaction.getTransaction_dateTime()));
+
+        if (transaction.getTransaction_dateTime() != null) {
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(transaction.getTransaction_dateTime()));
+        } else {
+            // اگر نمی‌خوای تغییر بدی یا مقدار قبلی رو از DB بخونی
+            preparedStatement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now())); // یا مقدار قبلی رو از DB بگیر
+        }
         preparedStatement.setInt(6, transaction.getId());
         preparedStatement.execute();
     }
@@ -55,6 +62,19 @@ public class TransactionRepository implements AutoCloseable {
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
     }
+
+    public Transaction findById(int id) throws SQLException {
+        Transaction transaction = new Transaction();
+        connection = ConnectionProvider.getConnectionProvider().getconnection();
+        preparedStatement = connection.prepareStatement("select * from transactions_report where transaction_id=?");
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            transaction=EntityMapper.transactionMapper(resultSet);
+        }
+        return transaction;
+    }
+
 
     public List<Transaction> findAll() throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
@@ -78,17 +98,6 @@ public class TransactionRepository implements AutoCloseable {
         return transactionList;
     }
 
-    public List<Transaction> findById(int id) throws SQLException {
-        List<Transaction> transactionList = new ArrayList<>();
-        connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transactions_report where transaction_id=?");
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            transactionList.add(EntityMapper.transactionMapper(resultSet));
-        }
-        return transactionList;
-    }
 
     public List<Transaction> findByStoreKeeperNameAndFamily(String name, String family) throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
@@ -101,6 +110,18 @@ public class TransactionRepository implements AutoCloseable {
             transactionList.add(EntityMapper.transactionMapper(resultSet));
         }
         return transactionList;
+    }
+
+    public Transaction findByNationalId(String nationalId) throws SQLException {
+        Transaction transaction = new Transaction();
+        connection = ConnectionProvider.getConnectionProvider().getconnection();
+        preparedStatement = connection.prepareStatement("select * from transactions_report where storekeepers_national_id=?");
+        preparedStatement.setString(1, nationalId);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            transaction=EntityMapper.transactionMapper(resultSet);
+        }
+        return transaction;
     }
 
     @Override

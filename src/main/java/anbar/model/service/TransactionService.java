@@ -16,7 +16,7 @@ public class TransactionService {
     public static void edit(Transaction transaction) throws Exception {
 
         try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            if (transactionRepository.findById(transaction.getId()) != null) {
+          if (transactionRepository.findById(transaction.getId()) != null) {
                 transactionRepository.edit(transaction);
             } else {
                 throw new Exception("Product not found");
@@ -33,10 +33,22 @@ public class TransactionService {
             }
         }
     }
+    public static Transaction findById(int id) throws Exception {
+        try (TransactionRepository transactionRepository = new TransactionRepository()) {
+            return transactionRepository.findById(id);
+        }
+    }
+
 
     public static List<Transaction> findAll() throws Exception {
         try (TransactionRepository transactionRepository = new TransactionRepository()) {
             return transactionRepository.findAll();
+        }
+    }
+
+    public static Transaction findByNationalId(String nationalId) throws Exception {
+        try (TransactionRepository transactionRepository = new TransactionRepository()) {
+            return transactionRepository.findByNationalId(nationalId);
         }
     }
 

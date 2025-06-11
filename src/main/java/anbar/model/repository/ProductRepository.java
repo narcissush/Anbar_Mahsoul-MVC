@@ -64,6 +64,17 @@ public class ProductRepository implements AutoCloseable {
 
     }
 
+    public Product findById(int id) throws SQLException {
+        Product product = null;
+        preparedStatement = connection.prepareStatement("select * from Products where id=?");
+        preparedStatement.setInt(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            product = EntityMapper.productMapper(resultSet);
+        }
+        return product;
+    }
+
     public List<Product> findAll() throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from products");
@@ -86,16 +97,7 @@ public class ProductRepository implements AutoCloseable {
         return productsList;
     }
 
-    public Product findById(int id) throws SQLException {
-        Product product = null;
-        preparedStatement = connection.prepareStatement("select * from Products where id=?");
-        preparedStatement.setInt(1, id);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            product = EntityMapper.productMapper(resultSet);
-        }
-        return product;
-    }
+
 
     public List<Product> findByPrice(int price1, int price2) throws SQLException {
         List<Product> productsList = new ArrayList<>();
