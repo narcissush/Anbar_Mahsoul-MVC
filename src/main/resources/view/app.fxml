@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="729.0" prefWidth="1128.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu fx:id="productMenu" mnemonicParsing="false" text="محصولات">
+            <items>
+              <MenuItem fx:id="newProductMenu" mnemonicParsing="false" text="جدید" />
+                  <MenuItem fx:id="editProductMenu" mnemonicParsing="false" text="ویرایش" />
+            </items>
+          </Menu>
+          <Menu fx:id="SuppliersMenu" mnemonicParsing="false" text="تامین کنندگان">
+            <items>
+              <MenuItem fx:id="newSupplyMenu" mnemonicParsing="false" text="جدید" />
+                  <MenuItem fx:id="editSupplyMenu" mnemonicParsing="false" text="ویرایش" />
+                  <MenuItem fx:id="deleteSupplyMenu" mnemonicParsing="false" text="حذف" />
+            </items>
+          </Menu>
+            <Menu fx:id="SuppliersMenu1" mnemonicParsing="false" text="انبارگردانی">
+               <items>
+                  <MenuItem fx:id="InBoundMenu" mnemonicParsing="false" text="ورود کالا" />
+                  <MenuItem fx:id="outBoundMenu" mnemonicParsing="false" text="خروج کالا" />
+                  <MenuItem mnemonicParsing="false" text="گزارشات" />
+               </items>
+            </Menu>
+            <Menu fx:id="usersMenu" mnemonicParsing="false" text="کاربر">
+              <items>
+                <MenuItem fx:id="userInfoMenu" mnemonicParsing="false" text="مشخصات" />
+                  <MenuItem fx:id="userChangePasswordMenu" mnemonicParsing="false" text="ویرایش رمز عبور" />
+                  <MenuItem fx:id="quitMenu" mnemonicParsing="false" text="خروج" />
+              </items>
+            </Menu>
+          <Menu fx:id="transactionsMenu" mnemonicParsing="false" text="راهنما">
+            <items>
+              <MenuItem fx:id="appVersionMenu" mnemonicParsing="false" text="ورژن برنامه" />
+            </items>
+          </Menu>
+            <Menu fx:id="aboutMenu" mnemonicParsing="false" text="دریاره ما">
+              <items>
+                <MenuItem fx:id="aboutMenu" mnemonicParsing="false" text="اطلاعات تماس" />
+              </items>
+            </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="649.0" prefWidth="1027.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="productsTab" text="محصولات">
+               <content>
+                  <VBox prefHeight="657.0" prefWidth="1115.0">
+                     <children>
+                        <HBox prefHeight="54.0" prefWidth="1027.0">
+                           <children>
+                              <Button fx:id="productNewBtn" defaultButton="true" minHeight="50.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="100.0" text="جدید">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="5.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="productEdiBtn" minHeight="50.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="100.0" text="ویرایش">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="inBoundBtn" minHeight="50.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="ورود کالا">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="outBoundBtn" minHeight="50.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="خروج کالا">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="productDeleteBtn" minHeight="50.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="100.0" text="حذف">
+                                 <opaqueInsets>
+                                    <Insets />
+                                 </opaqueInsets>
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="productReportBtn" minHeight="50.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="گزارشات">
+                                 <HBox.margin>
+                                    <Insets left="15.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="5.0" top="5.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <SplitPane dividerPositions="0.2817932296431839" prefHeight="546.0" prefWidth="1115.0">
+                          <items>
+                            <AnchorPane prefHeight="600.0" prefWidth="223.0">
+                                 <children>
+                                    <GridPane layoutX="6.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="489.0" prefWidth="289.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="104.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="185.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="کد کالا" />
+                                          <Label text="دسته بندی" GridPane.rowIndex="1" />
+                                          <Label text="برند" GridPane.rowIndex="2" />
+                                          <Label text="مدل" GridPane.rowIndex="3" />
+                                          <Label text="سیستم عامل" GridPane.rowIndex="4" />
+                                          <Label text="متعلقات" GridPane.rowIndex="5" />
+                                          <Label text="شماره سریال" GridPane.rowIndex="6" />
+                                          <Label text="قیمت" GridPane.rowIndex="7" />
+                                          <TextField fx:id="productIdTxt" GridPane.columnIndex="1" />
+                                          <TextField fx:id="productSerialTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextField fx:id="productPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <ComboBox fx:id="productGroupCmb" prefHeight="35.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="productBrandCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <ComboBox fx:id="productModelCmb" prefHeight="31.0" prefWidth="191.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="productOsCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                                             <children>
+                                                <VBox prefHeight="63.0" prefWidth="99.0">
+                                                   <children>
+                                                      <CheckBox fx:id="headsetChk" mnemonicParsing="false" text="هدست">
+                                                         <VBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </VBox.margin>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="chargerChk" mnemonicParsing="false" text="شارژر">
+                                                         <VBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </VBox.margin>
+                                                      </CheckBox>
+                                                   </children>
+                                                </VBox>
+                                                <VBox prefHeight="200.0" prefWidth="100.0">
+                                                   <children>
+                                                      <CheckBox fx:id="bagChk" mnemonicParsing="false" text="کیف">
+                                                         <VBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </VBox.margin>
+                                                      </CheckBox>
+                                                      <CheckBox fx:id="glassChk" mnemonicParsing="false" text="گلس">
+                                                         <VBox.margin>
+                                                            <Insets top="5.0" />
+                                                         </VBox.margin>
+                                                      </CheckBox>
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                          <Button fx:id="productSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <ComboBox fx:id="productSsupplierCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <Label text="تامین کننده" GridPane.rowIndex="8" />
+                                       </children>
+                                    </GridPane>
+                                 </children>
+                              </AnchorPane>
+                            <AnchorPane minHeight="0.0" prefHeight="160.0" prefWidth="100.0">
+                                 <children>
+                                    <VBox layoutX="-1.0" layoutY="1.0" prefHeight="567.0" prefWidth="796.0">
+                                       <children>
+                                          <HBox prefHeight="36.0" prefWidth="785.0">
+                                             <children>
+                                                <Label prefHeight="21.0" prefWidth="122.0" text="جستجو بر اساس :">
+                                                   <HBox.margin>
+                                                      <Insets left="2.0" right="2.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <ComboBox fx:id="searchItemCmb" prefWidth="150.0">
+                                                   <HBox.margin>
+                                                      <Insets top="2.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                                <Label fx:id="item1Lbl" disable="true" prefHeight="21.0" prefWidth="51.0" text="آیتم 1">
+                                                   <HBox.margin>
+                                                      <Insets left="5.0" right="2.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <TextField fx:id="item1Txt" disable="true" prefHeight="31.0" prefWidth="159.0">
+                                                   <HBox.margin>
+                                                      <Insets top="2.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <Label fx:id="item2Lbl" disable="true" prefHeight="21.0" prefWidth="54.0" text="آیتم2">
+                                                   <HBox.margin>
+                                                      <Insets left="2.0" top="5.0" />
+                                                   </HBox.margin>
+                                                </Label>
+                                                <TextField fx:id="item2Txt" disable="true" prefHeight="31.0" prefWidth="164.0">
+                                                   <HBox.margin>
+                                                      <Insets top="2.0" />
+                                                   </HBox.margin>
+                                                </TextField>
+                                                <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="68.0" text="جستجو">
+                                                   <HBox.margin>
+                                                      <Insets top="2.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <ImageView fx:id="refreshImg" fitHeight="27.0" fitWidth="30.0">
+                                                   <image>
+                                                      <Image url="@img/refresh.png" />
+                                                   </image>
+                                                   <HBox.margin>
+                                                      <Insets top="4.0" />
+                                                   </HBox.margin>
+                                                </ImageView>
+                                             </children>
+                                             <VBox.margin>
+                                                <Insets />
+                                             </VBox.margin>
+                                          </HBox>
+                                          <TableView fx:id="productsTable" nodeOrientation="RIGHT_TO_LEFT" prefHeight="534.0" prefWidth="740.0">
+                                             <columns>
+                                                <TableColumn fx:id="idCol" text="کد محصول" />
+                                                <TableColumn fx:id="modelCol" text="مدل" />
+                                                <TableColumn fx:id="brandCol" text="برند" />
+                                                <TableColumn fx:id="osCol" text="سیستم" />
+                                                <TableColumn fx:id="manufactureDateCol" prefWidth="95.0" text="تاریخ تولید" />
+                                                <TableColumn fx:id="hasChargerCol" prefWidth="84.0" text="شارژر" />
+                                                <TableColumn fx:id="hasHeadsetCol" prefWidth="87.0" text="هدست" />
+                                                <TableColumn fx:id="priceCol" prefWidth="208.0" text="قیمت" />
+                                             </columns>
+                                          </TableView>
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </AnchorPane>
+                          </items>
+                           <VBox.margin>
+                              <Insets />
+                           </VBox.margin>
+                        </SplitPane>
+                     </children>
+                  </VBox>
+               </content>
+          </Tab>
+          <Tab fx:id="SuppliersTab" text="تامین کنندگان">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox layoutX="-2.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="609.0" prefWidth="1115.0">
+                           <children>
+                              <HBox prefHeight="54.0" prefWidth="1027.0">
+                                 <children>
+                                    <Button fx:id="supplierNewBtn" defaultButton="true" minHeight="50.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="100.0" text="جدید">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="5.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="supplierEditBtn" minHeight="50.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="100.0" text="ویرایش">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="supplierDeleteBtn" minHeight="50.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="100.0" text="حذف">
+                                       <opaqueInsets>
+                                          <Insets />
+                                       </opaqueInsets>
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Button fx:id="supplierReportsBtn" minHeight="50.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="گزارشات">
+                                       <HBox.margin>
+                                          <Insets left="15.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="5.0" left="5.0" top="5.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <SplitPane dividerPositions="0.2817932296431839" prefHeight="546.0" prefWidth="1115.0">
+                                 <items>
+                                    <AnchorPane prefHeight="600.0" prefWidth="223.0">
+                                       <children>
+                                          <GridPane layoutX="6.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="489.0" prefWidth="289.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="139.0" minWidth="10.0" prefWidth="105.0" />
+                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="190.0" minWidth="10.0" prefWidth="184.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label text="کد تامین کننده" />
+                                                <Label text="نوع شخصیت" GridPane.rowIndex="1" />
+                                                <Label text="نام تامین کننده" GridPane.rowIndex="2" />
+                                                <Label text="کد ملی" GridPane.rowIndex="3" />
+                                                <Label text="کد پستی" GridPane.rowIndex="4" />
+                                                <Label text="شماره تلفن" GridPane.rowIndex="5" />
+                                                <Label text="شماره موبایل" GridPane.rowIndex="6" />
+                                                <Button fx:id="supplierSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                                                   <children>
+                                                      <RadioButton fx:id="naturalPersonRdo" mnemonicParsing="false" text="حقیقی">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" right="10.0" top="15.0" />
+                                                         </HBox.margin>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="legalPersonRdo" mnemonicParsing="false" text="حقوقی">
+                                                         <HBox.margin>
+                                                            <Insets top="15.0" />
+                                                         </HBox.margin>
+                                                      </RadioButton>
+                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </HBox>
+                                                <TextField fx:id="supplierNationalIdTxt" layoutX="115.0" layoutY="313.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="supplierNameTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <TextField fx:id="supplierPostalCodeTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <TextField fx:id="supplierMobileTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <TextField fx:id="supplierIdTxt" GridPane.columnIndex="1" />
+                                                <TextField fx:id="supplierPhoneNumberTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane minHeight="0.0" prefHeight="160.0" prefWidth="100.0">
+                                       <children>
+                                          <VBox layoutX="-1.0" layoutY="1.0" prefHeight="567.0" prefWidth="796.0">
+                                             <children>
+                                                <HBox prefHeight="36.0" prefWidth="785.0">
+                                                   <children>
+                                                      <Label prefHeight="21.0" prefWidth="122.0" text="جستجو بر اساس :">
+                                                         <HBox.margin>
+                                                            <Insets left="2.0" right="2.0" top="5.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <ComboBox fx:id="searchSupplierItemCmb" prefWidth="150.0">
+                                                         <HBox.margin>
+                                                            <Insets top="2.0" />
+                                                         </HBox.margin>
+                                                      </ComboBox>
+                                                      <Label fx:id="supplierSearchItemLbl1" disable="true" prefHeight="21.0" prefWidth="51.0" text="آیتم 1">
+                                                         <HBox.margin>
+                                                            <Insets left="5.0" right="2.0" top="5.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="supplierSearchItemTxt1" disable="true" prefHeight="31.0" prefWidth="159.0">
+                                                         <HBox.margin>
+                                                            <Insets top="2.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                      <Label fx:id="supplierSearchItemLbl2" disable="true" prefHeight="21.0" prefWidth="54.0" text="آیتم2">
+                                                         <HBox.margin>
+                                                            <Insets left="2.0" top="5.0" />
+                                                         </HBox.margin>
+                                                      </Label>
+                                                      <TextField fx:id="supplierSearchItemTxt2" disable="true" prefHeight="31.0" prefWidth="164.0">
+                                                         <HBox.margin>
+                                                            <Insets top="2.0" />
+                                                         </HBox.margin>
+                                                      </TextField>
+                                                      <Button fx:id="supplierSearchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="68.0" text="جستجو">
+                                                         <HBox.margin>
+                                                            <Insets top="2.0" />
+                                                         </HBox.margin>
+                                                      </Button>
+                                                      <ImageView fx:id="refreshImg1" fitHeight="27.0" fitWidth="30.0">
+                                                         <image>
+                                                            <Image url="@img/refresh.png" />
+                                                         </image>
+                                                         <HBox.margin>
+                                                            <Insets top="4.0" />
+                                                         </HBox.margin>
+                                                      </ImageView>
+                                                   </children>
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin>
+                                                </HBox>
+                                                <TableView fx:id="supplierTable" nodeOrientation="RIGHT_TO_LEFT" prefHeight="534.0" prefWidth="740.0">
+                                                   <columns>
+                                                      <TableColumn fx:id="idCol1" prefWidth="112.0" text="کدتامین کننده" />
+                                                      <TableColumn fx:id="modelCol1" prefWidth="92.0" text="نوع شخصیت" />
+                                                      <TableColumn fx:id="brandCol1" prefWidth="119.0" text="نام" />
+                                                      <TableColumn fx:id="osCol1" prefWidth="125.0" text="کدملی" />
+                                                      <TableColumn fx:id="manufactureDateCol1" prefWidth="113.0" text="کدپستی" />
+                                                      <TableColumn fx:id="hasChargerCol1" prefWidth="91.0" text="شماره تلفن" />
+                                                      <TableColumn fx:id="hasHeadsetCol1" prefWidth="127.0" text="شماره موبایل" />
+                                                   </columns>
+                                                </TableView>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </items>
+                              </SplitPane>
+                           </children>
+                        </VBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="userInfoTab" text="مشخصات کاربر">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox prefHeight="594.0" prefWidth="1128.0">
+                           <children>
+                              <HBox nodeOrientation="RIGHT_TO_LEFT" prefHeight="425.0" prefWidth="1128.0">
+                                 <children>
+                                    <GridPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="386.0" prefWidth="364.0">
+                                      <columnConstraints>
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="191.0" minWidth="10.0" prefWidth="145.0" />
+                                        <ColumnConstraints hgrow="SOMETIMES" maxWidth="288.0" minWidth="10.0" prefWidth="225.0" />
+                                      </columnConstraints>
+                                      <rowConstraints>
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                      </rowConstraints>
+                                       <children>
+                                          <Label text="کد پرسنلی" />
+                                          <Label text="کد ملی" GridPane.rowIndex="1" />
+                                          <Label text="نام" GridPane.rowIndex="2" />
+                                          <Label text="نام خانوادگی" GridPane.rowIndex="3" />
+                                          <Label text="جنسیت" GridPane.rowIndex="4" />
+                                          <Label text="ناریخ تولد" GridPane.rowIndex="5" />
+                                          <Label text="نام کاربری" GridPane.rowIndex="6" />
+                                          <Label text="رمز عبور" GridPane.rowIndex="7" />
+                                          <TextField fx:id="userIdTxt" GridPane.columnIndex="1" />
+                                          <TextField fx:id="userNationalIdTxt" layoutX="207.0" layoutY="19.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <TextField fx:id="userFirstNameTxt" layoutX="207.0" layoutY="68.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="userFamilyTxt" layoutX="207.0" layoutY="117.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="usernameTxt" layoutX="207.0" layoutY="166.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <PasswordField fx:id="passwordTxt" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <DatePicker fx:id="userBirthDate" prefHeight="31.0" prefWidth="226.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                          <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                                             <children>
+                                                <RadioButton fx:id="userFamelRdo" mnemonicParsing="false" text="زن">
+                                                   <HBox.margin>
+                                                      <Insets left="15.0" top="10.0" />
+                                                   </HBox.margin>
+                                                   <toggleGroup>
+                                                      <ToggleGroup fx:id="genderToggle" />
+                                                   </toggleGroup>
+                                                </RadioButton>
+                                                <RadioButton fx:id="userMaleRdo" mnemonicParsing="false" text="مرد" toggleGroup="$genderToggle">
+                                                   <HBox.margin>
+                                                      <Insets left="20.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </RadioButton>
+                                             </children>
+                                          </HBox>
+                                          <Button fx:id="userEditBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="221.0" text="ویرایش اطلاعات" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                       </children>
+                                       <HBox.margin>
+                                          <Insets left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </GridPane>
+                                    <ImageView fx:id="userImage" fitHeight="256.0" fitWidth="270.0" pickOnBounds="true" preserveRatio="true">
+                                       <HBox.margin>
+                                          <Insets left="100.0" top="10.0" />
+                                       </HBox.margin>
+                                       <image>
+                                          <Image url="@img/login.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</VBox>
