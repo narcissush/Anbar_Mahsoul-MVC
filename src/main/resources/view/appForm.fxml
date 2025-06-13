@@ -155,9 +155,9 @@
                                           <Label text="قیمت" GridPane.rowIndex="7" />
                                           <Label layoutX="10.0" layoutY="335.0" text="تعداد" GridPane.rowIndex="8" />
                                           <TextField fx:id="productIdTxt" GridPane.columnIndex="1" />
-                                          <ComboBox fx:id="productGroupCmb" prefHeight="35.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="productCategoryCmb" prefHeight="35.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                           <ComboBox fx:id="productBrandCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <ComboBox fx:id="productModelCmb" prefHeight="31.0" prefWidth="191.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <TextField fx:id="productModelTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                           <ComboBox fx:id="productOsCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                           <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <children>
@@ -185,7 +185,7 @@
                                           <TextField fx:id="productSerialTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                                           <TextField fx:id="productPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                           <TextField fx:id="productCountTxt" layoutX="114.0" layoutY="330.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                          <Button fx:id="productSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <Button fx:id="productSaveBtn" defaultButton="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -244,16 +244,18 @@
                                                 <Insets />
                                              </VBox.margin>
                                           </HBox>
-                                          <TableView fx:id="productsTable" nodeOrientation="RIGHT_TO_LEFT" prefHeight="534.0" prefWidth="740.0">
+                                          <TableView fx:id="productsTable" nodeOrientation="RIGHT_TO_LEFT" prefHeight="534.0">
                                              <columns>
                                                 <TableColumn fx:id="productIdCol" text="کد محصول" />
-                                                <TableColumn fx:id="productModelCol" text="مدل" />
-                                                <TableColumn fx:id="productBrandCol" text="برند" />
-                                                <TableColumn fx:id="productOsCol" text="سیستم" />
-                                                <TableColumn fx:id="productSerialCol" prefWidth="95.0" text="شماره سریال" />
-                                                <TableColumn fx:id="hasChargerCol" prefWidth="84.0" text="شارژر" />
-                                                <TableColumn fx:id="hasHeadsetCol" prefWidth="87.0" text="هدست" />
-                                                <TableColumn fx:id="productPriceCol" prefWidth="208.0" text="قیمت" />
+                                                <TableColumn fx:id="productCategoryCol" prefWidth="75.0" text="دسته بندی" />
+                                                <TableColumn fx:id="productModelCol" prefWidth="59.0" text="مدل" />
+                                                <TableColumn fx:id="productBrandCol" prefWidth="91.0" text="برند" />
+                                                <TableColumn fx:id="productOsCol" prefWidth="100.0" text="سیستم عامل" />
+                                                <TableColumn fx:id="productSerialCol" prefWidth="110.0" text="شماره سریال" />
+                                                <TableColumn fx:id="hasChargerCol" prefWidth="59.0" text="شارژر" />
+                                                <TableColumn fx:id="hasHeadsetCol" minWidth="0.0" prefWidth="82.0" text="هدست" />
+                                                <TableColumn fx:id="productPriceCol" prefWidth="57.0" text="قیمت" />
+                                                <TableColumn fx:id="productCountCol" maxWidth="82.0" minWidth="8.0" prefWidth="82.0" text="تعداد" />
                                              </columns>
                                           </TableView>
                                        </children>

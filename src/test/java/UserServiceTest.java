@@ -11,24 +11,24 @@ public class UserServiceTest {
                 .builder()
                 .id(2)
                 .nationalId("55")
-                .name("elmiraa")
-                .family("sadeghi")
+                .name("narges")
+                .family("haji")
                 .gender(Gender.men)
                 .birthDate(LocalDate.now())
-                .username("elmira")
-                .password("elmira456")
+                .username("1")
+                .password("1")
                 .build();
 
         //UserService.save(user);
-        //UserService.edit(user);
+        UserService.edit(user);
         //UserService.delete(1);
         //System.out.println(UserService.findByNationalId("55"));
         //System.out.println(UserService.findById(2));
-        System.out.println(UserService.findByNameAndFamily("elmiraa", "sadeghi"));
+        //System.out.println(UserService.findByNameAndFamily("elmiraa", "sadeghi"));
 
         //System.out.println(UserService.findByUserAndPassword("elmira", "elmira456"));
         // System.out.println(SupplierService.findByUsername("mohsen"));
 
-        //System.out.println(UserService.findAll());
+        System.out.println(UserService.findAll());
     }
 }

@@ -7,7 +7,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
@@ -33,8 +35,10 @@ public class LoginController implements Initializable {
                     secondStage.setTitle("نرم افزار انبارداری");
                     secondStage.show();
                 } else {
+                    new Alert(Alert.AlertType.INFORMATION, "User Not Found", ButtonType.OK).show();
                 }
             } catch (Exception ex) {
+                System.out.println(ex.getMessage());
             }
         });
 }}

@@ -42,7 +42,7 @@ public class ProductRepository implements AutoCloseable {
     }
 
     public void edit(Product product) throws SQLException {
-        preparedStatement = connection.prepareStatement("update Products set title=?, brand=?,model=?,os=?,has_charger=?,has_headset=?,price=?,count=?,manufacture_date=? where id=?");
+        preparedStatement = connection.prepareStatement("update Products set CATEGORY=?, brand=?,model=?,os=?,has_charger=?,has_headset=?,price=?,count=?,manufacture_date=? where id=?");
         preparedStatement.setString(1, product.getCategory().name());
         preparedStatement.setString(2, product.getBrand().name());
         preparedStatement.setString(3, product.getModel());

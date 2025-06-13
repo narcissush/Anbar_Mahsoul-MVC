@@ -28,7 +28,7 @@ public class ProductServiceTest {
 //        System.out.println(ProductService.findByCategory("mobile"));
 //        System.out.println(ProductService.findByPrice(700,800));
 
-//        System.out.println(ProductService.findAll());
+        System.out.println(ProductService.findAll());
     }
 
 }
