@@ -1,15 +1,14 @@
 import anbar.model.entity.Product;
-import anbar.model.entity.Storekeeper;
+import anbar.model.entity.Supplier;
 import anbar.model.entity.Transaction;
+import anbar.model.entity.User;
 import anbar.model.entity.enums.Brand;
-import anbar.model.entity.enums.Gender;
-import anbar.model.entity.enums.Os;
 import anbar.model.entity.enums.Transaction_type;
 import anbar.model.service.ProductService;
-import anbar.model.service.StorekeeperService;
+import anbar.model.service.SupplierService;
 import anbar.model.service.TransactionService;
+import anbar.model.service.UserService;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public class TransactionTest {
@@ -24,15 +23,17 @@ public class TransactionTest {
 //                .id(1)
 //                .build();
 
-        Storekeeper storekeeper = StorekeeperService.findById(5);
+        Supplier supplier = SupplierService.findById(5);
         Product product = ProductService.findById(3);
+        User user = UserService.findById(1);
 
 
         Transaction transaction = Transaction
                 .builder()
                 .id(2)
                 .product(product)
-                .storekeeper(storekeeper)
+                .supplier(supplier)
+                .user(user)
                 .transaction_type(Transaction_type.InBound)
                 .quantity(4000)
                 .transaction_dateTime(LocalDateTime.now())
@@ -42,10 +43,7 @@ public class TransactionTest {
        //TransactionService.edit(transaction);
         //TransactionService.delete(2);
         //System.out.println(TransactionService.findByNationalId("0080386822"));
-        System.out.println(TransactionService.findByProductBrand(Brand.Samsung));
-        System.out.println(TransactionService.findByStoreKeeperNameAndFamily("narges","hajizadeh"));
-
-
+        //System.out.println(TransactionService.findByProductBrand(""));
         //System.out.print(TransactionService.findAll());
     }
 }

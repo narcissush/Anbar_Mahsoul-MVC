@@ -1,5 +1,6 @@
 import anbar.model.entity.Product;
 import anbar.model.entity.enums.Brand;
+import anbar.model.entity.enums.Category;
 import anbar.model.entity.enums.Os;
 import anbar.model.service.ProductService;
 
@@ -10,21 +11,21 @@ public class ProductServiceTest {
     public static void main(String[] args) throws Exception {
         Product product = Product
                 .builder()
-                .id(3)
-                .title("mobile")
-                .brand(Brand.Huawei)
-                .model("Huawei16")
+                .id(1)
+                .category(Category.Laptop)
+                .brand(Brand.Samsung)
+                .model("")
                 .os(Os.Android)
-                .price(750)
-                .count(80)
-                .hasHeadset(false)
+                .price(1000)
+                .count(5)
+                .hasHeadset(true)
                 .hasCharger(false)
-                .manufactureDate(LocalDate.now())
+                .serialNumber("123")
                 .build();
 //        ProductService.save(product);
 //        ProductService.edit(product);
 //       ProductService.delete(1);
-//        System.out.println(ProductService.findByTitle("mobile"));
+//        System.out.println(ProductService.findByCategory("mobile"));
 //        System.out.println(ProductService.findByPrice(700,800));
 
 //        System.out.println(ProductService.findAll());

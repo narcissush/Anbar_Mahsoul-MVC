@@ -28,30 +28,30 @@ public class ProductRepository implements AutoCloseable {
         product.setId(nextId());
         preparedStatement = connection.prepareStatement("insert into Products values (?,?,?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, product.getId());
-        preparedStatement.setString(2, product.getTitle());
+        preparedStatement.setString(2, product.getCategory().name());
         preparedStatement.setString(3, product.getBrand().name());
         preparedStatement.setString(4, product.getModel());
         preparedStatement.setString(5, product.getOs().name());
         preparedStatement.setBoolean(6, product.isHasCharger());
         preparedStatement.setBoolean(7, product.isHasHeadset());
-        preparedStatement.setInt(8, product.getPrice());
-        preparedStatement.setInt(9, product.getCount());
-        preparedStatement.setDate(10, Date.valueOf(product.getManufactureDate()));
+        preparedStatement.setString(8, product.getSerialNumber());
+        preparedStatement.setInt(9, product.getPrice());
+        preparedStatement.setInt(10, product.getCount());
         preparedStatement.execute();
 
     }
 
     public void edit(Product product) throws SQLException {
         preparedStatement = connection.prepareStatement("update Products set title=?, brand=?,model=?,os=?,has_charger=?,has_headset=?,price=?,count=?,manufacture_date=? where id=?");
-        preparedStatement.setString(1, product.getTitle());
+        preparedStatement.setString(1, product.getCategory().name());
         preparedStatement.setString(2, product.getBrand().name());
         preparedStatement.setString(3, product.getModel());
         preparedStatement.setString(4, product.getOs().name());
         preparedStatement.setBoolean(5, product.isHasCharger());
         preparedStatement.setBoolean(6, product.isHasHeadset());
-        preparedStatement.setInt(7, product.getPrice());
-        preparedStatement.setInt(8, product.getCount());
-        preparedStatement.setDate(9, Date.valueOf(product.getManufactureDate()));
+        preparedStatement.setString(7, product.getSerialNumber());
+        preparedStatement.setInt(8, product.getPrice());
+        preparedStatement.setInt(9, product.getCount());
         preparedStatement.setInt(10, product.getId());
         preparedStatement.execute();
 
@@ -86,10 +86,10 @@ public class ProductRepository implements AutoCloseable {
         return productsList;
     }
 
-    public List<Product> findByTitle(String title) throws SQLException {
+    public List<Product> findByCategory(String category) throws SQLException {
         List<Product> productsList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from Products where TITLE Like ?");
-        preparedStatement.setString(1, title + "%");
+        preparedStatement = connection.prepareStatement("select * from Products where category Like ?");
+        preparedStatement.setString(1, category + "%");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             productsList.add(EntityMapper.productMapper(resultSet));

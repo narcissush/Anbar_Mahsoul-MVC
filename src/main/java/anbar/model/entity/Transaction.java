@@ -15,7 +15,8 @@ public class Transaction implements Serializable {
 
     private int id;
     private Product product;
-    private Storekeeper storekeeper;
+    private Supplier supplier;
+    private User user;
     private Transaction_type transaction_type;
     private int quantity;
     private LocalDateTime transaction_dateTime;

@@ -1,6 +1,8 @@
 package anbar.model.entity;
 
 import anbar.model.entity.enums.Gender;
+import anbar.model.entity.enums.Party;
+import anbar.model.entity.enums.Person;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -12,14 +14,13 @@ import java.time.LocalDate;
 @SuperBuilder
 @NoArgsConstructor
 
-public class Storekeeper implements Serializable {
+public class Supplier implements Serializable {
     private int id;
-    private String nationalId;
+    private Person personType;
+    private Party party_type;
     private String name;
-    private String family;
-    private Gender gender;
-    private LocalDate birthDate;
+    private String nationalId;
+    private String postalCode;
     private String phoneNumber;
-    private String username;
-    private String password;
+    private String mobileNumber;
 }

@@ -142,6 +142,7 @@
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                       </rowConstraints>
                                        <children>
                                           <Label text="کد کالا" />
@@ -174,26 +175,21 @@
                                                          </VBox.margin>
                                                       </CheckBox>
                                                    </children>
-                                                </VBox>
-                                                <VBox prefHeight="200.0" prefWidth="100.0">
-                                                   <children>
-                                                      <CheckBox fx:id="bagChk" mnemonicParsing="false" text="کیف">
-                                                         <VBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </VBox.margin>
-                                                      </CheckBox>
-                                                      <CheckBox fx:id="glassChk" mnemonicParsing="false" text="گلس">
-                                                         <VBox.margin>
-                                                            <Insets top="5.0" />
-                                                         </VBox.margin>
-                                                      </CheckBox>
-                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                   <padding>
+                                                      <Insets bottom="2.0" />
+                                                   </padding>
+                                                   <HBox.margin>
+                                                      <Insets bottom="2.0" />
+                                                   </HBox.margin>
                                                 </VBox>
                                              </children>
                                           </HBox>
                                           <Button fx:id="productSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                                          <ComboBox fx:id="productSsupplierCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                          <Label text="تامین کننده" GridPane.rowIndex="8" />
+                                          <TextField fx:id="productCountTxt" layoutX="114.0" layoutY="330.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <Label layoutX="10.0" layoutY="335.0" text="تعداد" GridPane.rowIndex="8" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -339,16 +335,17 @@
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                                              </rowConstraints>
                                              <children>
                                                 <Label text="کد تامین کننده" />
                                                 <Label text="نوع شخصیت" GridPane.rowIndex="1" />
-                                                <Label text="نام تامین کننده" GridPane.rowIndex="2" />
-                                                <Label text="کد ملی" GridPane.rowIndex="3" />
-                                                <Label text="کد پستی" GridPane.rowIndex="4" />
-                                                <Label text="شماره تلفن" GridPane.rowIndex="5" />
-                                                <Label text="شماره موبایل" GridPane.rowIndex="6" />
-                                                <Button fx:id="supplierSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                                <Label text="نام تامین کننده" GridPane.rowIndex="3" />
+                                                <Label text="کد ملی" GridPane.rowIndex="4" />
+                                                <Label text="کد پستی" GridPane.rowIndex="5" />
+                                                <Label text="شماره تلفن" GridPane.rowIndex="6" />
+                                                <Label text="شماره موبایل" GridPane.rowIndex="7" />
+                                                <Button fx:id="supplierSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                                                 <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                                    <children>
                                                       <RadioButton fx:id="naturalPersonRdo" mnemonicParsing="false" text="حقیقی">
@@ -366,12 +363,33 @@
                                                       <Insets />
                                                    </opaqueInsets>
                                                 </HBox>
-                                                <TextField fx:id="supplierNationalIdTxt" layoutX="115.0" layoutY="313.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <TextField fx:id="supplierNameTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="supplierPostalCodeTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <TextField fx:id="supplierMobileTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <TextField fx:id="supplierNationalIdTxt" layoutX="115.0" layoutY="313.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                <TextField fx:id="supplierNameTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="supplierPostalCodeTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <TextField fx:id="supplierMobileTxt" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                                 <TextField fx:id="supplierIdTxt" GridPane.columnIndex="1" />
-                                                <TextField fx:id="supplierPhoneNumberTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <TextField fx:id="supplierPhoneNumberTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                                <Label text="نقش" GridPane.rowIndex="2" />
+                                                <HBox layoutX="115.0" layoutY="55.0" prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                   <children>
+                                                      <RadioButton fx:id="buyerRdo" mnemonicParsing="false" text="خریدار">
+                                                         <HBox.margin>
+                                                            <Insets left="10.0" right="10.0" top="15.0" />
+                                                         </HBox.margin>
+                                                         <toggleGroup>
+                                                            <ToggleGroup fx:id="roleToggle" />
+                                                         </toggleGroup>
+                                                      </RadioButton>
+                                                      <RadioButton fx:id="sellerRdo" mnemonicParsing="false" text="فرشنده" toggleGroup="$roleToggle">
+                                                         <HBox.margin>
+                                                            <Insets top="15.0" />
+                                                         </HBox.margin>
+                                                      </RadioButton>
+                                                   </children>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
+                                                </HBox>
                                              </children>
                                           </GridPane>
                                        </children>

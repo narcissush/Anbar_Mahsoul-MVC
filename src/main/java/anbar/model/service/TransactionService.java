@@ -46,11 +46,6 @@ public class TransactionService {
         }
     }
 
-    public static Transaction findByNationalId(String nationalId) throws Exception {
-        try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            return transactionRepository.findByNationalId(nationalId);
-        }
-    }
 
     public static List<Transaction> findByProductBrand(Brand brand) throws Exception {
         try (TransactionRepository transactionRepository = new TransactionRepository()) {
@@ -58,11 +53,6 @@ public class TransactionService {
         }
     }
 
-    public static List<Transaction> findByStoreKeeperNameAndFamily(String name, String family) throws Exception {
-        try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            return transactionRepository.findByStoreKeeperNameAndFamily(name, family);
-        }
-    }
 
 
 }

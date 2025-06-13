@@ -46,9 +46,9 @@ public class ProductService {
 
 
 
-    public static List<Product> findByTitle(String title) throws Exception {
+    public static List<Product> findByCategory(String category) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {
-            return productRepository.findByTitle(title);
+            return productRepository.findByCategory(category);
         }
     }
 

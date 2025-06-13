@@ -1,37 +1,47 @@
 package anbar.tools;
 
 import anbar.model.entity.Product;
-import anbar.model.entity.Storekeeper;
+import anbar.model.entity.Supplier;
 import anbar.model.entity.Transaction;
-import anbar.model.entity.enums.Brand;
-import anbar.model.entity.enums.Gender;
-import anbar.model.entity.enums.Os;
-import anbar.model.entity.enums.Transaction_type;
+import anbar.model.entity.User;
+import anbar.model.entity.enums.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class EntityMapper {
-    public static Storekeeper storekeeperMapper(ResultSet resultSet) throws SQLException {
-        return Storekeeper
+    public static Supplier supplierMapper(ResultSet resultSet) throws SQLException {
+        return Supplier
                 .builder()
                 .id(resultSet.getInt("id"))
+                .personType(Person.valueOf(resultSet.getString("person_type")))
+                .party_type(Party.valueOf(resultSet.getString("party_type")))
                 .nationalId(resultSet.getString("national_id"))
-                .name(resultSet.getString("name"))
-                .family(resultSet.getString("family"))
-                .gender(Gender.valueOf(resultSet.getString("gender")))
-                .birthDate(resultSet.getDate("birth_date").toLocalDate())
+                .postalCode(resultSet.getString("postalcode"))
                 .phoneNumber(resultSet.getString("phone_number"))
-                .username(resultSet.getString("username"))
-                .password(resultSet.getString("password"))
+                .mobileNumber(resultSet.getString("mobile_number"))
+                .name(resultSet.getString("name"))
                 .build();
     }
+    public static User userMapper(ResultSet resultSet) throws SQLException {
+    return User
+            .builder()
+            .id(resultSet.getInt("id"))
+            .nationalId(resultSet.getString("national_id"))
+            .name(resultSet.getString("name"))
+            .family(resultSet.getString("family"))
+            .gender(Gender.valueOf(resultSet.getString("gender")))
+            .birthDate(resultSet.getDate("birth_date").toLocalDate())
+            .username(resultSet.getString("username"))
+            .password(resultSet.getString("password"))
+            .build();
+}
 
     public static Product productMapper(ResultSet resultSet) throws SQLException {
 
         return Product.builder()
                 .id(resultSet.getInt("id"))
-                .title(resultSet.getString("title"))
+                .category(Category.valueOf(resultSet.getString("category")))
                 .brand(Brand.valueOf(resultSet.getString("brand")))
                 .model(resultSet.getString("model"))
                 .os(Os.valueOf(resultSet.getString("os")))
@@ -39,48 +49,61 @@ public class EntityMapper {
                 .count(resultSet.getInt("count"))
                 .hasHeadset(resultSet.getBoolean("has_headset"))
                 .hasCharger(resultSet.getBoolean("has_charger"))
-                .manufactureDate(resultSet.getDate("manufacture_date").toLocalDate())
+                .serialNumber(resultSet.getString("serial_number"))
                 .build();
     }
 
     public static Transaction transactionMapper(ResultSet resultSet) throws SQLException {
 
-        Storekeeper storekeeper = Storekeeper
+        Supplier supplier = Supplier
                 .builder()
-                .id(resultSet.getInt("storekeepers_id"))
-                .nationalId(resultSet.getString("storekeepers_national_id"))
-                .name(resultSet.getString("storekeepers_name"))
-                .family(resultSet.getString("storekeepers_family"))
-                .gender(Gender.valueOf(resultSet.getString("storekeepers_gender")))
-                .birthDate(resultSet.getDate("storekeepers_birth_date").toLocalDate())
-                .phoneNumber(resultSet.getString("storekeepers_phone_number"))
-                .username(resultSet.getString("storekeepers_username"))
-                .password(resultSet.getString("storekeepers_password"))
+                .id(resultSet.getInt("id"))
+                .personType(Person.valueOf(resultSet.getString("person_type")))
+                .party_type(Party.valueOf(resultSet.getString("party_type")))
+                .nationalId(resultSet.getString("national_id"))
+                .postalCode(resultSet.getString("postalcode"))
+                .phoneNumber(resultSet.getString("phone_number"))
+                .mobileNumber(resultSet.getString("mobile_number"))
+                .name(resultSet.getString("name"))
                 .build();
 
         Product product =Product
                 .builder()
-                .id(resultSet.getInt("products_id"))
-                .title(resultSet.getString("products_title"))
-                .brand(Brand.valueOf(resultSet.getString("products_brand")))
-                .model(resultSet.getString("products_model"))
-                .os(Os.valueOf(resultSet.getString("products_os")))
-                .price(resultSet.getInt("products_price"))
-                .count(resultSet.getInt("products_count"))
-                .hasHeadset(resultSet.getBoolean("products_has_headset"))
-                .hasCharger(resultSet.getBoolean("products_has_charger"))
-                .manufactureDate(resultSet.getDate("products_manufacture_date").toLocalDate())
+                .id(resultSet.getInt("id"))
+                .category(Category.valueOf(resultSet.getString("category")))
+                .brand(Brand.valueOf(resultSet.getString("brand")))
+                .model(resultSet.getString("model"))
+                .os(Os.valueOf(resultSet.getString("os")))
+                .price(resultSet.getInt("price"))
+                .count(resultSet.getInt("count"))
+                .hasHeadset(resultSet.getBoolean("has_headset"))
+                .hasCharger(resultSet.getBoolean("has_charger"))
+                .serialNumber(resultSet.getString("serial_number"))
+                .build();
+
+        User user = User
+                .builder()
+                .id(resultSet.getInt("id"))
+                .nationalId(resultSet.getString("national_id"))
+                .name(resultSet.getString("name"))
+                .family(resultSet.getString("family"))
+                .gender(Gender.valueOf(resultSet.getString("gender")))
+                .birthDate(resultSet.getDate("birth_date").toLocalDate())
+                .username(resultSet.getString("username"))
+                .password(resultSet.getString("password"))
                 .build();
 
         return Transaction
                 .builder()
                 .id(resultSet.getInt("transaction_ID"))
                 .product(product)
-                .storekeeper(storekeeper)
+                .supplier(supplier)
+                .user(user)
                 .transaction_type(Transaction_type.valueOf(resultSet.getString("transaction_type")))
                 .quantity(resultSet.getInt("quantity"))
                 .transaction_dateTime(resultSet.getTimestamp("transaction_date").toLocalDateTime())
 
                 .build();
     }
+
 }

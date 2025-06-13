@@ -31,7 +31,7 @@ public class TransactionRepository implements AutoCloseable {
         preparedStatement = connection.prepareStatement("insert into transactions  values (?, ?, ?,?, ?, ?)");
         preparedStatement.setInt(1, transaction.getId());
         preparedStatement.setInt(2, transaction.getProduct().getId());
-        preparedStatement.setInt(3, transaction.getStorekeeper().getId());
+        preparedStatement.setInt(3, transaction.getSupplier().getId());
         preparedStatement.setString(4, transaction.getTransaction_type().name());
         preparedStatement.setInt(5, transaction.getQuantity());
         preparedStatement.setTimestamp(6, transaction.getTransaction_dateTime() == null ? null : Timestamp.valueOf(transaction.getTransaction_dateTime()));
@@ -41,7 +41,7 @@ public class TransactionRepository implements AutoCloseable {
     public void edit(Transaction transaction) throws SQLException {
         preparedStatement = connection.prepareStatement("update transactions set products_id=?, storekeepers_id=?, transaction_type=?,quantity=?, transaction_date=? where id=?");
         preparedStatement.setInt(1, transaction.getProduct().getId());
-        preparedStatement.setInt(2, transaction.getStorekeeper().getId());
+        preparedStatement.setInt(2, transaction.getSupplier().getId());
         preparedStatement.setString(3, transaction.getTransaction_type().name());
         preparedStatement.setInt(4, transaction.getQuantity());
 
@@ -69,10 +69,11 @@ public class TransactionRepository implements AutoCloseable {
         preparedStatement = connection.prepareStatement("select * from transactions_report where transaction_id=?");
         preparedStatement.setInt(1, id);
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            transaction=EntityMapper.transactionMapper(resultSet);
+        if (resultSet.next()) {
+            return EntityMapper.transactionMapper(resultSet);
+        } else {
+            return null;
         }
-        return transaction;
     }
 
 
@@ -98,31 +99,6 @@ public class TransactionRepository implements AutoCloseable {
         return transactionList;
     }
 
-
-    public List<Transaction> findByStoreKeeperNameAndFamily(String name, String family) throws SQLException {
-        List<Transaction> transactionList = new ArrayList<>();
-        connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transactions_report where storekeepers_name like ? and storekeepers_family like ?");
-        preparedStatement.setString(1, name + "%");
-        preparedStatement.setString(2, family + "%");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            transactionList.add(EntityMapper.transactionMapper(resultSet));
-        }
-        return transactionList;
-    }
-
-    public Transaction findByNationalId(String nationalId) throws SQLException {
-        Transaction transaction = new Transaction();
-        connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transactions_report where storekeepers_national_id=?");
-        preparedStatement.setString(1, nationalId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            transaction=EntityMapper.transactionMapper(resultSet);
-        }
-        return transaction;
-    }
 
     @Override
     public void close() throws Exception {
