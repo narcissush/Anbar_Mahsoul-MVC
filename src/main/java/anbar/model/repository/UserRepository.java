@@ -107,17 +107,17 @@ public class UserRepository implements AutoCloseable {
     }
 
 
-    public List<User> findByUsernameAndPassword(String username, String password) throws SQLException {
-        List<User> usersList = new ArrayList<>();
+    public User findByUsernameAndPassword(String username, String password) throws SQLException {
+        User user = new User();
         preparedStatement = connection.prepareStatement("select * from users where username=? and password=?");
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, password);
 
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            usersList.add(EntityMapper.userMapper(resultSet));
-        }
-        return usersList;
+        if (resultSet.next()) {
+            return  EntityMapper.userMapper(resultSet);
+        }else
+        return null;
     }
 
     public List<User> findByUsername(String username) throws SQLException {

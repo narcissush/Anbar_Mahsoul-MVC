@@ -54,7 +54,7 @@ public class UserService {
         }
     }
 
-    public static List<User> findByUserAndPassword(String username, String password) throws Exception {
+    public static User findByUserAndPassword(String username, String password) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
             return userRepository.findByUsernameAndPassword(username, password);
         }
