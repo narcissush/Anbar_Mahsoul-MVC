@@ -57,5 +57,10 @@ public class ProductService {
             return productRepository.findByPrice(price1, price2);
         }
     }
+    public static List<Product> findByBrand(String brand) throws Exception {
+        try (ProductRepository productRepository = new ProductRepository()) {
+            return productRepository.findByBrand(brand);
+        }
+    }
 
 }

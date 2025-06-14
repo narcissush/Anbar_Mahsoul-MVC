@@ -42,7 +42,7 @@ public class ProductRepository implements AutoCloseable {
     }
 
     public void edit(Product product) throws SQLException {
-        preparedStatement = connection.prepareStatement("update Products set CATEGORY=?, brand=?,model=?,os=?,has_charger=?,has_headset=?,price=?,count=?,manufacture_date=? where id=?");
+        preparedStatement = connection.prepareStatement("update Products set CATEGORY=?, brand=?,model=?,os=?,has_charger=?,has_headset=?,SERIAL_NUMBER=?,price=?,count=? where id=?");
         preparedStatement.setString(1, product.getCategory().name());
         preparedStatement.setString(2, product.getBrand().name());
         preparedStatement.setString(3, product.getModel());
@@ -104,6 +104,17 @@ public class ProductRepository implements AutoCloseable {
         preparedStatement = connection.prepareStatement("select * from Products where price between ? and ?");
         preparedStatement.setInt(1, price1);
         preparedStatement.setInt(2, price2);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            productsList.add(EntityMapper.productMapper(resultSet));
+        }
+        return productsList;
+    }
+    public List<Product> findByBrand(String brand) throws SQLException {
+        List<Product> productsList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select * from Products where brand LIKE ?");
+        preparedStatement.setString(1, brand);
+
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             productsList.add(EntityMapper.productMapper(resultSet));

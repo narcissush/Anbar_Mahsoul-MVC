@@ -154,14 +154,14 @@
                                           <Label text="شماره سریال" GridPane.rowIndex="6" />
                                           <Label text="قیمت" GridPane.rowIndex="7" />
                                           <Label layoutX="10.0" layoutY="335.0" text="تعداد" GridPane.rowIndex="8" />
-                                          <TextField fx:id="productIdTxt" GridPane.columnIndex="1" />
-                                          <ComboBox fx:id="productCategoryCmb" prefHeight="35.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                          <ComboBox fx:id="productBrandCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                          <TextField fx:id="productModelTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                          <ComboBox fx:id="productOsCmb" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                          <TextField fx:id="productIdTxt" disable="true" GridPane.columnIndex="1" />
+                                          <ComboBox fx:id="productCategoryCmb" disable="true" prefHeight="35.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                          <ComboBox fx:id="productBrandCmb" disable="true" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                          <TextField fx:id="productModelTxt" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                          <ComboBox fx:id="productOsCmb" disable="true" prefHeight="31.0" prefWidth="187.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                           <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="5">
                                              <children>
-                                                <CheckBox fx:id="headsetChk" mnemonicParsing="false" text="هدست">
+                                                <CheckBox fx:id="headsetChk" disable="true" mnemonicParsing="false" text="هدست" underline="true">
                                                    <HBox.margin>
                                                       <Insets left="8.0" right="8.0" top="8.0" />
                                                    </HBox.margin>
@@ -169,7 +169,7 @@
                                                       <Insets top="5.0" />
                                                    </padding>
                                                 </CheckBox>
-                                                <CheckBox fx:id="chargerChk" mnemonicParsing="false" text="شارژر">
+                                                <CheckBox fx:id="chargerChk" disable="true" mnemonicParsing="false" text="شارژر" underline="true">
                                                    <HBox.margin>
                                                       <Insets top="8.0" />
                                                    </HBox.margin>
@@ -182,10 +182,10 @@
                                                 <Insets />
                                              </opaqueInsets>
                                           </HBox>
-                                          <TextField fx:id="productSerialTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                                          <TextField fx:id="productPriceTxt" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                                          <TextField fx:id="productCountTxt" layoutX="114.0" layoutY="330.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
-                                          <Button fx:id="productSaveBtn" defaultButton="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                                          <TextField fx:id="productSerialTxt" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                                          <TextField fx:id="productPriceTxt" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                                          <TextField fx:id="productCountTxt" disable="true" layoutX="114.0" layoutY="330.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                                          <Button fx:id="productSaveBtn" defaultButton="true" disable="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                                        </children>
                                     </GridPane>
                                  </children>
@@ -196,37 +196,35 @@
                                        <children>
                                           <HBox prefHeight="36.0" prefWidth="785.0">
                                              <children>
-                                                <Label prefHeight="21.0" prefWidth="122.0" text="جستجو بر اساس :">
+                                                <Label prefHeight="21.0" prefWidth="137.0" text="جستجو بر اساس :">
                                                    <HBox.margin>
                                                       <Insets left="2.0" right="2.0" top="5.0" />
                                                    </HBox.margin>
                                                 </Label>
                                                 <ComboBox fx:id="productSearchItemCmb" prefWidth="150.0">
                                                    <HBox.margin>
+                                                      <Insets right="2.0" top="2.0" />
+                                                   </HBox.margin>
+                                                </ComboBox>
+                                                <ComboBox fx:id="productSearchByCmb" prefWidth="150.0" visible="false">
+                                                   <HBox.margin>
                                                       <Insets top="2.0" />
                                                    </HBox.margin>
                                                 </ComboBox>
-                                                <Label fx:id="productItem1Lbl" disable="true" prefHeight="21.0" prefWidth="51.0" text="آیتم 1">
-                                                   <HBox.margin>
-                                                      <Insets left="5.0" right="2.0" top="5.0" />
-                                                   </HBox.margin>
-                                                </Label>
-                                                <TextField fx:id="productItem1Txt" disable="true" prefHeight="31.0" prefWidth="159.0">
+                                                <TextField fx:id="productItem1Txt" prefHeight="31.0" prefWidth="128.0" promptText="از" visible="false">
                                                    <HBox.margin>
                                                       <Insets top="2.0" />
                                                    </HBox.margin>
                                                 </TextField>
-                                                <Label fx:id="productItem2Lbl" disable="true" prefHeight="21.0" prefWidth="54.0" text="آیتم2">
+                                                <TextField fx:id="productItem2Txt" prefHeight="31.0" prefWidth="132.0" promptText="تا" visible="false">
                                                    <HBox.margin>
-                                                      <Insets left="2.0" top="5.0" />
+                                                      <Insets right="10.0" top="2.0" />
                                                    </HBox.margin>
-                                                </Label>
-                                                <TextField fx:id="productItem2Txt" disable="true" prefHeight="31.0" prefWidth="164.0">
-                                                   <HBox.margin>
-                                                      <Insets top="2.0" />
-                                                   </HBox.margin>
+                                                   <opaqueInsets>
+                                                      <Insets />
+                                                   </opaqueInsets>
                                                 </TextField>
-                                                <Button fx:id="productSearchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="68.0" text="جستجو">
+                                                <Button fx:id="productSearchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="جستجو">
                                                    <HBox.margin>
                                                       <Insets top="2.0" />
                                                    </HBox.margin>
