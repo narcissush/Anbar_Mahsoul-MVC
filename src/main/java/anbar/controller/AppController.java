@@ -196,6 +196,7 @@ public class AppController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        //Product Controller
         AtomicInteger i = new AtomicInteger();
         productBrandCmb.getItems().addAll(Brand.values());
         productCategoryCmb.getItems().addAll(Category.values());
@@ -353,6 +354,9 @@ public class AppController implements Initializable {
         });
 
          }
+         //Supplier Controller
+
+
 
     private void resetProductForm() {
         productCategoryCmb.getSelectionModel().clearSelection();
