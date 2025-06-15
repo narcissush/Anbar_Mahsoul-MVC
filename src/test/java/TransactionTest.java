@@ -18,7 +18,7 @@ public class TransactionTest {
 //                .id(4)
 //                .build();
 //
-//        Storekeeper storekeeper = Storekeeper
+//         Supplier supplier = Supplier
 //                .builder()
 //                .id(1)
 //                .build();

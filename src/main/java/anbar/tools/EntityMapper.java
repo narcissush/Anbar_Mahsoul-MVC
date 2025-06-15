@@ -15,12 +15,12 @@ public class EntityMapper {
                 .builder()
                 .id(resultSet.getInt("id"))
                 .personType(Person.valueOf(resultSet.getString("person_type")))
-                .party_type(Party.valueOf(resultSet.getString("party_type")))
+                .partyType(Party.valueOf(resultSet.getString("party_type")))
                 .nationalId(resultSet.getString("national_id"))
+                .name(resultSet.getString("name"))
                 .postalCode(resultSet.getString("postalcode"))
                 .phoneNumber(resultSet.getString("phone_number"))
                 .mobileNumber(resultSet.getString("mobile_number"))
-                .name(resultSet.getString("name"))
                 .build();
     }
     public static User userMapper(ResultSet resultSet) throws SQLException {
@@ -59,12 +59,12 @@ public class EntityMapper {
                 .builder()
                 .id(resultSet.getInt("id"))
                 .personType(Person.valueOf(resultSet.getString("person_type")))
-                .party_type(Party.valueOf(resultSet.getString("party_type")))
+                .partyType(Party.valueOf(resultSet.getString("party_type")))
+                .name(resultSet.getString("name"))
                 .nationalId(resultSet.getString("national_id"))
                 .postalCode(resultSet.getString("postalcode"))
                 .phoneNumber(resultSet.getString("phone_number"))
                 .mobileNumber(resultSet.getString("mobile_number"))
-                .name(resultSet.getString("name"))
                 .build();
 
         Product product =Product

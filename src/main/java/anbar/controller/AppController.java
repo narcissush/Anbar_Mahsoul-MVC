@@ -5,6 +5,7 @@ import anbar.model.entity.Supplier;
 
 import anbar.model.entity.enums.*;
 import anbar.model.service.ProductService;
+import anbar.model.service.SupplierService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -34,6 +35,10 @@ public class AppController implements Initializable {
     @FXML
     private RadioButton sellerRdo;
     @FXML
+    private ToggleGroup personToggle;
+    @FXML
+    private ToggleGroup partyToggle;
+    @FXML
     private TextField supplierNameTxt;
     @FXML
     private TextField supplierNationalIdTxt;
@@ -43,8 +48,6 @@ public class AppController implements Initializable {
     private TextField supplierPhoneNumberTxt;
     @FXML
     private TextField supplierMobileTxt;
-    @FXML
-    private ToggleGroup partyToggle;
     @FXML
     private Button supplierSaveBtn;
     @FXML
@@ -61,25 +64,19 @@ public class AppController implements Initializable {
     @FXML
     private ComboBox supplierSearchItemCmb;
     @FXML
-    private Label supplierSearchItem1Lbl;
-    @FXML
     private TextField supplierSearchItem1Txt;
-    @FXML
-    private Label supplierSearchItem2Lbl;
-    @FXML
-    private TextField supplierSearchItem2Txt;
     @FXML
     private Button supplierSearchBtn;
     @FXML
     private ImageView supplierRefreshImg;
+    @FXML
+    private ComboBox<Enum<?>> supplierSearchByCmb;
 
     // جدول تامین کننده
     @FXML
     private TableView<Supplier> supplierTable;
     @FXML
     private TableColumn<Supplier, Integer> supplierIdCol;
-    @FXML
-    private TableColumn<Supplier, Person> supplierPersonCol;
     @FXML
     private TableColumn<Supplier, String> supplierNameCol;
     @FXML
@@ -90,6 +87,10 @@ public class AppController implements Initializable {
     private TableColumn<Supplier, String> supplierPhoneNumberCol;
     @FXML
     private TableColumn<Supplier, String> supplierMobileCol;
+    @FXML
+    private TableColumn<Supplier, Person> supplierPersonCol;
+    @FXML
+    private TableColumn<Supplier, Party> supplierPartyCol;
 
 
     //فیلدهای محصولات
@@ -204,6 +205,11 @@ public class AppController implements Initializable {
         productSearchItemCmb.getItems().addAll(ProductSearchList.values());
         resetProductForm();
 
+        //Supplier Controller
+        resetSupplierForm();
+
+
+//New----------------------------------------------------------
         productNewBtn.setOnAction(event -> {
             resetProductForm();
             productCategoryCmb.setDisable(false);
@@ -218,6 +224,22 @@ public class AppController implements Initializable {
             productSaveBtn.setDisable(false);
 
         });
+        supplierNewBtn.setOnAction(event -> {
+            resetSupplierForm();
+            naturalPersonRdo.setDisable(false);
+            legalPersonRdo.setDisable(false);
+            buyerRdo.setDisable(false);
+            sellerRdo.setDisable(false);
+            supplierNameTxt.setDisable(false);
+            supplierNationalIdTxt.setDisable(false);
+            supplierPostalCodeTxt.setDisable(false);
+            supplierPhoneNumberTxt.setDisable(false);
+            supplierMobileTxt.setDisable(false);
+        });
+
+
+//Edit-------------------------------
+
         productEdiBtn.setOnAction(event -> {
             productCategoryCmb.setDisable(false);
             productBrandCmb.setDisable(false);
@@ -231,27 +253,40 @@ public class AppController implements Initializable {
             productSaveBtn.setDisable(false);
 
         });
+        supplierEditBtn.setOnAction(event -> {
+            //supplierIdTxt.setDisable(false);
+            naturalPersonRdo.setDisable(false);
+            legalPersonRdo.setDisable(false);
+            buyerRdo.setDisable(false);
+            sellerRdo.setDisable(false);
+            supplierNameTxt.setDisable(false);
+            supplierNationalIdTxt.setDisable(false);
+            supplierPostalCodeTxt.setDisable(false);
+            supplierPhoneNumberTxt.setDisable(false);
+            supplierMobileTxt.setDisable(false);
+        });
 
-
+//Save-------------------------------------------------------------------
         productSaveBtn.setOnAction(event -> {
             try {
                 if (productIdTxt.getText().isEmpty()) {
-                Product product =
-                        Product.builder()
-                                //.id(Integer.parseInt(productIdTxt.getText()))
-                                .category(productCategoryCmb.getSelectionModel().getSelectedItem())
-                                .brand(productBrandCmb.getSelectionModel().getSelectedItem())
-                                .model(productModelTxt.getText())
-                                .os(productOsCmb.getSelectionModel().getSelectedItem())
-                                .hasHeadset(headsetChk.isSelected())
-                                .hasCharger(chargerChk.isSelected())
-                                .serialNumber(productSerialTxt.getText())
-                                .price(Integer.parseInt(productPriceTxt.getText()))
-                                .count(Integer.parseInt(productCountTxt.getText()))
-                                .build();
+                    Product product =
+                            Product.builder()
+                                    //.id(Integer.parseInt(productIdTxt.getText()))
+                                    .category(productCategoryCmb.getSelectionModel().getSelectedItem())
+                                    .brand(productBrandCmb.getSelectionModel().getSelectedItem())
+                                    .model(productModelTxt.getText())
+                                    .os(productOsCmb.getSelectionModel().getSelectedItem())
+                                    .hasHeadset(headsetChk.isSelected())
+                                    .hasCharger(chargerChk.isSelected())
+                                    .serialNumber(productSerialTxt.getText())
+                                    .price(Integer.parseInt(productPriceTxt.getText()))
+                                    .count(Integer.parseInt(productCountTxt.getText()))
+                                    .build();
 
                     ProductService.save(product);
-                } else  {
+                    resetProductForm();
+                } else {
                     Product product =
                             Product.builder()
                                     .id(Integer.parseInt(productIdTxt.getText()))
@@ -266,25 +301,81 @@ public class AppController implements Initializable {
                                     .count(Integer.parseInt(productCountTxt.getText()))
                                     .build();
                     ProductService.edit(product);
+                    resetSupplierForm();;
                 }
 
                 new Alert(Alert.AlertType.INFORMATION, "Product Saved", ButtonType.OK).show();
-                resetProductForm();
+
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
 
         });
+
+
+        supplierSaveBtn.setOnAction(event -> {
+            RadioButton selectedPersonRdo = (RadioButton) personToggle.getSelectedToggle();
+            RadioButton selectedPartyRdo = (RadioButton) partyToggle.getSelectedToggle();
+            try {
+                if (supplierIdTxt.getText().isEmpty()) {
+                    Supplier supplier =
+                            Supplier.builder()
+                                    //.id(Integer.parseInt(supplierIdTxt.getText()))
+                                    .personType(Person.valueOf(selectedPersonRdo.getText()))
+                                    .partyType(Party.valueOf(selectedPartyRdo.getText()))
+                                    .name(supplierNameTxt.getText())
+                                    .nationalId(supplierNationalIdTxt.getText())
+                                    .postalCode(supplierPostalCodeTxt.getText())
+                                    .phoneNumber(selectedPartyRdo.getText())
+                                    .mobileNumber(selectedPartyRdo.getText())
+                                    .build();
+                    SupplierService.save(supplier);
+
+                } else {
+                    Supplier supplier =
+                            Supplier.builder()
+                                    .id(Integer.parseInt(supplierIdTxt.getText()))
+                                    .personType(Person.valueOf(selectedPersonRdo.getText()))
+                                    .partyType(Party.valueOf(selectedPartyRdo.getText()))
+                                    .name(supplierNameTxt.getText())
+                                    .nationalId(supplierNationalIdTxt.getText())
+                                    .postalCode(supplierPostalCodeTxt.getText())
+                                    .phoneNumber(selectedPartyRdo.getText())
+                                    .mobileNumber(selectedPartyRdo.getText())
+                                    .build();
+                    SupplierService.edit(supplier);
+                }
+
+                new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
+                resetSupplierForm();
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+
+        });
+
+
+//Delete----------------------------------------------------------------------
         productDeleteBtn.setOnAction(event -> {
             try {
                 ProductService.delete(Integer.parseInt(productIdTxt.getText()));
-            }catch (Exception e) {
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+
+        supplierDeleteBtn.setOnAction(event -> {
+            try {
+                SupplierService.delete(Integer.parseInt(supplierIdTxt.getText()));
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         });
 
 
-        EventHandler<Event> tableChangeEvent = (mouseEvent) -> {
+//EventHandler-------------------------------------------------------------
+
+        EventHandler<Event> tableChangeEvent1 = (mouseEvent) -> {
             resetProductForm();
             Product selected = productsTable.getSelectionModel().getSelectedItem();
             if (selected != null) {
@@ -301,9 +392,31 @@ public class AppController implements Initializable {
             }
 
         };
-        productsTable.setOnMouseReleased(tableChangeEvent);
-        productsTable.setOnKeyReleased(tableChangeEvent);
+        productsTable.setOnMouseReleased(tableChangeEvent1);
+        productsTable.setOnKeyReleased(tableChangeEvent1);
 
+
+        EventHandler<Event> tableChangeEvent2 = (mouseEvent) -> {
+            resetSupplierForm();
+            Supplier selected = supplierTable.getSelectionModel().getSelectedItem();
+            if (selected != null) {
+                supplierIdTxt.setText(String.valueOf(selected.getId()));
+                supplierNameTxt.setText(selected.getName());
+                supplierNationalIdTxt.setText(selected.getNationalId());
+                supplierPostalCodeTxt.setText(selected.getPostalCode());
+                supplierPhoneNumberTxt.setText(selected.getPhoneNumber());
+                supplierMobileTxt.setText(selected.getMobileNumber());
+                if (selected.getPersonType() == Person.حقوقی) naturalPersonRdo.setSelected(true);
+                else legalPersonRdo.setSelected(true);
+                if (selected.getPartyType() == Party.فروشنده) buyerRdo.setSelected(true);
+                else sellerRdo.setSelected(true);
+            }
+        };
+        supplierTable.setOnMouseReleased(tableChangeEvent2);
+        supplierTable.setOnKeyReleased(tableChangeEvent2);
+
+
+//productSearchItem------------------------------------------------------
 
         productSearchItemCmb.setOnAction(event -> {
 
@@ -315,15 +428,14 @@ public class AppController implements Initializable {
                 productSearchByCmb.setVisible(true);
                 i.set(1);
 
-            }else if ("findByBrand".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            } else if ("findByBrand".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
                 productItem1Txt.setVisible(false);
                 productItem2Txt.setVisible(false);
                 productSearchByCmb.getItems().addAll(Brand.values());
                 productSearchByCmb.setVisible(true);
                 i.set(2);
-            }
-            else if ("findByPrice".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            } else if ("findByPrice".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
                 productSearchByCmb.setVisible(false);
                 productItem1Txt.setVisible(true);
@@ -332,32 +444,124 @@ public class AppController implements Initializable {
             }
         });
 
+
+        supplierSearchItemCmb.setOnAction(event -> {
+
+            if ("findByNationalId".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+                supplierSearchByCmb.getItems().clear();
+                supplierSearchByCmb.setVisible(false);
+                supplierSearchItem1Txt.setVisible(true);
+                i.set(1);
+
+            } else if ("findByName".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+                supplierSearchByCmb.getItems().clear();
+                supplierSearchByCmb.setVisible(false);
+                supplierSearchItem1Txt.setVisible(true);
+                i.set(2);
+            } else if ("findByPerson".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+                supplierSearchByCmb.getItems().clear();
+                supplierSearchByCmb.setVisible(false);
+                supplierSearchByCmb.getItems().addAll(Person.values());
+                supplierSearchItem1Txt.setVisible(true);
+                i.set(3);
+            } else if ("findByParty".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+                supplierSearchByCmb.getItems().clear();
+                supplierSearchByCmb.setVisible(false);
+                supplierSearchByCmb.getItems().addAll(Party.values());
+                supplierSearchItem1Txt.setVisible(true);
+                i.set(4);
+            }
+        });
+
+
+//Search-Btn-------------------------------------------------
+
         productSearchBtn.setOnAction(event -> {
-            List<Product> productList=new ArrayList<>();
+            List<Product> productList = new ArrayList<>();
             try {
-                if (i.get() ==1) {
+                if (i.get() == 1) {
                     productList = ProductService.findByCategory(productSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillProductTable(productList);
-                } else if (i.get() ==2) {
+                } else if (i.get() == 2) {
                     productList = ProductService.findByBrand(productSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillProductTable(productList);
-                }else if(i.get() ==3){
-                    productList = ProductService.findByPrice(Integer.parseInt(productItem1Txt.getText()),Integer.parseInt(productItem2Txt.getText()));
+                } else if (i.get() == 3) {
+                    productList = ProductService.findByPrice(Integer.parseInt(productItem1Txt.getText()), Integer.parseInt(productItem2Txt.getText()));
                     fillProductTable(productList);
                 }
-            }catch (Exception e) {
+            } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
         });
+
+
+        supplierSearchBtn.setOnAction(event -> {
+            List<Supplier> supplierList = new ArrayList<>();
+            try {
+                if (i.get() == 1) {
+                    supplierList = SupplierService.findByNationalId(supplierSearchItem1Txt.getText());
+                    fillSupplierTable(supplierList);
+
+                } else if (i.get() == 2) {
+
+                    supplierList = SupplierService.findByName(supplierSearchItem1Txt.getText());
+                    fillSupplierTable(supplierList);
+
+                } else if (i.get() == 3) {
+                    supplierList = SupplierService.findByPerson(supplierSearchByCmb.getSelectionModel().getSelectedItem().toString());
+                    fillSupplierTable(supplierList);
+                }
+                else if (i.get() == 4) {
+                    supplierList = SupplierService.findByParty(supplierSearchByCmb.getSelectionModel().getSelectedItem().toString());
+                    fillSupplierTable(supplierList);
+                }
+
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        });
+
+//RefreshImg-----------------------------------
+
         productRefreshImg.setOnMouseClicked(event -> {
             resetProductForm();
         });
 
-         }
-         //Supplier Controller
+        supplierRefreshImg.setOnMouseClicked(event -> {
+            resetSupplierForm();
+        });
+    }
 
+//fillTable--------------------------------------------------------------
+    private void fillProductTable(List<Product> productList) {
+        ObservableList<Product> observableList = FXCollections.observableArrayList(productList);
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        productModelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
+        productBrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        productOsCol.setCellValueFactory(new PropertyValueFactory<>("os"));
+        hasChargerCol.setCellValueFactory(new PropertyValueFactory<>("hasCharger"));
+        hasHeadsetCol.setCellValueFactory(new PropertyValueFactory<>("hasHeadset"));
+        productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productCountCol.setCellValueFactory(new PropertyValueFactory<>("count"));
+        productsTable.setItems(observableList);
+    }
 
+    private void fillSupplierTable(List<Supplier> supplierList) {
 
+        ObservableList<Supplier> observableList = FXCollections.observableArrayList(supplierList);
+        supplierIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        supplierPersonCol.setCellValueFactory(new PropertyValueFactory<>("personType"));
+        supplierPartyCol.setCellValueFactory(new PropertyValueFactory<>("partyType"));
+        supplierNationalIdCol.setCellValueFactory(new PropertyValueFactory<>("nationalId"));
+        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        supplierPhoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
+        supplierMobileCol.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+        supplierTable.setItems(observableList);
+    }
+
+    //Reset Form------------------------------------------
     private void resetProductForm() {
         productCategoryCmb.getSelectionModel().clearSelection();
         productBrandCmb.getSelectionModel().clearSelection();
@@ -397,21 +601,38 @@ public class AppController implements Initializable {
         productItem1Txt.setVisible(false);
         productItem2Txt.setVisible(false);
         productSearchByCmb.setVisible(false);
+
     }
 
-    private void fillProductTable(List<Product> productList) {
-        ObservableList<Product> observableList = FXCollections.observableArrayList(productList);
-        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-        productCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-        productModelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
-        productBrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
-        productOsCol.setCellValueFactory(new PropertyValueFactory<>("os"));
-        hasChargerCol.setCellValueFactory(new PropertyValueFactory<>("hasCharger"));
-        hasHeadsetCol.setCellValueFactory(new PropertyValueFactory<>("hasHeadset"));
-        productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
-        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-        productCountCol.setCellValueFactory(new PropertyValueFactory<>("count"));
-        productsTable.setItems(observableList);
+    private void resetSupplierForm() {
+        supplierIdTxt.clear();
+        naturalPersonRdo.isSelected();
+        legalPersonRdo.isSelected();
+        buyerRdo.isSelected();
+        sellerRdo.isSelected();
+        supplierNameTxt.clear();
+        supplierNationalIdTxt.clear();
+        supplierPostalCodeTxt.clear();
+        supplierPhoneNumberTxt.clear();
+        supplierMobileTxt.clear();
+        try {
+            fillSupplierTable(SupplierService.findAll());
+        } catch (Exception e) {
+            System.out.println("fill2");
+        }
+        supplierIdTxt.setDisable(true);
+        naturalPersonRdo.setDisable(true);
+        legalPersonRdo.setDisable(true);
+        buyerRdo.setDisable(true);
+        sellerRdo.setDisable(true);
+        supplierNameTxt.setDisable(true);
+        supplierNationalIdTxt.setDisable(true);
+        supplierPostalCodeTxt.setDisable(true);
+        supplierPhoneNumberTxt.setDisable(true);
+        supplierMobileTxt.setDisable(true);
+        supplierSearchItem1Txt.setVisible(false);
+        supplierSearchByCmb.setVisible(false);
+
     }
 
 

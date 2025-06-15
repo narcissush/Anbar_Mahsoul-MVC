@@ -2,7 +2,6 @@ package anbar.model.repository;
 
 
 import anbar.model.entity.Supplier;
-import anbar.model.entity.enums.Person;
 import anbar.tools.ConnectionProvider;
 import anbar.tools.EntityMapper;
 
@@ -30,7 +29,7 @@ public class SupplierRepository implements AutoCloseable {
         preparedStatement = connection.prepareStatement("insert into suppliers values (?,?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, supplier.getId());
         preparedStatement.setString(2,supplier.getPersonType().name());
-        preparedStatement.setString(3,supplier.getParty_type().name());
+        preparedStatement.setString(3,supplier.getPartyType().name());
         preparedStatement.setString(4,supplier.getNationalId());
         preparedStatement.setString(5,supplier.getPostalCode());
         preparedStatement.setString(6,supplier.getPhoneNumber());
@@ -44,7 +43,7 @@ public class SupplierRepository implements AutoCloseable {
     public void edit(Supplier supplier) throws SQLException {
         preparedStatement = connection.prepareStatement("update suppliers set PERSON_TYPE=?,PARTY_TYPE=?,NATIONAL_ID=?,POSTALCODE=?,PHONE_NUMBER=?,MOBILE_NUMBER=?,NAME=? where id = ?");
         preparedStatement.setString(1,supplier.getPersonType().name());
-        preparedStatement.setString(2,supplier.getParty_type().name());
+        preparedStatement.setString(2,supplier.getPartyType().name());
         preparedStatement.setString(3,supplier.getNationalId());
         preparedStatement.setString(4,supplier.getPostalCode());
         preparedStatement.setString(5,supplier.getPhoneNumber());
@@ -76,24 +75,25 @@ public class SupplierRepository implements AutoCloseable {
     public List<Supplier> findAll() throws SQLException {
         List<Supplier> suppliersList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from suppliers");
+
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-
             suppliersList.add(EntityMapper.supplierMapper(resultSet));
         }
         return suppliersList;
     }
 
-    public Supplier findByNationalId(String nationalId) throws SQLException {
+
+    public List<Supplier> findByNationalId(String nationalId) throws SQLException {
+        List<Supplier> suppliersList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from suppliers where national_id=?");
         preparedStatement.setString(1, nationalId);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        if (resultSet.next()) {
-            return EntityMapper.supplierMapper(resultSet);
-        } else {
-            return null;
-        }
 
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            suppliersList.add(EntityMapper.supplierMapper(resultSet));
+        }
+        return suppliersList;
     }
 
     public List<Supplier> findByName(String name) throws SQLException {

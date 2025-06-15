@@ -20,7 +20,8 @@ create sequence products_seq start with 1 increment by 1;
 create table suppliers
 (
     id            number primary key,
-    person_type   nvarchar2(10),
+    name nvarchar2(30),
+    person_type   nvarchar2(10)  ,
     party_type    nvarchar2(20),
     national_id   nvarchar2(10) not null,
     postalcode    nvarchar2(10),
@@ -36,7 +37,7 @@ create sequence suppliers_seq start with 1 increment by 1;
 create table users
 (
     id          number primary key,
-    national_id nvarchar2(10),
+    national_id nvarchar2(10) unique,
     name        nvarchar2(30),
     family      nvarchar2(30),
     gender      nvarchar2(5),
@@ -80,6 +81,7 @@ select t.id as         transaction_id,
        t.suppliers_id,
        s.person_type   suppliers_person_type,
        s.party_type    suppliers_party_type,
+       s.NAME           suppliers_name,
        s.national_id   suppliers_national_id,
        s.postalcode    suppliers_postalcode,
        s.phone_number  suppliers_phone_number,

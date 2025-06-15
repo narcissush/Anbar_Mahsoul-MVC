@@ -44,7 +44,7 @@ public class SupplierService {
     }
 
 
-    public static Supplier findByNationalId(String nationalId) throws Exception {
+    public static List<Supplier> findByNationalId(String nationalId) throws Exception {
         try (SupplierRepository supplierRepository = new SupplierRepository()) {
             return supplierRepository.findByNationalId(nationalId);
         }
