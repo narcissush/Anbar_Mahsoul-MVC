@@ -27,7 +27,7 @@ public class SupplierRepository implements AutoCloseable {
     public void save(Supplier supplier) throws SQLException {
         supplier.setId(nextId());
         preparedStatement = connection.prepareStatement("insert into suppliers values (?,?,?,?,?,?,?,?)");
-        preparedStatement.setInt(1, supplier.getId());
+       preparedStatement.setInt(1, supplier.getId());
         preparedStatement.setString(2,supplier.getPersonType().name());
         preparedStatement.setString(3,supplier.getPartyType().name());
         preparedStatement.setString(4,supplier.getNationalId());
@@ -35,8 +35,6 @@ public class SupplierRepository implements AutoCloseable {
         preparedStatement.setString(6,supplier.getPhoneNumber());
         preparedStatement.setString(7,supplier.getMobileNumber());
         preparedStatement.setString(8, supplier.getName());
-
-
         preparedStatement.execute();
     }
 

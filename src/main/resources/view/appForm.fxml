@@ -373,7 +373,7 @@
                                                             <ToggleGroup fx:id="partyToggle" />
                                                          </toggleGroup>
                                                       </RadioButton>
-                                                      <RadioButton fx:id="sellerRdo" mnemonicParsing="false" text="فرشنده" toggleGroup="$partyToggle">
+                                                      <RadioButton fx:id="sellerRdo" mnemonicParsing="false" text="فروشنده" toggleGroup="$partyToggle">
                                                          <HBox.margin>
                                                             <Insets top="10.0" />
                                                          </HBox.margin>

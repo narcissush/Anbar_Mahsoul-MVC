@@ -301,11 +301,9 @@ public class AppController implements Initializable {
                                     .count(Integer.parseInt(productCountTxt.getText()))
                                     .build();
                     ProductService.edit(product);
-                    resetSupplierForm();;
+                    resetProductForm();
                 }
-
                 new Alert(Alert.AlertType.INFORMATION, "Product Saved", ButtonType.OK).show();
-
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -326,8 +324,8 @@ public class AppController implements Initializable {
                                     .name(supplierNameTxt.getText())
                                     .nationalId(supplierNationalIdTxt.getText())
                                     .postalCode(supplierPostalCodeTxt.getText())
-                                    .phoneNumber(selectedPartyRdo.getText())
-                                    .mobileNumber(selectedPartyRdo.getText())
+                                    .phoneNumber(supplierPhoneNumberTxt.getText())
+                                    .mobileNumber(supplierMobileTxt.getText())
                                     .build();
                     SupplierService.save(supplier);
 
@@ -340,8 +338,8 @@ public class AppController implements Initializable {
                                     .name(supplierNameTxt.getText())
                                     .nationalId(supplierNationalIdTxt.getText())
                                     .postalCode(supplierPostalCodeTxt.getText())
-                                    .phoneNumber(selectedPartyRdo.getText())
-                                    .mobileNumber(selectedPartyRdo.getText())
+                                    .phoneNumber(supplierPhoneNumberTxt.getText())
+                                    .mobileNumber(supplierMobileTxt.getText())
                                     .build();
                     SupplierService.edit(supplier);
                 }
@@ -359,6 +357,7 @@ public class AppController implements Initializable {
         productDeleteBtn.setOnAction(event -> {
             try {
                 ProductService.delete(Integer.parseInt(productIdTxt.getText()));
+                resetProductForm();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -367,6 +366,7 @@ public class AppController implements Initializable {
         supplierDeleteBtn.setOnAction(event -> {
             try {
                 SupplierService.delete(Integer.parseInt(supplierIdTxt.getText()));
+                resetSupplierForm();
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
@@ -510,8 +510,7 @@ public class AppController implements Initializable {
                 } else if (i.get() == 3) {
                     supplierList = SupplierService.findByPerson(supplierSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillSupplierTable(supplierList);
-                }
-                else if (i.get() == 4) {
+                } else if (i.get() == 4) {
                     supplierList = SupplierService.findByParty(supplierSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillSupplierTable(supplierList);
                 }
@@ -522,7 +521,6 @@ public class AppController implements Initializable {
         });
 
 //RefreshImg-----------------------------------
-
         productRefreshImg.setOnMouseClicked(event -> {
             resetProductForm();
         });
@@ -531,6 +529,7 @@ public class AppController implements Initializable {
             resetSupplierForm();
         });
     }
+
 
 //fillTable--------------------------------------------------------------
     private void fillProductTable(List<Product> productList) {
@@ -555,13 +554,14 @@ public class AppController implements Initializable {
         supplierPersonCol.setCellValueFactory(new PropertyValueFactory<>("personType"));
         supplierPartyCol.setCellValueFactory(new PropertyValueFactory<>("partyType"));
         supplierNationalIdCol.setCellValueFactory(new PropertyValueFactory<>("nationalId"));
-        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        supplierPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         supplierPhoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
-        supplierMobileCol.setCellValueFactory(new PropertyValueFactory<>("mobile"));
+        supplierMobileCol.setCellValueFactory(new PropertyValueFactory<>("mobileNumber"));
+        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         supplierTable.setItems(observableList);
     }
 
-    //Reset Form------------------------------------------
+//Reset Form------------------------------------------
     private void resetProductForm() {
         productCategoryCmb.getSelectionModel().clearSelection();
         productBrandCmb.getSelectionModel().clearSelection();
@@ -618,7 +618,7 @@ public class AppController implements Initializable {
         try {
             fillSupplierTable(SupplierService.findAll());
         } catch (Exception e) {
-            System.out.println("fill2");
+            System.out.println("error");
         }
         supplierIdTxt.setDisable(true);
         naturalPersonRdo.setDisable(true);

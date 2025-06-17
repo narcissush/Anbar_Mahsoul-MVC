@@ -17,10 +17,10 @@ public class EntityMapper {
                 .personType(Person.valueOf(resultSet.getString("person_type")))
                 .partyType(Party.valueOf(resultSet.getString("party_type")))
                 .nationalId(resultSet.getString("national_id"))
-                .name(resultSet.getString("name"))
                 .postalCode(resultSet.getString("postalcode"))
                 .phoneNumber(resultSet.getString("phone_number"))
                 .mobileNumber(resultSet.getString("mobile_number"))
+                .name(resultSet.getString("name"))
                 .build();
     }
     public static User userMapper(ResultSet resultSet) throws SQLException {
