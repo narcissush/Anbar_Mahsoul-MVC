@@ -41,4 +41,5 @@ public class LoginController implements Initializable {
                 System.out.println(ex.getMessage());
             }
         });
-}}
+}
+}

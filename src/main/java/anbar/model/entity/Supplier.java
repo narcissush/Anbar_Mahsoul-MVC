@@ -1,7 +1,7 @@
 package anbar.model.entity;
-
 import anbar.model.entity.enums.Party;
 import anbar.model.entity.enums.Person;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
