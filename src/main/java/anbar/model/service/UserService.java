@@ -6,6 +6,8 @@ import anbar.model.repository.UserRepository;
 import java.util.List;
 
 public class UserService {
+    public static User loginUser=new User();
+
     public static void save(User user) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
             userRepository.save(user);
@@ -56,7 +58,13 @@ public class UserService {
 
     public static User findByUserAndPassword(String username, String password) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
-            return userRepository.findByUsernameAndPassword(username, password);
+            loginUser= userRepository.findByUsernameAndPassword(username, password);
+            return loginUser;
+        }
+    }
+    public static User getLoginUser() throws Exception {
+        try (UserRepository userRepository = new UserRepository()) {
+        return loginUser;
         }
     }
 
@@ -65,5 +73,7 @@ public class UserService {
             return userRepository.findByUsername(username);
         }
     }
+
+
 
 }

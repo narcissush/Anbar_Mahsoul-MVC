@@ -10,10 +10,10 @@ public class UserServiceTest {
         User user = User
                 .builder()
                 .id(2)
-                .nationalId("55")
+                .nationalId("0080386822")
                 .name("narges")
-                .family("haji")
-                .gender(Gender.men)
+                .family("hajizadeh")
+                .gender(Gender.زن)
                 .birthDate(LocalDate.now())
                 .username("1")
                 .password("1")

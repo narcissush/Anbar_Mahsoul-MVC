@@ -11,6 +11,7 @@ import java.util.List;
 public class UserRepository implements AutoCloseable {
     private Connection connection;
     private PreparedStatement preparedStatement;
+    User loginUser = new User();
 
     public UserRepository() throws SQLException {
         connection = ConnectionProvider.getConnectionProvider().getconnection();
@@ -38,6 +39,7 @@ public class UserRepository implements AutoCloseable {
     }
 
     public void edit(User user) throws SQLException {
+
         preparedStatement = connection.prepareStatement("update users set NATIONAL_ID=?,NAME=?,FAMILY=?,GENDER=?,BIRTH_DATE=?,USERNAME=?,PASSWORD=? where id = ?");
         preparedStatement.setString(1, user.getNationalId());
         preparedStatement.setString(2, user.getName());
@@ -48,6 +50,7 @@ public class UserRepository implements AutoCloseable {
         preparedStatement.setString(7, user.getPassword());
         preparedStatement.setInt(8, user.getId());
         preparedStatement.execute();
+
 
     }
 
@@ -108,14 +111,15 @@ public class UserRepository implements AutoCloseable {
 
 
     public User findByUsernameAndPassword(String username, String password) throws SQLException {
-        User user = new User();
+
         preparedStatement = connection.prepareStatement("select * from users where username=? and password=?");
         preparedStatement.setString(1, username);
         preparedStatement.setString(2, password);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         if (resultSet.next()) {
-            return  EntityMapper.userMapper(resultSet);
+            loginUser=EntityMapper.userMapper(resultSet);
+            return loginUser;
         }else
         return null;
     }
@@ -131,6 +135,8 @@ public class UserRepository implements AutoCloseable {
         }
         return usersList;
     }
+
+
 
 
     @Override

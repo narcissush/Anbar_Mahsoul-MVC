@@ -18,7 +18,7 @@ import java.util.ResourceBundle;
 
 public class LoginController implements Initializable {
     @FXML private TextField userLoginTxt,passwordLoginTxt;
-    @FXML private Button loginBtn;
+    @FXML private Button loginBtn,registerBtn;
 
 
     @Override
@@ -34,6 +34,10 @@ public class LoginController implements Initializable {
                     secondStage.setScene(scene);
                     secondStage.setTitle("نرم افزار انبارداری");
                     secondStage.show();
+
+                    Stage currentStage = (Stage) loginBtn.getScene().getWindow();
+                    currentStage.close();
+
                 } else {
                     new Alert(Alert.AlertType.INFORMATION, "User Not Found", ButtonType.OK).show();
                 }
@@ -41,5 +45,19 @@ public class LoginController implements Initializable {
                 System.out.println(ex.getMessage());
             }
         });
+
+        registerBtn.setOnAction(e -> {
+            try {
+                Stage secondStage = new Stage();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/UserRegisterForm.fxml")));
+                secondStage.setScene(scene);
+                secondStage.setTitle("ثبت نام کاربر");
+                secondStage.show();
+            }catch (Exception ex){
+                //
+            }
+        });
+
+
 }
 }
