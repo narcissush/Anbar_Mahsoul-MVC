@@ -8,18 +8,12 @@ import java.util.List;
 public class UserService {
     public static User loginUser=new User();
 
-    public static void save(User user) throws Exception {
-        try (UserRepository userRepository = new UserRepository()) {
-            userRepository.save(user);
-        }
-    }
 
     public static void edit(User user) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
                 userRepository.edit(user);
         }
     }
-
 
     public static void delete(int id) throws Exception {
 

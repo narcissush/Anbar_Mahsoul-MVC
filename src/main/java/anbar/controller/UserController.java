@@ -43,7 +43,7 @@ public class UserController implements Initializable {
     @FXML
     private PasswordField passwordTxt;
     @FXML
-    private Button userEditBtn,userQuitBtn;
+    private Button userEditBtn, userQuitBtn;
     User loginUser = new User();
 
     @Override
@@ -86,11 +86,12 @@ public class UserController implements Initializable {
                 Stage currentStage = (Stage) userQuitBtn.getScene().getWindow();
                 UserService.loginUser = null;
                 currentStage.close();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 //
             }
         });
     }
+
     private void fillUserForm() {
         try {
             User user = UserService.getLoginUser();
