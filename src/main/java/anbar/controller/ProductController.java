@@ -9,10 +9,13 @@ import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.util.ArrayList;
@@ -50,9 +53,8 @@ public class ProductController implements Initializable {
     @FXML
     private Button productEdiBtn;
     @FXML
-    private Button inBoundBtn;
-    @FXML
-    private Button outBoundBtn;
+    private Button transactionBtn;
+
     @FXML
     private Button productDeleteBtn;
     @FXML
@@ -274,6 +276,21 @@ public class ProductController implements Initializable {
         productRefreshImg.setOnMouseClicked(event -> {
             resetProductForm();
         });
+
+        //inBound-OutBound-------------------------------
+        transactionBtn.setOnAction(event -> {
+            try {
+                Stage secondStage = new Stage();
+                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/Transaction.fxml")));
+                secondStage.setScene(scene);
+                secondStage.setTitle("ورود کالا");
+                secondStage.show();
+            }catch (Exception e) {
+                //--
+            }
+        });
+
+
 
     }
 

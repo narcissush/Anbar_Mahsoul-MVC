@@ -28,41 +28,38 @@ public class TransactionRepository implements AutoCloseable {
 
     public void save(Transaction transaction) throws SQLException {
         transaction.setId(nextId());
-        preparedStatement = connection.prepareStatement("insert into transactions  values (?, ?, ?,?, ?, ?)");
+        preparedStatement = connection.prepareStatement("insert into transactions  values (?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, transaction.getId());
         preparedStatement.setInt(2, transaction.getProduct().getId());
         preparedStatement.setInt(3, transaction.getSupplier().getId());
-        preparedStatement.setString(4, transaction.getTransaction_type().name());
-        preparedStatement.setInt(5, transaction.getQuantity());
-        preparedStatement.setTimestamp(6, transaction.getTransaction_dateTime() == null ? null : Timestamp.valueOf(transaction.getTransaction_dateTime()));
+        preparedStatement.setInt(4, transaction.getUser().getId());
+        preparedStatement.setString(5, transaction.getTransaction_type().name());
+        preparedStatement.setInt(6, transaction.getQuantity());
+        preparedStatement.setTimestamp(7, transaction.getTransaction_dateTime() == null ? null : Timestamp.valueOf(transaction.getTransaction_dateTime()));
         preparedStatement.execute();
     }
 
     public void edit(Transaction transaction) throws SQLException {
-        preparedStatement = connection.prepareStatement("update transactions set products_id=?, storekeepers_id=?, transaction_type=?,quantity=?, transaction_date=? where id=?");
+        preparedStatement = connection.prepareStatement("update transactions set products_id=?, SUPPLIERS_ID=?,USERS_ID, transaction_type=?,quantity=?, transaction_date=? where id=?");
         preparedStatement.setInt(1, transaction.getProduct().getId());
         preparedStatement.setInt(2, transaction.getSupplier().getId());
-        preparedStatement.setString(3, transaction.getTransaction_type().name());
-        preparedStatement.setInt(4, transaction.getQuantity());
-
+        preparedStatement.setInt(3, transaction.getUser().getId());
+        preparedStatement.setString(4, transaction.getTransaction_type().name());
+        preparedStatement.setInt(5, transaction.getQuantity());
         if (transaction.getTransaction_dateTime() != null) {
-            preparedStatement.setTimestamp(5, Timestamp.valueOf(transaction.getTransaction_dateTime()));
+            preparedStatement.setTimestamp(6, Timestamp.valueOf(transaction.getTransaction_dateTime()));
         } else {
             // اگر نمی‌خوای تغییر بدی یا مقدار قبلی رو از DB بخونی
-            preparedStatement.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now())); // یا مقدار قبلی رو از DB بگیر
+            preparedStatement.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now())); // یا مقدار قبلی رو از DB بگیر
         }
-        preparedStatement.setInt(6, transaction.getId());
+        preparedStatement.setInt(7, transaction.getId());
         preparedStatement.execute();
     }
-
     public void delete(int id) throws SQLException {
-        preparedStatement = connection.prepareStatement(
-                "delete from transactions where id=?"
-        );
+        preparedStatement = connection.prepareStatement("delete from transactions where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
     }
-
     public Transaction findById(int id) throws SQLException {
         Transaction transaction = new Transaction();
         connection = ConnectionProvider.getConnectionProvider().getconnection();

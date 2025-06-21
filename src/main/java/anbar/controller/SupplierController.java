@@ -97,6 +97,7 @@ public class SupplierController implements Initializable {
 
         resetSupplierForm();
         AtomicInteger i = new AtomicInteger();
+        supplierSearchItemCmb.getItems().addAll(supplierSearchList.values());
 
 
         supplierNewBtn.setOnAction(event -> {
@@ -219,15 +220,17 @@ public class SupplierController implements Initializable {
                 i.set(2);
             } else if ("findByPerson".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
-                supplierSearchByCmb.setVisible(false);
+                supplierSearchByCmb.setVisible(true);
+                supplierSearchItem1Txt.setVisible(false);
                 supplierSearchByCmb.getItems().addAll(Person.values());
-                supplierSearchItem1Txt.setVisible(true);
+
                 i.set(3);
             } else if ("findByParty".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
-                supplierSearchByCmb.setVisible(false);
+                supplierSearchByCmb.setVisible(true);
+                supplierSearchItem1Txt.setVisible(false);
                 supplierSearchByCmb.getItems().addAll(Party.values());
-                supplierSearchItem1Txt.setVisible(true);
+
                 i.set(4);
             }
         });

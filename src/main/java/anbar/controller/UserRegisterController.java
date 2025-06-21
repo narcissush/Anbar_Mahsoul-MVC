@@ -59,14 +59,10 @@ resetForm();
                 System.out.println(e.getMessage());
             }
         });
-
         backBtn.setOnAction(event -> {
             Stage currentStage = (Stage) backBtn.getScene().getWindow();
             currentStage.close();
         });
-
-
-
     }
     private void resetForm(){
         userIdTxt.clear();
@@ -78,6 +74,5 @@ resetForm();
         usernameTxt.clear();
         passwordTxt.clear();
         userIdTxt.setDisable(true);
-
     }
 }

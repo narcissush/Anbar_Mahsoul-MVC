@@ -16,7 +16,7 @@ public class SupplierService {
         try (SupplierRepository supplierRepository = new SupplierRepository()) {
             if (supplierRepository.findById(supplier.getId()) != null) {
                 supplierRepository.edit(supplier);
-               }
+            }
         }
     }
 
@@ -26,7 +26,8 @@ public class SupplierService {
         try (SupplierRepository supplierRepository = new SupplierRepository()) {
             if (supplierRepository.findById(id) != null) {
                 supplierRepository.delete(id);
-            }}
+            }
+        }
     }
 
     public static Supplier findById(int id) throws Exception {
