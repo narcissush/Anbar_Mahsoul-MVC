@@ -98,8 +98,6 @@ public class SupplierController implements Initializable {
         resetSupplierForm();
         AtomicInteger i = new AtomicInteger();
         supplierSearchItemCmb.getItems().addAll(supplierSearchList.values());
-
-
         supplierNewBtn.setOnAction(event -> {
             resetSupplierForm();
             naturalPersonRdo.setDisable(false);
@@ -113,8 +111,6 @@ public class SupplierController implements Initializable {
             supplierMobileTxt.setDisable(false);
         });
 
-
-
         supplierEditBtn.setOnAction(event -> {
             //supplierIdTxt.setDisable(false);
             naturalPersonRdo.setDisable(false);
@@ -127,8 +123,6 @@ public class SupplierController implements Initializable {
             supplierPhoneNumberTxt.setDisable(false);
             supplierMobileTxt.setDisable(false);
         });
-
-
 
         supplierSaveBtn.setOnAction(event -> {
             RadioButton selectedPersonRdo = (RadioButton) personToggle.getSelectedToggle();
@@ -168,9 +162,7 @@ public class SupplierController implements Initializable {
             } catch (Exception e) {
                 System.out.println(e.getMessage());
             }
-
         });
-
 
 
         supplierDeleteBtn.setOnAction(event -> {
@@ -183,8 +175,7 @@ public class SupplierController implements Initializable {
         });
 
 
-
-        EventHandler<Event> tableChangeEvent2 = (mouseEvent) -> {
+        EventHandler<Event> tableChangeEvent = (mouseEvent) -> {
             resetSupplierForm();
             Supplier selected = supplierTable.getSelectionModel().getSelectedItem();
             if (selected != null) {
@@ -200,8 +191,8 @@ public class SupplierController implements Initializable {
                 else sellerRdo.setSelected(true);
             }
         };
-        supplierTable.setOnMouseReleased(tableChangeEvent2);
-        supplierTable.setOnKeyReleased(tableChangeEvent2);
+        supplierTable.setOnMouseReleased(tableChangeEvent);
+        supplierTable.setOnKeyReleased(tableChangeEvent);
 
 
 
@@ -269,8 +260,6 @@ public class SupplierController implements Initializable {
         });
     }
 
-
-
     private void fillSupplierTable(List<Supplier> supplierList) {
 
         ObservableList<Supplier> observableList = FXCollections.observableArrayList(supplierList);
@@ -284,8 +273,6 @@ public class SupplierController implements Initializable {
         supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
         supplierTable.setItems(observableList);
     }
-
-
 
     private void resetSupplierForm() {
         supplierIdTxt.clear();
