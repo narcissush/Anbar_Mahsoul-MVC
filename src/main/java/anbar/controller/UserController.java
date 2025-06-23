@@ -51,7 +51,8 @@ public class UserController implements Initializable {
         try {
             loginUser = UserService.getLoginUser();
         } catch (Exception e) {
-
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.show();
         }
         fillUserForm();
 
@@ -72,7 +73,8 @@ public class UserController implements Initializable {
                 UserService.edit(user);
                 new Alert(Alert.AlertType.INFORMATION, "user Edited", ButtonType.OK).show();
             } catch (Exception e) {
-                //throw new UserException("عملیات ویرایش انجام نشد");
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
         userQuitBtn.setOnAction(event -> {
@@ -87,7 +89,8 @@ public class UserController implements Initializable {
                 UserService.loginUser = null;
                 currentStage.close();
             } catch (Exception e) {
-                //
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
     }
@@ -105,7 +108,8 @@ public class UserController implements Initializable {
             usernameTxt.setText(String.valueOf(user.getUsername()));
             passwordTxt.setText(String.valueOf(user.getPassword()));
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.show();
         }
     }
 }

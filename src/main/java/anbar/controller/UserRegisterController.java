@@ -56,7 +56,8 @@ resetForm();
                 resetForm();
                 new Alert(Alert.AlertType.INFORMATION, "user is created", ButtonType.OK).show();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
         backBtn.setOnAction(event -> {

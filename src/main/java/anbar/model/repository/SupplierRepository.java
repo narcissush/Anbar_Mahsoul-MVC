@@ -73,7 +73,6 @@ public class SupplierRepository implements AutoCloseable {
     public List<Supplier> findAll() throws SQLException {
         List<Supplier> suppliersList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from suppliers");
-
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             suppliersList.add(EntityMapper.supplierMapper(resultSet));
@@ -127,6 +126,16 @@ public class SupplierRepository implements AutoCloseable {
             suppliersList.add(EntityMapper.supplierMapper(resultSet));
         }
         return suppliersList;
+    }
+
+    public ArrayList fillTransferSupplierNameCmb() throws SQLException {
+        ArrayList productList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select id,NAME from SUPPLIERS");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            productList.add(resultSet.getString(1)+ " " +resultSet.getString(2));
+        }
+        return productList;
     }
 
 

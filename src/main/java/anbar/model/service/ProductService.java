@@ -1,8 +1,11 @@
 package anbar.model.service;
 
 import anbar.model.entity.Product;
+import anbar.model.entity.Transaction;
 import anbar.model.repository.ProductRepository;
+import anbar.model.repository.TransactionRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
@@ -60,6 +63,12 @@ public class ProductService {
     public static List<Product> findByBrand(String brand) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {
             return productRepository.findByBrand(brand);
+        }
+    }
+
+    public static ArrayList fillTransferProductNameCmb() throws Exception {
+        try (ProductRepository productRepository = new ProductRepository()) {
+            return productRepository.fillTransferProductNameCmb();
         }
     }
 

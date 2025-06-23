@@ -1,8 +1,10 @@
 package anbar.model.service;
 
 import anbar.model.entity.Supplier;
+import anbar.model.repository.ProductRepository;
 import anbar.model.repository.SupplierRepository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class SupplierService {
@@ -64,6 +66,12 @@ public class SupplierService {
     public static List<Supplier> findByPerson(String person) throws Exception {
         try (SupplierRepository supplierRepository = new SupplierRepository()) {
             return supplierRepository.findByPerson(person);
+        }
+    }
+
+    public static ArrayList fillTransferSupplierNameCmb() throws Exception {
+        try (SupplierRepository supplierRepository = new SupplierRepository()) {
+            return supplierRepository.fillTransferSupplierNameCmb();
         }
     }
 

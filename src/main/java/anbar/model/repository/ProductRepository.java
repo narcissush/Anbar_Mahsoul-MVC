@@ -1,10 +1,8 @@
 package anbar.model.repository;
 
-
 import anbar.model.entity.Product;
 import anbar.tools.ConnectionProvider;
 import anbar.tools.EntityMapper;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +36,6 @@ public class ProductRepository implements AutoCloseable {
         preparedStatement.setInt(9, product.getPrice());
         preparedStatement.setInt(10, product.getCount());
         preparedStatement.execute();
-
     }
 
     public void edit(Product product) throws SQLException {
@@ -54,14 +51,12 @@ public class ProductRepository implements AutoCloseable {
         preparedStatement.setInt(9, product.getCount());
         preparedStatement.setInt(10, product.getId());
         preparedStatement.execute();
-
     }
 
     public void delete(int id) throws SQLException {
         preparedStatement = connection.prepareStatement("delete from products where id=?");
         preparedStatement.setInt(1, id);
         preparedStatement.execute();
-
     }
 
     public Product findById(int id) throws SQLException {
@@ -80,7 +75,6 @@ public class ProductRepository implements AutoCloseable {
         preparedStatement = connection.prepareStatement("select * from products");
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-
             productsList.add(EntityMapper.productMapper(resultSet));
         }
         return productsList;
@@ -97,8 +91,6 @@ public class ProductRepository implements AutoCloseable {
         return productsList;
     }
 
-
-
     public List<Product> findByPrice(int price1, int price2) throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from Products where price between ? and ?");
@@ -110,6 +102,7 @@ public class ProductRepository implements AutoCloseable {
         }
         return productsList;
     }
+
     public List<Product> findByBrand(String brand) throws SQLException {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from Products where brand LIKE ?");
@@ -120,6 +113,16 @@ public class ProductRepository implements AutoCloseable {
             productsList.add(EntityMapper.productMapper(resultSet));
         }
         return productsList;
+    }
+
+    public ArrayList fillTransferProductNameCmb() throws SQLException {
+        ArrayList productList = new ArrayList<>();
+        preparedStatement = connection.prepareStatement("select id,brand,MODEL from PRODUCTS");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while (resultSet.next()) {
+            productList.add(resultSet.getString(1)+ " " +resultSet.getString(2)+ " " + resultSet.getString(3));
+        }
+        return productList;
     }
 
     @Override

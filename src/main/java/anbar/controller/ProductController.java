@@ -180,7 +180,8 @@ public class ProductController implements Initializable {
                 }
                 new Alert(Alert.AlertType.INFORMATION, "Product Saved", ButtonType.OK).show();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
 
         });
@@ -192,7 +193,8 @@ public class ProductController implements Initializable {
                 ProductService.delete(Integer.parseInt(productIdTxt.getText()));
                 resetProductForm();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
 
@@ -267,7 +269,8 @@ public class ProductController implements Initializable {
                     fillProductTable(productList);
                 }
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
 
@@ -286,7 +289,8 @@ public class ProductController implements Initializable {
                 secondStage.setTitle("ورود کالا");
                 secondStage.show();
             }catch (Exception e) {
-                //--
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
 
@@ -295,19 +299,23 @@ public class ProductController implements Initializable {
     }
 
         //fillTable--------------------------------------------------------------
-        private void fillProductTable (List < Product > productList) {
+        private void fillProductTable (List<Product> productList) {
             ObservableList<Product> observableList = FXCollections.observableArrayList(productList);
             productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
             productCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+
             productModelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
             productBrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
             productOsCol.setCellValueFactory(new PropertyValueFactory<>("os"));
             hasChargerCol.setCellValueFactory(new PropertyValueFactory<>("hasCharger"));
             hasHeadsetCol.setCellValueFactory(new PropertyValueFactory<>("hasHeadset"));
+
             productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
             productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
             productCountCol.setCellValueFactory(new PropertyValueFactory<>("count"));
             productsTable.setItems(observableList);
+
         }
 
 
@@ -336,7 +344,8 @@ public class ProductController implements Initializable {
             try {
                 fillProductTable(ProductService.findAll());
             } catch (Exception e) {
-                System.out.println("error");
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
             productIdTxt.setDisable(true);
             productCategoryCmb.setDisable(true);

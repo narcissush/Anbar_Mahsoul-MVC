@@ -24,7 +24,7 @@ public class LoginController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        loginBtn.setOnAction(e -> {
+        loginBtn.setOnAction(event -> {
             try {
                 User user = new User();
                 user = UserService.findByUserAndPassword(userLoginTxt.getText(), passwordLoginTxt.getText());
@@ -41,20 +41,22 @@ public class LoginController implements Initializable {
                 } else {
                     new Alert(Alert.AlertType.INFORMATION, "User Not Found", ButtonType.OK).show();
                 }
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
 
-        registerBtn.setOnAction(e -> {
+        registerBtn.setOnAction(event -> {
             try {
                 Stage secondStage = new Stage();
                 Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/UserRegisterForm.fxml")));
                 secondStage.setScene(scene);
                 secondStage.setTitle("ثبت نام کاربر");
                 secondStage.show();
-            }catch (Exception ex){
-                //
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
 

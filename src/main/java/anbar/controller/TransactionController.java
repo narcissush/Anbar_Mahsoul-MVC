@@ -4,6 +4,7 @@ import anbar.model.entity.Supplier;
 import anbar.model.entity.Transaction;
 import anbar.model.service.ProductService;
 import anbar.model.service.SupplierService;
+import anbar.model.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -30,17 +31,15 @@ public class TransactionController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-//        Supplier supplier = new Supplier();
-//        ArrayList<String> supplierName = new ArrayList<>();
-//        ArrayList<Supplier> supplierList = new ArrayList<>();
-//        Supplier selected = supplierTable.getSelectionModel().getSelectedItem();
-//        if (selected != null) {
         try {
-            TProductNameCmb.getItems().addAll(ProductService.findAll());
-            TSupplierNameCmb.getItems().addAll(SupplierService.findAll());
+
+            TProductNameCmb.getItems().addAll(ProductService.fillTransferProductNameCmb());
+            TSupplierNameCmb.getItems().addAll(SupplierService.fillTransferSupplierNameCmb());
+            userTxt.setText(String.valueOf(UserService.getLoginUser().getName()));
 
         } catch (Exception e) {
-            throw new RuntimeException(e);
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.show();
         }
 
 

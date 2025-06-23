@@ -160,7 +160,8 @@ public class SupplierController implements Initializable {
                 new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
                 resetSupplierForm();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
 
@@ -170,7 +171,8 @@ public class SupplierController implements Initializable {
                 SupplierService.delete(Integer.parseInt(supplierIdTxt.getText()));
                 resetSupplierForm();
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
 
@@ -249,11 +251,10 @@ public class SupplierController implements Initializable {
                 }
 
             } catch (Exception e) {
-                System.out.println(e.getMessage());
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
             }
         });
-
-
 
         supplierRefreshImg.setOnMouseClicked(event -> {
             resetSupplierForm();
@@ -261,7 +262,6 @@ public class SupplierController implements Initializable {
     }
 
     private void fillSupplierTable(List<Supplier> supplierList) {
-
         ObservableList<Supplier> observableList = FXCollections.observableArrayList(supplierList);
         supplierIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         supplierPersonCol.setCellValueFactory(new PropertyValueFactory<>("personType"));
@@ -288,7 +288,8 @@ public class SupplierController implements Initializable {
         try {
             fillSupplierTable(SupplierService.findAll());
         } catch (Exception e) {
-            System.out.println("error");
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.show();
         }
         supplierIdTxt.setDisable(true);
         naturalPersonRdo.setDisable(true);
