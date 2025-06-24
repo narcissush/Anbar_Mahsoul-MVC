@@ -28,25 +28,25 @@ public class SupplierRepository implements AutoCloseable {
         supplier.setId(nextId());
         preparedStatement = connection.prepareStatement("insert into suppliers values (?,?,?,?,?,?,?,?)");
        preparedStatement.setInt(1, supplier.getId());
+        preparedStatement.setString(2, supplier.getName());
+        preparedStatement.setString(3,supplier.getPersonType().name());
+        preparedStatement.setString(4,supplier.getPartyType().name());
+        preparedStatement.setString(5,supplier.getNationalId());
+        preparedStatement.setString(6,supplier.getPostalCode());
+        preparedStatement.setString(7,supplier.getPhoneNumber());
+        preparedStatement.setString(8,supplier.getMobileNumber());
+        preparedStatement.execute();
+    }
+
+    public void edit(Supplier supplier) throws SQLException {
+        preparedStatement = connection.prepareStatement("update suppliers set NAME=?,PERSON_TYPE=?,PARTY_TYPE=?,NATIONAL_ID=?,POSTALCODE=?,PHONE_NUMBER=?,MOBILE_NUMBER=? where id = ?");
+        preparedStatement.setString(1, supplier.getName());
         preparedStatement.setString(2,supplier.getPersonType().name());
         preparedStatement.setString(3,supplier.getPartyType().name());
         preparedStatement.setString(4,supplier.getNationalId());
         preparedStatement.setString(5,supplier.getPostalCode());
         preparedStatement.setString(6,supplier.getPhoneNumber());
         preparedStatement.setString(7,supplier.getMobileNumber());
-        preparedStatement.setString(8, supplier.getName());
-        preparedStatement.execute();
-    }
-
-    public void edit(Supplier supplier) throws SQLException {
-        preparedStatement = connection.prepareStatement("update suppliers set PERSON_TYPE=?,PARTY_TYPE=?,NATIONAL_ID=?,POSTALCODE=?,PHONE_NUMBER=?,MOBILE_NUMBER=?,NAME=? where id = ?");
-        preparedStatement.setString(1,supplier.getPersonType().name());
-        preparedStatement.setString(2,supplier.getPartyType().name());
-        preparedStatement.setString(3,supplier.getNationalId());
-        preparedStatement.setString(4,supplier.getPostalCode());
-        preparedStatement.setString(5,supplier.getPhoneNumber());
-        preparedStatement.setString(6,supplier.getMobileNumber());
-        preparedStatement.setString(7, supplier.getName());
         preparedStatement.setInt(8, supplier.getId());
         preparedStatement.execute();
 

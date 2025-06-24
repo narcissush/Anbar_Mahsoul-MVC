@@ -7,6 +7,7 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
@@ -43,8 +44,11 @@
                      <HBox.margin>
                         <Insets top="9.0" />
                      </HBox.margin>
+                     <toggleGroup>
+                        <ToggleGroup fx:id="partyToggle" />
+                     </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="TsellerRdo" mnemonicParsing="false" text="فروش">
+                  <RadioButton fx:id="TsellerRdo" mnemonicParsing="false" text="فروش" toggleGroup="$partyToggle">
                      <HBox.margin>
                         <Insets left="15.0" top="9.0" />
                      </HBox.margin>
@@ -52,7 +56,7 @@
                </children>
             </HBox>
             <TextField fx:id="quantityTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="userTxt" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="userTxt" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <DatePicker fx:id="submitDate" prefHeight="31.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
             <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="210.0" text="ثبت" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>

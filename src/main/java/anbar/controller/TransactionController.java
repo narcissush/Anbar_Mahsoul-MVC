@@ -32,7 +32,6 @@ public class TransactionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-
             TProductNameCmb.getItems().addAll(ProductService.fillTransferProductNameCmb());
             TSupplierNameCmb.getItems().addAll(SupplierService.fillTransferSupplierNameCmb());
             userTxt.setText(String.valueOf(UserService.getLoginUser().getName()));
