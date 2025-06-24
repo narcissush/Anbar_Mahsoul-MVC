@@ -35,30 +35,30 @@
             <Label prefHeight="21.0" prefWidth="107.0" text="نام شخص" GridPane.rowIndex="1" />
             <Label text="تعداد" GridPane.rowIndex="3" />
             <Label text="تاریخ ثبت" GridPane.rowIndex="5" />
-            <Label text="کاربر" GridPane.rowIndex="4" />
-            <ComboBox fx:id="TProductNameCmb" prefHeight="31.0" prefWidth="223.0" GridPane.columnIndex="1" />
-            <ComboBox fx:id="TSupplierNameCmb" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label text="نام کاربر " GridPane.rowIndex="4" />
+            <ComboBox fx:id="transactionProductCmb" prefHeight="31.0" prefWidth="223.0" GridPane.columnIndex="1" />
+            <ComboBox fx:id="transactionSupplierCmb" prefHeight="31.0" prefWidth="229.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <children>
-                  <RadioButton fx:id="TbuyerRdo" mnemonicParsing="false" text="خرید">
+                  <RadioButton fx:id="transactionBuyerRdo" mnemonicParsing="false" text="خرید">
                      <HBox.margin>
                         <Insets top="9.0" />
                      </HBox.margin>
                      <toggleGroup>
-                        <ToggleGroup fx:id="partyToggle" />
+                        <ToggleGroup fx:id="transactionTypeToggle" />
                      </toggleGroup>
                   </RadioButton>
-                  <RadioButton fx:id="TsellerRdo" mnemonicParsing="false" text="فروش" toggleGroup="$partyToggle">
+                  <RadioButton fx:id="transactionSellerRdo" mnemonicParsing="false" text="فروش" toggleGroup="$transactionTypeToggle">
                      <HBox.margin>
                         <Insets left="15.0" top="9.0" />
                      </HBox.margin>
                   </RadioButton>
                </children>
             </HBox>
-            <TextField fx:id="quantityTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="userTxt" visible="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-            <DatePicker fx:id="submitDate" prefHeight="31.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-            <Button fx:id="submitBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="210.0" text="ثبت" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <TextField fx:id="transactionQuantityTxt" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="transactionUserTxt" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <DatePicker fx:id="transactionDate" prefHeight="31.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Button fx:id="transactionSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="210.0" text="ثبت" GridPane.columnIndex="1" GridPane.rowIndex="6" />
          </children>
       </GridPane>
    </children>

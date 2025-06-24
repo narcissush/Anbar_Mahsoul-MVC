@@ -3,9 +3,12 @@ package anbar.model.repository;
 import anbar.model.entity.Product;
 import anbar.tools.ConnectionProvider;
 import anbar.tools.EntityMapper;
+import lombok.Data;
+
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
+@Data
 
 public class ProductRepository implements AutoCloseable {
     private Connection connection;
@@ -107,7 +110,6 @@ public class ProductRepository implements AutoCloseable {
         List<Product> productsList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from Products where brand LIKE ?");
         preparedStatement.setString(1, brand);
-
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             productsList.add(EntityMapper.productMapper(resultSet));
@@ -115,15 +117,6 @@ public class ProductRepository implements AutoCloseable {
         return productsList;
     }
 
-    public ArrayList fillTransferProductNameCmb() throws SQLException {
-        ArrayList productList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select id,brand,MODEL from PRODUCTS");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            productList.add(resultSet.getString(1)+ " " +resultSet.getString(2)+ " " + resultSet.getString(3));
-        }
-        return productList;
-    }
 
     @Override
     public void close() throws Exception {

@@ -1,6 +1,7 @@
 package anbar.model.entity;
 
-import anbar.model.entity.enums.Transaction_type;
+import anbar.model.entity.enums.Party;
+import anbar.model.entity.enums.TransactionType;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -14,10 +15,10 @@ import java.time.LocalDateTime;
 public class Transaction implements Serializable {
 
     private int id;
-    private Product product;
-    private Supplier supplier;
-    private User user;
-    private Transaction_type transaction_type;
+    private int productId;
+    private int supplierId;
+    private int userId;
+    private TransactionType transactionType;
     private int quantity;
-    private LocalDateTime transaction_dateTime;
+    private LocalDateTime transactionDateTime;
 }

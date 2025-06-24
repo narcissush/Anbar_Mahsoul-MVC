@@ -62,7 +62,7 @@ public class UserService {
         }
     }
 
-    public static List<User> findByUsername(String username) throws Exception {
+    public static User findByUsername(String username) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
             return userRepository.findByUsername(username);
         }

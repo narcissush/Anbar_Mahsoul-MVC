@@ -104,16 +104,16 @@ public class UserRepository implements AutoCloseable {
         return null;
     }
 
-    public List<User> findByUsername(String username) throws SQLException {
-        List<User> usersList = new ArrayList<>();
+    public User findByUsername(String username) throws SQLException {
+        User user = new User();
         preparedStatement = connection.prepareStatement("select * from users where username=?");
         preparedStatement.setString(1, username);
-
         ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            usersList.add(EntityMapper.userMapper(resultSet));
+        if (resultSet.next()) {
+            return EntityMapper.userMapper(resultSet);
+        } else {
+            return null;
         }
-        return usersList;
     }
 
 

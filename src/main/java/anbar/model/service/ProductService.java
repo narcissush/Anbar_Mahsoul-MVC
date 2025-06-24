@@ -47,8 +47,6 @@ public class ProductService {
         }
     }
 
-
-
     public static List<Product> findByCategory(String category) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {
             return productRepository.findByCategory(category);
@@ -66,10 +64,6 @@ public class ProductService {
         }
     }
 
-    public static ArrayList fillTransferProductNameCmb() throws Exception {
-        try (ProductRepository productRepository = new ProductRepository()) {
-            return productRepository.fillTransferProductNameCmb();
-        }
-    }
+
 
 }

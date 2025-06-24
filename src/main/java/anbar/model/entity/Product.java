@@ -24,4 +24,7 @@ public class Product implements Serializable {
     private String serialNumber;
     private int price;
     private int count;
+
+    public Product(int id, String brand, String model) {
+    }
 }

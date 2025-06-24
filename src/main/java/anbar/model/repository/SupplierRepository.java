@@ -128,15 +128,7 @@ public class SupplierRepository implements AutoCloseable {
         return suppliersList;
     }
 
-    public ArrayList fillTransferSupplierNameCmb() throws SQLException {
-        ArrayList productList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select id,NAME from SUPPLIERS");
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            productList.add(resultSet.getString(1)+ " " +resultSet.getString(2));
-        }
-        return productList;
-    }
+
 
 
     @Override

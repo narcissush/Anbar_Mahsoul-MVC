@@ -2,11 +2,9 @@ import anbar.model.entity.Product;
 import anbar.model.entity.Supplier;
 import anbar.model.entity.Transaction;
 import anbar.model.entity.User;
-import anbar.model.entity.enums.Brand;
-import anbar.model.entity.enums.Transaction_type;
+import anbar.model.entity.enums.TransactionType;
 import anbar.model.service.ProductService;
 import anbar.model.service.SupplierService;
-import anbar.model.service.TransactionService;
 import anbar.model.service.UserService;
 
 import java.time.LocalDateTime;
@@ -34,7 +32,7 @@ public class TransactionTest {
                 .product(product)
                 .supplier(supplier)
                 .user(user)
-                .transaction_type(Transaction_type.InBound)
+                .transaction_type(TransactionType.InBound)
                 .quantity(4000)
                 .transaction_dateTime(LocalDateTime.now())
                 .build();

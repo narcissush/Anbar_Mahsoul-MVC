@@ -24,9 +24,6 @@ public class TransactionService {
         }
     }
 
-
-
-
     public static void delete(int id) throws Exception {
         try (TransactionRepository transactionRepository = new TransactionRepository()) {
             if (transactionRepository.findById(id) != null) {
@@ -48,8 +45,6 @@ public class TransactionService {
             return transactionRepository.findAll();
         }
     }
-
-
 
 
     public static List<Transaction> findByProductBrand(Brand brand) throws Exception {

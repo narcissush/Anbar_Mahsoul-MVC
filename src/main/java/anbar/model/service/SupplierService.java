@@ -69,11 +69,7 @@ public class SupplierService {
         }
     }
 
-    public static ArrayList fillTransferSupplierNameCmb() throws Exception {
-        try (SupplierRepository supplierRepository = new SupplierRepository()) {
-            return supplierRepository.fillTransferSupplierNameCmb();
-        }
-    }
+
 
 
 }
