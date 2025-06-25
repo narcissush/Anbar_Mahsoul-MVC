@@ -45,7 +45,7 @@ public class ProductController implements Initializable {
     @FXML
     private TextField productPriceTxt;
     @FXML
-    private TextField productCountTxt;
+    private TextField productQuantityTxt;
     @FXML
     private Button productSaveBtn;
     @FXML
@@ -83,7 +83,7 @@ public class ProductController implements Initializable {
     @FXML
     private TableColumn<Product, Integer> productPriceCol;
     @FXML
-    private TableColumn<Product, Integer> productCountCol;
+    private TableColumn<Product, Integer> productQuantityCol;
 
     //جستجو محصولات
     @FXML
@@ -120,7 +120,7 @@ public class ProductController implements Initializable {
             chargerChk.setDisable(false);
             productSerialTxt.setDisable(false);
             productPriceTxt.setDisable(false);
-            productCountTxt.setDisable(false);
+            productQuantityTxt.setDisable(false);
             productSaveBtn.setDisable(false);
 
         });
@@ -137,7 +137,7 @@ public class ProductController implements Initializable {
             chargerChk.setDisable(false);
             productSerialTxt.setDisable(false);
             productPriceTxt.setDisable(false);
-            productCountTxt.setDisable(false);
+            productQuantityTxt.setDisable(false);
             productSaveBtn.setDisable(false);
 
         });
@@ -156,7 +156,7 @@ public class ProductController implements Initializable {
                                     .hasCharger(chargerChk.isSelected())
                                     .serialNumber(productSerialTxt.getText())
                                     .price(Integer.parseInt(productPriceTxt.getText()))
-                                    .count(Integer.parseInt(productCountTxt.getText()))
+                                    .quantity(Integer.parseInt(productQuantityTxt.getText()))
                                     .build();
 
                     ProductService.save(product);
@@ -173,7 +173,7 @@ public class ProductController implements Initializable {
                                     .hasCharger(chargerChk.isSelected())
                                     .serialNumber(productSerialTxt.getText())
                                     .price(Integer.parseInt(productPriceTxt.getText()))
-                                    .count(Integer.parseInt(productCountTxt.getText()))
+                                    .quantity(Integer.parseInt(productQuantityTxt.getText()))
                                     .build();
                     ProductService.edit(product);
                     resetProductForm();
@@ -214,7 +214,7 @@ public class ProductController implements Initializable {
                 chargerChk.setSelected(selected.isHasCharger());
                 productSerialTxt.setText(selected.getSerialNumber());
                 productPriceTxt.setText(String.valueOf(selected.getPrice()));
-                productCountTxt.setText(String.valueOf(selected.getCount()));
+                productQuantityTxt.setText(String.valueOf(selected.getQuantity()));
             }
         });
 
@@ -280,7 +280,7 @@ public class ProductController implements Initializable {
             resetProductForm();
         });
 
-        //inBound-OutBound-------------------------------
+        //Transaction-------------------------------
         transactionBtn.setOnAction(event -> {
             try {
                 Stage secondStage = new Stage();
@@ -313,13 +313,10 @@ public class ProductController implements Initializable {
             productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
             productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-            productCountCol.setCellValueFactory(new PropertyValueFactory<>("count"));
+            productQuantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             productsTable.setItems(observableList);
 
         }
-
-
-
         //Reset Form------------------------------------------
         private void resetProductForm () {
             productCategoryCmb.getSelectionModel().clearSelection();
@@ -330,7 +327,7 @@ public class ProductController implements Initializable {
             chargerChk.setSelected(false);
             productSerialTxt.clear();
             productPriceTxt.clear();
-            productCountTxt.clear();
+            productQuantityTxt.clear();
             productIdTxt.clear();
             productCategoryCmb.getSelectionModel().clearSelection();
             productBrandCmb.getSelectionModel().clearSelection();
@@ -340,7 +337,7 @@ public class ProductController implements Initializable {
             chargerChk.setSelected(false);
             productSerialTxt.clear();
             productPriceTxt.clear();
-            productCountTxt.clear();
+            productQuantityTxt.clear();
             try {
                 fillProductTable(ProductService.findAll());
             } catch (Exception e) {
@@ -356,7 +353,7 @@ public class ProductController implements Initializable {
             chargerChk.setDisable(true);
             productSerialTxt.setDisable(true);
             productPriceTxt.setDisable(true);
-            productCountTxt.setDisable(true);
+            productQuantityTxt.setDisable(true);
             productSaveBtn.setDisable(true);
             productItem1Txt.setVisible(false);
             productItem2Txt.setVisible(false);

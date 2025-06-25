@@ -58,18 +58,28 @@ public class TransactionController implements Initializable {
             try {
 //            Product selectedProduct = new Product();
 //            Supplier selectedSupplier = new Supplier();
-                RadioButton selectedPartyRdo = (RadioButton) transactionTypeToggle.getSelectedToggle();
+                RadioButton selectedtransactionTypeRdo = (RadioButton) transactionTypeToggle.getSelectedToggle();
 
                 Transaction transaction = Transaction.builder()
                         .id(1)
                         .productId(transactionProductCmb.getSelectionModel().getSelectedItem().getId())
                         .supplierId(transactionSupplierCmb.getSelectionModel().getSelectedItem().getId())
                         .userId(UserService.getLoginUser().getId())
-                        .transactionType(TransactionType.valueOf(selectedPartyRdo.getText()))
+                        .transactionType(TransactionType.valueOf(selectedtransactionTypeRdo.getText()))
                         .quantity(Integer.parseInt(transactionQuantityTxt.getText()))
                         .transactionDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
                         .build();
                 TransactionService.save(transaction);
+
+                if (selectedtransactionTypeRdo.getText().equals("خرید"))
+                {
+                    ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 1);
+                }
+                else if(selectedtransactionTypeRdo.getText().equals("فروش"))
+                {
+                    ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 2);
+                }
+
                 new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
                 resetTransactionForm();
             }catch (Exception e){
@@ -77,10 +87,7 @@ public class TransactionController implements Initializable {
                 alert.show();
 
             }
-
-
         });
-
     }
     private void resetTransactionForm() throws Exception {
         transactionQuantityTxt.clear();

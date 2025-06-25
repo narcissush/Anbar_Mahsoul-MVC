@@ -23,7 +23,7 @@ public class Product implements Serializable {
     private boolean hasHeadset;
     private String serialNumber;
     private int price;
-    private int count;
+    private int quantity;
 
     public Product(int id, String brand, String model) {
     }

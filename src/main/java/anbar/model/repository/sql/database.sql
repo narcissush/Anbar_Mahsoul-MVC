@@ -9,7 +9,7 @@ create table products
     has_headset   number(1),
     serial_number nvarchar2(20),
     price         number,
-    count         number
+    quantity         number
 
 );
 
@@ -75,11 +75,11 @@ select t.id as         transaction_id,
        p.has_headset   products_has_headset,
        p.serial_number products_serial_number,
        p.price         products_price,
-       p.count         products_count,
+       p.quantity      products_count,
 
        t.suppliers_id,
        s.person_type   suppliers_person_type,
-       s.NAME           suppliers_name,
+       s.NAME          suppliers_name,
        s.national_id   suppliers_national_id,
        s.postalcode    suppliers_postalcode,
        s.phone_number  suppliers_phone_number,
@@ -103,6 +103,6 @@ from TRANSACTIONS t -- برای جداول اسم مستعار as ندارد
 
 
 
-
+select quantity from Products where id=1
 
 

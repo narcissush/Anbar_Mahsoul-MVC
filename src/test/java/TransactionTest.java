@@ -26,16 +26,16 @@ public class TransactionTest {
         User user = UserService.findById(1);
 
 
-        Transaction transaction = Transaction
-                .builder()
-                .id(2)
-                .product(product)
-                .supplier(supplier)
-                .user(user)
-                .transaction_type(TransactionType.InBound)
-                .quantity(4000)
-                .transaction_dateTime(LocalDateTime.now())
-                .build();
+//        Transaction transaction = Transaction
+//                .builder()
+//                .id(2)
+//                .product(1)
+//                .supplier(3)
+//                .user(user)
+//                .transaction_type(TransactionType.خرید)
+//                .quantity(4000)
+//                .transaction_dateTime(LocalDateTime.now())
+//                .build();
 
         //TransactionService.save(transaction);
        //TransactionService.edit(transaction);

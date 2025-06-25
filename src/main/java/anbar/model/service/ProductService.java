@@ -25,6 +25,12 @@ public class ProductService {
         }
     }
 
+    public static void editQuantity(int id, int quantity , int n) throws Exception {
+        try (ProductRepository productRepository = new ProductRepository()) {
+                productRepository.editQuantity(id, quantity , n);
+        }
+    }
+
     public static void delete(int id) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {
             if (productRepository.findById(id) != null) {

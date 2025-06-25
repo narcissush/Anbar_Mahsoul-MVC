@@ -127,7 +127,7 @@
                         </HBox>
                         <TextField fx:id="productSerialTxt" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <TextField fx:id="productPriceTxt" disable="true" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                        <TextField fx:id="productCountTxt" disable="true" layoutX="114.0" layoutY="330.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                        <TextField fx:id="productQuantityTxt" disable="true" layoutX="114.0" layoutY="330.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                         <Button fx:id="productSaveBtn" defaultButton="true" disable="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="9" />
                      </children>
                   </GridPane>
@@ -196,7 +196,7 @@
                               <TableColumn fx:id="hasChargerCol" prefWidth="59.0" text="شارژر" />
                               <TableColumn fx:id="hasHeadsetCol" minWidth="0.0" prefWidth="82.0" text="هدست" />
                               <TableColumn fx:id="productPriceCol" prefWidth="57.0" text="قیمت" />
-                              <TableColumn fx:id="productCountCol" maxWidth="82.0" minWidth="8.0" prefWidth="82.0" text="تعداد" />
+                              <TableColumn fx:id="productQuantityCol" maxWidth="82.0" minWidth="8.0" prefWidth="82.0" text="تعداد" />
                            </columns>
                         </TableView>
                      </children>
