@@ -40,19 +40,14 @@ public class TransactionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-
-
             transactionProductCmb.getItems().addAll(ProductService.findAll());
             transactionSupplierCmb.getItems().addAll(SupplierService.findAll());
             transactionUserTxt.setText(String.valueOf(UserService.getLoginUser().getName()) +" "+String.valueOf(UserService.getLoginUser().getFamily()) );
             transactionDate.setValue(LocalDate.now());
-
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.show();
         }
-
-
 
         transactionSaveBtn.setOnAction(event -> {
             try {

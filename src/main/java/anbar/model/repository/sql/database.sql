@@ -98,7 +98,7 @@ select t.id as         transaction_id,
 from TRANSACTIONS t -- برای جداول اسم مستعار as ندارد
          join products p on t.products_id = p.id
          join suppliers s on t.suppliers_id = s.id
-         join Users u on t.suppliers_id = u.id;
+         join Users u on t.users_id = u.id;
 
 
 

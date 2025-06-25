@@ -68,7 +68,6 @@ public class TransactionRepository implements AutoCloseable {
         }
     }
 
-
     public List<Transaction> findAll() throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
         preparedStatement = connection.prepareStatement("select * from transactions_report");
