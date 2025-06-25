@@ -103,6 +103,6 @@ from TRANSACTIONS t -- برای جداول اسم مستعار as ندارد
 
 
 
-select quantity from Products where id=1
+
 
 
