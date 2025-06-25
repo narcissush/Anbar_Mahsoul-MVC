@@ -137,7 +137,6 @@ public class ProductController implements Initializable {
             chargerChk.setDisable(false);
             productSerialTxt.setDisable(false);
             productPriceTxt.setDisable(false);
-            productQuantityTxt.setDisable(false);
             productSaveBtn.setDisable(false);
 
         });

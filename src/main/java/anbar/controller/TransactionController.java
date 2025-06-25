@@ -12,6 +12,7 @@ import anbar.model.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
 
 import java.net.URL;
 import java.sql.Timestamp;
@@ -76,14 +77,16 @@ public class TransactionController implements Initializable {
                 if(result){
                     TransactionService.save(transaction);
                     new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
+                    Stage currentStage = (Stage) transactionSaveBtn.getScene().getWindow();
+                    currentStage.close();
                 }
-                resetTransactionForm();
             }catch (Exception e){
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
 
             }
         });
+
     }
     private void resetTransactionForm() throws Exception {
         transactionQuantityTxt.clear();
