@@ -1,9 +1,16 @@
 package anbar.controller.validation;
+import anbar.tools.ConnectionProvider;
+
+import java.sql.SQLException;
 import java.util.regex.*;
 
 
 public class UserValidation {
+
     private static final Pattern USERNAME_PATTERN =
+            Pattern.compile("^[A-Za-z]\\w{5,29}$");
+
+    private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^[A-Za-z]\\w{5,29}$");
 
     public static boolean isValid(String username) {
@@ -11,17 +18,6 @@ public class UserValidation {
         return USERNAME_PATTERN.matcher(username).matches();
     }
 
-    public static void main(String[] args) {
-        String[] tests = {
-                "Geeksforgeeks_21", // true
-                "1Geeksforgeeks",   // false
-                "User_1",           // true (length 6)
-                "Ab",               // false (کوتاه‌تر از 6)
-                "User.123",         // false (کاراکتر غیرمجاز ".")
-        };
-        for (String u : tests) {
-            System.out.printf("%s → %b%n", u, isValid(u));
-        }
-    }
+
 }
 
