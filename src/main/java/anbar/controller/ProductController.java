@@ -129,16 +129,16 @@ public class ProductController implements Initializable {
 //Edit-------------------------------
 
         productEdiBtn.setOnAction(event -> {
-            productCategoryCmb.setDisable(false);
-            productBrandCmb.setDisable(false);
-            productModelTxt.setDisable(false);
-            productOsCmb.setDisable(false);
+            //productCategoryCmb.setDisable(false);
+            //productBrandCmb.setDisable(false);
+            //productModelTxt.setDisable(false);
+            //productOsCmb.setDisable(false);
             headsetChk.setDisable(false);
             chargerChk.setDisable(false);
-            productSerialTxt.setDisable(false);
+            //productSerialTxt.setDisable(false);
             productPriceTxt.setDisable(false);
+            //productQuantityTxt.setDisable(false);
             productSaveBtn.setDisable(false);
-
         });
 
         productSaveBtn.setOnAction(event -> {

@@ -103,10 +103,10 @@ public class SupplierController implements Initializable {
 
         supplierEditBtn.setOnAction(event -> {
             //supplierIdTxt.setDisable(false);
-            naturalPersonRdo.setDisable(false);
-            legalPersonRdo.setDisable(false);
-            supplierNameTxt.setDisable(false);
-            supplierNationalIdTxt.setDisable(false);
+            //naturalPersonRdo.setDisable(false);
+            //legalPersonRdo.setDisable(false);
+            //supplierNameTxt.setDisable(false);
+            //supplierNationalIdTxt.setDisable(false);
             supplierPostalCodeTxt.setDisable(false);
             supplierPhoneNumberTxt.setDisable(false);
             supplierMobileTxt.setDisable(false);
