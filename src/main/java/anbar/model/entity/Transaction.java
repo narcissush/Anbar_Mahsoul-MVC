@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Data
@@ -20,5 +21,5 @@ public class Transaction implements Serializable {
     private int userId;
     private TransactionType transactionType;
     private int quantity;
-    private LocalDateTime transactionDateTime;
+    private LocalDate transactionDate;
 }

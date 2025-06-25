@@ -67,7 +67,7 @@ public class TransactionController implements Initializable {
                         .userId(UserService.getLoginUser().getId())
                         .transactionType(TransactionType.valueOf(selectedPartyRdo.getText()))
                         .quantity(Integer.parseInt(transactionQuantityTxt.getText()))
-                        .transactionDateTime(LocalDateTime.parse(transactionDate.getValue().toString()))
+                        .transactionDate(LocalDate.parse(transactionDate.getValue().toString()))
                         .build();
                 TransactionService.save(transaction);
             }catch (Exception e){

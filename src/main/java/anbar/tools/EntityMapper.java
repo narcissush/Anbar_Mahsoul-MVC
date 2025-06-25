@@ -103,7 +103,7 @@ public class EntityMapper {
                 .userId(resultSet.getInt("user_id"))
                 .transactionType(TransactionType.valueOf(resultSet.getString("transaction_type")))
                 .quantity(resultSet.getInt("quantity"))
-                .transactionDateTime(resultSet.getTimestamp("transaction_date").toLocalDateTime())
+                .transactionDate(resultSet.getDate("transaction_date").toLocalDate())
 
                 .build();
     }
