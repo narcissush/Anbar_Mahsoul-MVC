@@ -25,9 +25,10 @@ public class ProductService {
         }
     }
 
-    public static void editQuantity(int id, int quantity , int n) throws Exception {
+    public static boolean editQuantity(int id, int quantity , int n) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {
-                productRepository.editQuantity(id, quantity , n);
+              boolean result = productRepository.editQuantity(id, quantity , n);
+              return result;
         }
     }
 

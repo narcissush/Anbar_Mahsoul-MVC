@@ -54,7 +54,7 @@ public class TransactionController implements Initializable {
 //            Product selectedProduct = new Product();
 //            Supplier selectedSupplier = new Supplier();
                 RadioButton selectedtransactionTypeRdo = (RadioButton) transactionTypeToggle.getSelectedToggle();
-
+                Boolean result = false;
                 Transaction transaction = Transaction.builder()
                         .id(1)
                         .productId(transactionProductCmb.getSelectionModel().getSelectedItem().getId())
@@ -64,18 +64,19 @@ public class TransactionController implements Initializable {
                         .quantity(Integer.parseInt(transactionQuantityTxt.getText()))
                         .transactionDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
                         .build();
-                TransactionService.save(transaction);
 
                 if (selectedtransactionTypeRdo.getText().equals("خرید"))
                 {
-                    ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 1);
+                    result=ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 1);
                 }
                 else if(selectedtransactionTypeRdo.getText().equals("فروش"))
                 {
-                    ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 2);
+                    result= ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 2);
                 }
-
-                new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
+                if(result){
+                    TransactionService.save(transaction);
+                    new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
+                }
                 resetTransactionForm();
             }catch (Exception e){
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
