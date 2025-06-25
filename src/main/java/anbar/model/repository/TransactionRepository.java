@@ -35,7 +35,7 @@ public class TransactionRepository implements AutoCloseable {
         preparedStatement.setInt(4, transaction.getUserId());
         preparedStatement.setString(5, transaction.getTransactionType().name());
         preparedStatement.setInt(6, transaction.getQuantity());
-        preparedStatement.setTimestamp(7, transaction.getTransactionDate());
+        preparedStatement.setTimestamp(7,Timestamp.valueOf(transaction.getTransactionDate()));
         preparedStatement.execute();
     }
 
@@ -46,7 +46,7 @@ public class TransactionRepository implements AutoCloseable {
         preparedStatement.setInt(3, transaction.getUserId());
         preparedStatement.setString(4, transaction.getTransactionType().name());
         preparedStatement.setInt(5, transaction.getQuantity());
-        preparedStatement.setTimestamp(6, transaction.);
+        preparedStatement.setTimestamp(7,Timestamp.valueOf(transaction.getTransactionDate()));
         preparedStatement.setInt(7, transaction.getId());
         preparedStatement.execute();
     }

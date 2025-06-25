@@ -1,5 +1,4 @@
 import anbar.model.entity.Supplier;
-import anbar.model.entity.enums.Party;
 import anbar.model.entity.enums.Person;
 import anbar.model.service.SupplierService;
 
@@ -9,7 +8,6 @@ public class SupplierServiceTest {
                 .builder()
                 .id(10)
                 .personType(Person.حقوقی)
-                .partyType(Party.فروشنده)
                 .nationalId("0010386822")
                 .postalCode("00")
                 .phoneNumber("00")

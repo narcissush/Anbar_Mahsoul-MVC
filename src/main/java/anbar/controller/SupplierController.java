@@ -29,13 +29,7 @@ public class SupplierController implements Initializable {
     @FXML
     private RadioButton legalPersonRdo;
     @FXML
-    private RadioButton buyerRdo;
-    @FXML
-    private RadioButton sellerRdo;
-    @FXML
     private ToggleGroup personToggle;
-    @FXML
-    private ToggleGroup partyToggle;
     @FXML
     private TextField supplierNameTxt;
     @FXML
@@ -76,6 +70,8 @@ public class SupplierController implements Initializable {
     @FXML
     private TableColumn<Supplier, Integer> supplierIdCol;
     @FXML
+    private TableColumn<Supplier, Integer> supplierPersonCol;
+    @FXML
     private TableColumn<Supplier, String> supplierNameCol;
     @FXML
     private TableColumn<Supplier, String> supplierNationalIdCol;
@@ -85,10 +81,6 @@ public class SupplierController implements Initializable {
     private TableColumn<Supplier, String> supplierPhoneNumberCol;
     @FXML
     private TableColumn<Supplier, String> supplierMobileCol;
-    @FXML
-    private TableColumn<Supplier, Person> supplierPersonCol;
-    @FXML
-    private TableColumn<Supplier, Party> supplierPartyCol;
 
 
 
@@ -102,8 +94,6 @@ public class SupplierController implements Initializable {
             resetSupplierForm();
             naturalPersonRdo.setDisable(false);
             legalPersonRdo.setDisable(false);
-            buyerRdo.setDisable(false);
-            sellerRdo.setDisable(false);
             supplierNameTxt.setDisable(false);
             supplierNationalIdTxt.setDisable(false);
             supplierPostalCodeTxt.setDisable(false);
@@ -115,8 +105,6 @@ public class SupplierController implements Initializable {
             //supplierIdTxt.setDisable(false);
             naturalPersonRdo.setDisable(false);
             legalPersonRdo.setDisable(false);
-            buyerRdo.setDisable(false);
-            sellerRdo.setDisable(false);
             supplierNameTxt.setDisable(false);
             supplierNationalIdTxt.setDisable(false);
             supplierPostalCodeTxt.setDisable(false);
@@ -126,14 +114,12 @@ public class SupplierController implements Initializable {
 
         supplierSaveBtn.setOnAction(event -> {
             RadioButton selectedPersonRdo = (RadioButton) personToggle.getSelectedToggle();
-            RadioButton selectedPartyRdo = (RadioButton) partyToggle.getSelectedToggle();
             try {
                 if (supplierIdTxt.getText().isEmpty()) {
                     Supplier supplier =
                             Supplier.builder()
                                     //.id(Integer.parseInt(supplierIdTxt.getText()))
                                     .personType(Person.valueOf(selectedPersonRdo.getText()))
-                                    .partyType(Party.valueOf(selectedPartyRdo.getText()))
                                     .name(supplierNameTxt.getText())
                                     .nationalId(supplierNationalIdTxt.getText())
                                     .postalCode(supplierPostalCodeTxt.getText())
@@ -141,13 +127,14 @@ public class SupplierController implements Initializable {
                                     .mobileNumber(supplierMobileTxt.getText())
                                     .build();
                     SupplierService.save(supplier);
+                    new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
+                    resetSupplierForm();
 
                 } else {
                     Supplier supplier =
                             Supplier.builder()
                                     .id(Integer.parseInt(supplierIdTxt.getText()))
                                     .personType(Person.valueOf(selectedPersonRdo.getText()))
-                                    .partyType(Party.valueOf(selectedPartyRdo.getText()))
                                     .name(supplierNameTxt.getText())
                                     .nationalId(supplierNationalIdTxt.getText())
                                     .postalCode(supplierPostalCodeTxt.getText())
@@ -155,10 +142,9 @@ public class SupplierController implements Initializable {
                                     .mobileNumber(supplierMobileTxt.getText())
                                     .build();
                     SupplierService.edit(supplier);
+                    new Alert(Alert.AlertType.INFORMATION, "Supplier edited", ButtonType.OK).show();
+                    resetSupplierForm();
                 }
-
-                new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
-                resetSupplierForm();
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
@@ -189,13 +175,11 @@ public class SupplierController implements Initializable {
                 supplierMobileTxt.setText(selected.getMobileNumber());
                 if (selected.getPersonType() == Person.حقوقی) naturalPersonRdo.setSelected(true);
                 else legalPersonRdo.setSelected(true);
-                if (selected.getPartyType() == Party.فروشنده) buyerRdo.setSelected(true);
-                else sellerRdo.setSelected(true);
+
             }
         };
         supplierTable.setOnMouseReleased(tableChangeEvent);
         supplierTable.setOnKeyReleased(tableChangeEvent);
-
 
 
         supplierSearchItemCmb.setOnAction(event -> {
@@ -218,16 +202,8 @@ public class SupplierController implements Initializable {
                 supplierSearchByCmb.getItems().addAll(Person.values());
 
                 i.set(3);
-            } else if ("findByParty".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
-                supplierSearchByCmb.getItems().clear();
-                supplierSearchByCmb.setVisible(true);
-                supplierSearchItem1Txt.setVisible(false);
-                supplierSearchByCmb.getItems().addAll(Party.values());
-
-                i.set(4);
             }
         });
-
 
 
         supplierSearchBtn.setOnAction(event -> {
@@ -244,9 +220,6 @@ public class SupplierController implements Initializable {
 
                 } else if (i.get() == 3) {
                     supplierList = SupplierService.findByPerson(supplierSearchByCmb.getSelectionModel().getSelectedItem().toString());
-                    fillSupplierTable(supplierList);
-                } else if (i.get() == 4) {
-                    supplierList = SupplierService.findByParty(supplierSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillSupplierTable(supplierList);
                 }
 
@@ -265,7 +238,6 @@ public class SupplierController implements Initializable {
         ObservableList<Supplier> observableList = FXCollections.observableArrayList(supplierList);
         supplierIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
         supplierPersonCol.setCellValueFactory(new PropertyValueFactory<>("personType"));
-        supplierPartyCol.setCellValueFactory(new PropertyValueFactory<>("partyType"));
         supplierNationalIdCol.setCellValueFactory(new PropertyValueFactory<>("nationalId"));
         supplierPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         supplierPhoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
@@ -278,8 +250,6 @@ public class SupplierController implements Initializable {
         supplierIdTxt.clear();
         naturalPersonRdo.isSelected();
         legalPersonRdo.isSelected();
-        buyerRdo.isSelected();
-        sellerRdo.isSelected();
         supplierNameTxt.clear();
         supplierNationalIdTxt.clear();
         supplierPostalCodeTxt.clear();
@@ -294,8 +264,7 @@ public class SupplierController implements Initializable {
         supplierIdTxt.setDisable(true);
         naturalPersonRdo.setDisable(true);
         legalPersonRdo.setDisable(true);
-        buyerRdo.setDisable(true);
-        sellerRdo.setDisable(true);
+
         supplierNameTxt.setDisable(true);
         supplierNationalIdTxt.setDisable(true);
         supplierPostalCodeTxt.setDisable(true);

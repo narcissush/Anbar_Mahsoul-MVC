@@ -51,11 +51,6 @@ public class SupplierService {
         }
     }
 
-    public static List<Supplier> findByParty(String party) throws Exception {
-        try (SupplierRepository supplierRepository = new SupplierRepository()) {
-            return supplierRepository.findByParty(party);
-        }
-    }
 
     public static List<Supplier> findByName(String name) throws Exception {
         try (SupplierRepository supplierRepository = new SupplierRepository()) {

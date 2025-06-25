@@ -8,6 +8,8 @@ import anbar.model.entity.enums.*;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class EntityMapper {
     public static Supplier supplierMapper(ResultSet resultSet) throws SQLException {
@@ -16,7 +18,6 @@ public class EntityMapper {
                 .id(resultSet.getInt("id"))
                 .name(resultSet.getString("name"))
                 .personType(Person.valueOf(resultSet.getString("person_type")))
-                .partyType(Party.valueOf(resultSet.getString("party_type")))
                 .nationalId(resultSet.getString("national_id"))
                 .postalCode(resultSet.getString("postalcode"))
                 .phoneNumber(resultSet.getString("phone_number"))
@@ -61,7 +62,6 @@ public class EntityMapper {
 //                .builder()
 //                .id(resultSet.getInt("id"))
 //                .personType(Person.valueOf(resultSet.getString("person_type")))
-//                .partyType(Party.valueOf(resultSet.getString("party_type")))
 //                .name(resultSet.getString("name"))
 //                .nationalId(resultSet.getString("national_id"))
 //                .postalCode(resultSet.getString("postalcode"))
@@ -103,8 +103,7 @@ public class EntityMapper {
                 .userId(resultSet.getInt("user_id"))
                 .transactionType(TransactionType.valueOf(resultSet.getString("transaction_type")))
                 .quantity(resultSet.getInt("quantity"))
-                .transactionDate(resultSet.getDate("transaction_date").toLocalDate())
-
+                .transactionDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
                 .build();
     }
 

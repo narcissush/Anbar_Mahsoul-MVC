@@ -25,7 +25,7 @@
          </rowConstraints>
          <children>
             <TextField fx:id="userLoginTxt" maxWidth="250.0" minWidth="100.0" prefHeight="31.0" prefWidth="200.0" />
-            <PasswordField fx:id="passwordLoginTxt" maxWidth="250.0" GridPane.rowIndex="1" />
+            <PasswordField fx:id="passwordLoginTxt" maxWidth="250.0" minWidth="100.0" prefHeight="31.0" prefWidth="200.0" GridPane.rowIndex="1" />
             <Button fx:id="loginBtn" defaultButton="true" mnemonicParsing="false" prefHeight="31.0" prefWidth="250.0" text="ورود" GridPane.rowIndex="2">
                <font>
                   <Font size="16.0" />

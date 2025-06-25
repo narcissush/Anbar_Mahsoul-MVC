@@ -26,28 +26,26 @@ public class SupplierRepository implements AutoCloseable {
 
     public void save(Supplier supplier) throws SQLException {
         supplier.setId(nextId());
-        preparedStatement = connection.prepareStatement("insert into suppliers values (?,?,?,?,?,?,?,?)");
+        preparedStatement = connection.prepareStatement("insert into suppliers values (?,?,?,?,?,?,?)");
        preparedStatement.setInt(1, supplier.getId());
         preparedStatement.setString(2, supplier.getName());
         preparedStatement.setString(3,supplier.getPersonType().name());
-        preparedStatement.setString(4,supplier.getPartyType().name());
-        preparedStatement.setString(5,supplier.getNationalId());
-        preparedStatement.setString(6,supplier.getPostalCode());
-        preparedStatement.setString(7,supplier.getPhoneNumber());
-        preparedStatement.setString(8,supplier.getMobileNumber());
-        preparedStatement.execute();
-    }
-
-    public void edit(Supplier supplier) throws SQLException {
-        preparedStatement = connection.prepareStatement("update suppliers set NAME=?,PERSON_TYPE=?,PARTY_TYPE=?,NATIONAL_ID=?,POSTALCODE=?,PHONE_NUMBER=?,MOBILE_NUMBER=? where id = ?");
-        preparedStatement.setString(1, supplier.getName());
-        preparedStatement.setString(2,supplier.getPersonType().name());
-        preparedStatement.setString(3,supplier.getPartyType().name());
         preparedStatement.setString(4,supplier.getNationalId());
         preparedStatement.setString(5,supplier.getPostalCode());
         preparedStatement.setString(6,supplier.getPhoneNumber());
         preparedStatement.setString(7,supplier.getMobileNumber());
-        preparedStatement.setInt(8, supplier.getId());
+        preparedStatement.execute();
+    }
+
+    public void edit(Supplier supplier) throws SQLException {
+        preparedStatement = connection.prepareStatement("update suppliers set NAME=?,PERSON_TYPE=?,NATIONAL_ID=?,POSTALCODE=?,PHONE_NUMBER=?,MOBILE_NUMBER=? where id = ?");
+        preparedStatement.setString(1, supplier.getName());
+        preparedStatement.setString(2,supplier.getPersonType().name());
+        preparedStatement.setString(3,supplier.getNationalId());
+        preparedStatement.setString(4,supplier.getPostalCode());
+        preparedStatement.setString(5,supplier.getPhoneNumber());
+        preparedStatement.setString(6,supplier.getMobileNumber());
+        preparedStatement.setInt(7, supplier.getId());
         preparedStatement.execute();
 
     }
@@ -116,20 +114,6 @@ public class SupplierRepository implements AutoCloseable {
         }
         return suppliersList;
     }
-    public List<Supplier> findByParty(String party) throws SQLException {
-        List<Supplier> suppliersList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from suppliers where PARTY_TYPE=?");
-        preparedStatement.setString(1, party);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            suppliersList.add(EntityMapper.supplierMapper(resultSet));
-        }
-        return suppliersList;
-    }
-
-
-
 
     @Override
     public void close() throws Exception {

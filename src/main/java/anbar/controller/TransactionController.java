@@ -14,6 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import java.net.URL;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
@@ -42,7 +43,6 @@ public class TransactionController implements Initializable {
 
 
             transactionProductCmb.getItems().addAll(ProductService.findAll());
-
             transactionSupplierCmb.getItems().addAll(SupplierService.findAll());
             transactionUserTxt.setText(String.valueOf(UserService.getLoginUser().getName()) +" "+String.valueOf(UserService.getLoginUser().getFamily()) );
             transactionDate.setValue(LocalDate.now());
@@ -67,9 +67,11 @@ public class TransactionController implements Initializable {
                         .userId(UserService.getLoginUser().getId())
                         .transactionType(TransactionType.valueOf(selectedPartyRdo.getText()))
                         .quantity(Integer.parseInt(transactionQuantityTxt.getText()))
-                        .transactionDate(LocalDate.parse(transactionDate.getValue().toString()))
+                        .transactionDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
                         .build();
                 TransactionService.save(transaction);
+                new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
+                resetTransactionForm();
             }catch (Exception e){
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
@@ -79,9 +81,11 @@ public class TransactionController implements Initializable {
 
         });
 
-
-
-
+    }
+    private void resetTransactionForm() throws Exception {
+        transactionQuantityTxt.clear();
+        transactionUserTxt.setText(String.valueOf(UserService.getLoginUser().getName()) +" "+String.valueOf(UserService.getLoginUser().getFamily()) );
+        transactionDate.setValue(LocalDate.now());
     }
 
 
