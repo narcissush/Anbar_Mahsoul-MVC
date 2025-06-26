@@ -93,8 +93,8 @@ public class SupplierRepository implements AutoCloseable {
 
     public List<Supplier> findByName(String name) throws SQLException {
         List<Supplier> suppliersList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from suppliers where name=?");
-        preparedStatement.setString(1, name);
+        preparedStatement = connection.prepareStatement("select * from suppliers where name Like?");
+        preparedStatement.setString(1,"%"+ name + "%");
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {

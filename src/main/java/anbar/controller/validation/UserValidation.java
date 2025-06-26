@@ -25,8 +25,6 @@ public class UserValidation {
                             "(?=.*[@#$%^&+=!])" +
                             "(?=\\S+$).{8,20}$"
             );
-
-
     public static boolean isValidName(String name) {
         if (name == null) return false;
         return NAME_PATTERN.matcher(name).matches();
@@ -49,9 +47,5 @@ public class UserValidation {
         if (password == null) return false;
         return PASSWORD_PATTERN.matcher(password).matches();
     }
-
-
-
-
 }
 

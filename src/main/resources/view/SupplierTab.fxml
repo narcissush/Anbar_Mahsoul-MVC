@@ -19,7 +19,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="400.0" prefWidth="1128.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anbar.controller.SupplierController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="675.0" prefWidth="1128.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anbar.controller.SupplierController">
    <children>
       <HBox prefHeight="54.0" prefWidth="1027.0">
          <children>
@@ -125,22 +125,22 @@
                                     <Insets left="2.0" right="2.0" top="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox fx:id="supplierSearchItemCmb" prefWidth="150.0">
+                              <ComboBox fx:id="supplierSearchItemCmb" prefWidth="120.0">
                                  <HBox.margin>
                                     <Insets top="2.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <TextField fx:id="supplierSearchItem1Txt" prefHeight="31.0" prefWidth="159.0">
+                              <TextField fx:id="supplierSearchItem1Txt" prefHeight="31.0" prefWidth="120.0">
                                  <HBox.margin>
-                                    <Insets top="2.0" />
+                                    <Insets left="5.0" top="2.0" />
                                  </HBox.margin>
                               </TextField>
-                              <ComboBox fx:id="supplierSearchByCmb" prefWidth="150.0">
+                              <ComboBox fx:id="supplierSearchByCmb" prefWidth="120.0">
                                  <HBox.margin>
-                                    <Insets top="2.0" />
+                                    <Insets left="5.0" top="2.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <Button fx:id="supplierSearchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="68.0" text="جستجو">
+                              <Button fx:id="supplierSearchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="جستجو">
                                  <HBox.margin>
                                     <Insets left="5.0" top="2.0" />
                                  </HBox.margin>
@@ -150,7 +150,7 @@
                                     <Image url="@img/refresh.png" />
                                  </image>
                                  <HBox.margin>
-                                    <Insets top="4.0" />
+                                    <Insets left="10.0" top="4.0" />
                                  </HBox.margin>
                               </ImageView>
                            </children>

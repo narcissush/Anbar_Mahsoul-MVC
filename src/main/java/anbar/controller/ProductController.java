@@ -227,7 +227,7 @@ public class ProductController implements Initializable {
 
         productSearchItemCmb.setOnAction(event -> {
 
-            if ("findByCategory".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            if ("دسته".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
                 productItem1Txt.setVisible(false);
                 productItem2Txt.setVisible(false);
@@ -235,14 +235,14 @@ public class ProductController implements Initializable {
                 productSearchByCmb.setVisible(true);
                 i.set(1);
 
-            } else if ("findByBrand".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            } else if ("برند".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
                 productItem1Txt.setVisible(false);
                 productItem2Txt.setVisible(false);
                 productSearchByCmb.getItems().addAll(Brand.values());
                 productSearchByCmb.setVisible(true);
                 i.set(2);
-            } else if ("findByPrice".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            } else if ("قیمت".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
                 productSearchByCmb.setVisible(false);
                 productItem1Txt.setVisible(true);

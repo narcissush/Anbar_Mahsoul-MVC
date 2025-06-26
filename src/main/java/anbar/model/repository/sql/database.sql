@@ -75,7 +75,7 @@ select t.id as         transaction_id,
        p.has_headset   products_has_headset,
        p.serial_number products_serial_number,
        p.price         products_price,
-       p.quantity      products_count,
+       p.quantity      products_quantity,
 
        t.suppliers_id,
        s.person_type   suppliers_person_type,

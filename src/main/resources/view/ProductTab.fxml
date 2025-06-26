@@ -39,7 +39,7 @@
                </HBox.margin>
             </Button>
 
-            <Button fx:id="transactionBtn" layoutX="245.0" layoutY="10.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="100.0" text="خروج/ورود کالا">
+            <Button fx:id="transactionBtn" layoutX="245.0" layoutY="10.0" minHeight="50.0" mnemonicParsing="false" prefHeight="50.0" prefWidth="120.0" text="خروج/ورود کالا">
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
@@ -52,7 +52,10 @@
                   <Insets left="15.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="productReportBtn" minHeight="50.0" mnemonicParsing="false" prefHeight="0.0" prefWidth="100.0" text="گزارشات">
+            <Button fx:id="productReportBtn" layoutX="380.0" layoutY="10.0" minHeight="50.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" prefHeight="0.0" prefWidth="100.0" text="گزارشات">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
                <HBox.margin>
                   <Insets left="15.0" />
                </HBox.margin>
@@ -144,22 +147,22 @@
                                     <Insets left="2.0" right="2.0" top="5.0" />
                                  </HBox.margin>
                               </Label>
-                              <ComboBox fx:id="productSearchItemCmb" prefWidth="150.0">
+                              <ComboBox fx:id="productSearchItemCmb" prefWidth="120.0">
                                  <HBox.margin>
                                     <Insets right="2.0" top="2.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <ComboBox fx:id="productSearchByCmb" prefWidth="150.0" visible="false">
+                              <ComboBox fx:id="productSearchByCmb" prefWidth="120.0" visible="false">
                                  <HBox.margin>
-                                    <Insets top="2.0" />
+                                    <Insets left="5.0" top="2.0" />
                                  </HBox.margin>
                               </ComboBox>
-                              <TextField fx:id="productItem1Txt" prefHeight="31.0" prefWidth="128.0" promptText="از" visible="false">
+                              <TextField fx:id="productItem1Txt" prefHeight="31.0" prefWidth="120.0" promptText="از" visible="false">
                                  <HBox.margin>
                                     <Insets top="2.0" />
                                  </HBox.margin>
                               </TextField>
-                              <TextField fx:id="productItem2Txt" prefHeight="31.0" prefWidth="132.0" promptText="تا" visible="false">
+                              <TextField fx:id="productItem2Txt" prefHeight="31.0" prefWidth="120.0" promptText="تا" visible="false">
                                  <HBox.margin>
                                     <Insets right="10.0" top="2.0" />
                                  </HBox.margin>
@@ -167,7 +170,7 @@
                                     <Insets />
                                  </opaqueInsets>
                               </TextField>
-                              <Button fx:id="productSearchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="82.0" text="جستجو">
+                              <Button fx:id="productSearchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="110.0" text="جستجو">
                                  <HBox.margin>
                                     <Insets top="2.0" />
                                  </HBox.margin>
@@ -177,7 +180,7 @@
                                     <Image url="@img/refresh.png" />
                                  </image>
                                  <HBox.margin>
-                                    <Insets top="4.0" />
+                                    <Insets left="10.0" top="4.0" />
                                  </HBox.margin>
                               </ImageView>
                            </children>

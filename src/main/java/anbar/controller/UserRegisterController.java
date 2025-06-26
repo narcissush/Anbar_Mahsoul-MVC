@@ -10,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class UserRegisterController implements Initializable {
@@ -32,7 +33,9 @@ public class UserRegisterController implements Initializable {
     @FXML
     private TextField usernameTxt;
     @FXML
-    private PasswordField passwordTxt;
+    private PasswordField passwordTxt,repeatPasswordTxt;
+    @FXML
+    private Label validationNationalIdLbl,validationNameLbl,validationFamilyLbl,validationUserNameLbl,validationPasswordLbl,validationPasswordReapeatLbl;
     @FXML
     private Button saveBtn, backBtn;
 
@@ -74,42 +77,53 @@ resetForm();
         userFirstNameTxt.clear();
         userFamilyTxt.clear();
         genderGroup.selectToggle(userFamaleRdo);
-        userBirthDate.setValue(null);
+        userBirthDate.setValue(LocalDate.now());
         usernameTxt.clear();
         passwordTxt.clear();
         userIdTxt.setDisable(true);
     }
 
     private boolean validate() {
-        StringBuilder errorMessage = new StringBuilder();
+
         boolean valid = true;
         if (!UserValidation.isValidName(userFirstNameTxt.getText())) {
-            errorMessage.append("نام معتبر نمی باشد. نام شامل حروف فارسی" + "/n");
+            validationNameLbl.setText("نام شامل حروف فارسی");
+            validationNameLbl.setVisible(true);
             valid = false;
-        }
+        }else validationNameLbl.setVisible(false);
+
 
         if (!UserValidation.isValidFamilye(userFamilyTxt.getText())) {
-            errorMessage.append("نام خانوادگی معتبر نمی باشد. نام خانوادگی شامل حروف فارسی" + "/n");
+            validationFamilyLbl.setText("نام خانوادگی شامل حروف فارسی");
+            validationFamilyLbl.setVisible(true);
             valid = false;
-        }
+        }else validationFamilyLbl.setVisible(false);
 
         if (!UserValidation.isValidNationalId(userNationalIdTxt.getText())) {
-            errorMessage.append("کد ملی معتبر نمی باشد. کد ملی شامل 10 رقم " + "/n");
+            validationNationalIdLbl.setText("کد ملی شامل 10 رقم");
+            validationNationalIdLbl.setVisible(true);
             valid = false;
-        }
+        }else validationNationalIdLbl.setVisible(false);
 
         if (!UserValidation.isValidUserName(usernameTxt.getText())) {
-            errorMessage.append("نام کاربری نامعتبر می باشد.نام کاربری شامل حرف -اعداد-نقطه یا خط تیره" + "/n");
+            validationUserNameLbl.setText("شامل حروف انگیسی-اعداد-خط تیره-نقطه");
+            validationUserNameLbl.setVisible(true);
             valid = false;
-        }
+        }else validationUserNameLbl.setVisible(false);
 
         if (!UserValidation.isValidPassword(passwordTxt.getText())) {
-            errorMessage.append("رمز عبور معتبر نمی باشد. رمز عبور شامل حرف بزرگ و کوچک-اعداد-@#$%^" + "/n");
+            validationPasswordLbl.setText("شامل حروف انگیسی-اعداد-@#$%^&+=!");
+            validationPasswordLbl.setVisible(true);
             valid = false;
-        }
+        }else validationPasswordLbl.setVisible(false);
+
+        if (!passwordTxt.getText().equals(repeatPasswordTxt.getText())) {
+            validationPasswordReapeatLbl.setText("پسورد یکسان نمی باشد");
+            validationPasswordReapeatLbl.setVisible(true);
+            valid = false;
+        }else validationPasswordReapeatLbl.setVisible(false);
+
         if (!valid) {
-            Alert alert = new Alert(Alert.AlertType.ERROR, errorMessage.toString());
-            alert.show();
             return false;
         } else return true;
 

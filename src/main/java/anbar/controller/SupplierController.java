@@ -184,18 +184,18 @@ public class SupplierController implements Initializable {
 
         supplierSearchItemCmb.setOnAction(event -> {
 
-            if ("findByNationalId".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            if ("کدملی".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(false);
                 supplierSearchItem1Txt.setVisible(true);
                 i.set(1);
 
-            } else if ("findByName".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            } else if ("نام".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(false);
                 supplierSearchItem1Txt.setVisible(true);
                 i.set(2);
-            } else if ("findByPerson".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
+            } else if ("شخص".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(true);
                 supplierSearchItem1Txt.setVisible(false);

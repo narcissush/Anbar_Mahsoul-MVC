@@ -45,6 +45,10 @@ public class UserController implements Initializable {
     private Button userEditBtn, userQuitBtn;
     User loginUser = new User();
 
+    @FXML
+    private Label validationNationalIdLbl,validationNameLbl,validationFamilyLbl,validationUserNameLbl,validationPasswordLbl,validationPasswordReapeatLbl;
+
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {

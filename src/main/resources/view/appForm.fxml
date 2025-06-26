@@ -11,32 +11,10 @@
    <children>
       <MenuBar>
         <menus>
-          <Menu fx:id="productMenu" mnemonicParsing="false" text="محصولات">
-            <items>
-              <MenuItem fx:id="newProductMenu" mnemonicParsing="false" text="جدید" />
-                  <MenuItem fx:id="editProductMenu" mnemonicParsing="false" text="ویرایش" />
-            </items>
-          </Menu>
-          <Menu fx:id="supplierMenu" mnemonicParsing="false" text="تامین کنندگان">
-            <items>
-              <MenuItem fx:id="newSupplyMenu" mnemonicParsing="false" text="جدید" />
-                  <MenuItem fx:id="editSupplyMenu" mnemonicParsing="false" text="ویرایش" />
-                  <MenuItem fx:id="deleteSupplyMenu" mnemonicParsing="false" text="حذف" />
-            </items>
-          </Menu>
             <Menu fx:id="transactionMenu" mnemonicParsing="false" text="انبارگردانی">
                <items>
-                  <MenuItem fx:id="InBoundMenu" mnemonicParsing="false" text="ورود کالا" />
-                  <MenuItem fx:id="outBoundMenu" mnemonicParsing="false" text="خروج کالا" />
-                  <MenuItem mnemonicParsing="false" text="گزارشات" />
+                  <MenuItem fx:id="transactionReport" mnemonicParsing="false" text="گزارشات" />
                </items>
-            </Menu>
-            <Menu fx:id="userMenu" mnemonicParsing="false" text="کاربر">
-              <items>
-                <MenuItem fx:id="userInfoMenu" mnemonicParsing="false" text="مشخصات" />
-                  <MenuItem fx:id="userChangePasswordMenu" mnemonicParsing="false" text="ویرایش رمز عبور" />
-                  <MenuItem fx:id="quitMenu" mnemonicParsing="false" text="خروج" />
-              </items>
             </Menu>
           <Menu fx:id="helpMenu" mnemonicParsing="false" text="راهنما">
             <items>
