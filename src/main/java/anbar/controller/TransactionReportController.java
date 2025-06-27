@@ -2,6 +2,7 @@ package anbar.controller;
 
 import anbar.model.entity.Product;
 import anbar.model.entity.Transaction;
+import anbar.model.service.TransactionService;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -70,4 +71,14 @@ public class TransactionReportController implements Initializable {
         transactionTableView.setItems(observableList);
 
     }
+    private void resetForm()
+    {
+        try {
+            fillTransactionTable(TransactionService.findAll());
+        }catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.show();
+        }
+    }
 }
+

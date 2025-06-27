@@ -292,9 +292,6 @@ public class ProductController implements Initializable {
                 alert.show();
             }
         });
-
-
-
     }
 
         //fillTable--------------------------------------------------------------
@@ -302,16 +299,13 @@ public class ProductController implements Initializable {
             ObservableList<Product> observableList = FXCollections.observableArrayList(productList);
             productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
             productCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-
             productModelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
             productBrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
             productOsCol.setCellValueFactory(new PropertyValueFactory<>("os"));
             hasChargerCol.setCellValueFactory(new PropertyValueFactory<>("hasCharger"));
             hasHeadsetCol.setCellValueFactory(new PropertyValueFactory<>("hasHeadset"));
-
             productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
             productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-
             productQuantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
             productsTable.setItems(observableList);
 

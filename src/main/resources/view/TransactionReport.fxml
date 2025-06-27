@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="RIGHT_TO_LEFT" prefHeight="657.0" prefWidth="1115.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="anbar.controller.TransactionReportController">
+   <children>
+      <HBox prefHeight="42.0" prefWidth="1115.0">
+         <children>
+            <Label text="جستجو بر اساس :">
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <ComboBox fx:id="searchItemCmb1" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </ComboBox>
+            <ComboBox fx:id="searchItemCmb2" prefWidth="150.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </ComboBox>
+            <TextField fx:id="searchItemTxt">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </TextField>
+            <Button fx:id="searchBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="جستجو">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="excelBtn" mnemonicParsing="false" text="خروجی اکسل">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+            <Button fx:id="cancleBtn" layoutX="278.0" layoutY="15.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="88.0" text="لغو">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+      <TableView fx:id="transactionTableView" prefHeight="592.0" prefWidth="1115.0">
+        <columns>
+          <TableColumn fx:id="id" prefWidth="75.0" text="ردیف" />
+          <TableColumn fx:id="category" prefWidth="75.0" text="دسته بندی محصول" />
+            <TableColumn fx:id="brand" prefWidth="75.0" text="برند" />
+            <TableColumn fx:id="model" prefWidth="75.0" text="مدل" />
+            <TableColumn fx:id="price" prefWidth="75.0" text="قیمت" />
+            <TableColumn fx:id="totalQuantity" prefWidth="75.0" text="تعداد" />
+            <TableColumn fx:id="SupplierName" prefWidth="75.0" text="تامین کننده" />
+            <TableColumn fx:id="personType" prefWidth="75.0" text="شخص" />
+            <TableColumn fx:id="nationalId" prefWidth="75.0" text="کدملی" />
+            <TableColumn fx:id="phoneNumber" prefWidth="75.0" text="شماره تماس" />
+            <TableColumn fx:id="mobileNumber" prefWidth="75.0" text="شماره موبایل" />
+            <TableColumn fx:id="Username" prefWidth="75.0" text="نام کاربر" />
+            <TableColumn fx:id="family" prefWidth="75.0" text="نام خانوادگی" />
+            <TableColumn fx:id="transactionType" prefWidth="75.0" text="نوع عملیات" />
+            <TableColumn fx:id="transactionQuantity" prefWidth="75.0" text="نعداد" />
+            <TableColumn fx:id="transactionDate" prefWidth="75.0" text="تاریخ ثبت" />
+        </columns>
+      </TableView>
+   </children>
+</VBox>
