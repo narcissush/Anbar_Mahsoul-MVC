@@ -98,11 +98,35 @@ public class TransactionRepository implements AutoCloseable {
         }
     }
 
-    public List<Transaction> findByProductBrand(Brand brand) throws SQLException {
+    public List<Transaction> findByFilters(Brand brand,TransactionType transactionType,String username,String supplierName) throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
+        StringBuilder queryBuilder = new StringBuilder("SELECT * FROM transactions_report WHERE 1=1");
+        List<Object> parameters = new ArrayList<>();
+
+        if (brand != null) {
+            queryBuilder.append(" AND PRODUCTS_BRAND = ?");
+            parameters.add(brand.name());
+        }
+        if (transactionType != null) {
+            queryBuilder.append(" AND TRANSACTION_TYPE = ?");
+            parameters.add(transactionType.name());
+        }
+        if (username != null && !username.isEmpty()) {
+            queryBuilder.append(" AND USERS_USERNAME = ?");
+            parameters.add(username);
+        }
+        if (supplierName != null && !supplierName.isEmpty()) {
+            queryBuilder.append(" AND SUPPLIERS_NAME = ?");
+            parameters.add(supplierName);
+        }
         connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transactions_report where products_brand=?");
-        preparedStatement.setString(1, brand.name());
+        preparedStatement = connection.prepareStatement(queryBuilder.toString());
+
+
+        for (int i = 0; i < parameters.size(); i++) {
+            preparedStatement.setObject(i + 1, parameters.get(i));
+        }
+
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             transactionList.add(EntityMapper.transactionMapper(resultSet));
@@ -110,41 +134,7 @@ public class TransactionRepository implements AutoCloseable {
         return transactionList;
     }
 
-    public List<Transaction> findByTransactionType(TransactionType Transactiontype) throws SQLException {
-        List<Transaction> transactionList = new ArrayList<>();
-        connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transactions_report where TRANSACTION_TYPE=?");
-        preparedStatement.setString(1, Transactiontype.name());
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            transactionList.add(EntityMapper.transactionMapper(resultSet));
-        }
-        return transactionList;
-    }
 
-    public List<Transaction> findByUserName(String username) throws SQLException {
-        List<Transaction> transactionList = new ArrayList<>();
-        connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transactions_report where USERS_USERNAME=?");
-        preparedStatement.setString(1, username);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            transactionList.add(EntityMapper.transactionMapper(resultSet));
-        }
-        return transactionList;
-    }
-
-    public List<Transaction> findBySupplierName(String supplierName) throws SQLException {
-        List<Transaction> transactionList = new ArrayList<>();
-        connection = ConnectionProvider.getConnectionProvider().getconnection();
-        preparedStatement = connection.prepareStatement("select * from transactions_report where SUPPLIERS_NAME=?");
-        preparedStatement.setString(1, supplierName);
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            transactionList.add(EntityMapper.transactionMapper(resultSet));
-        }
-        return transactionList;
-    }
 
 
     @Override

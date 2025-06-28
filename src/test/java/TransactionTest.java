@@ -39,7 +39,7 @@ public class TransactionTest {
 
         //TransactionService.save(transaction);
 
-        System.out.println(TransactionService.findByProductBrand(Brand.Apple));
+        System.out.println(TransactionService.findByFilters(Brand.Apple,null,null,null));
         //System.out.print(TransactionService.findAll());
     }
 }

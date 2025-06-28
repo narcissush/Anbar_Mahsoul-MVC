@@ -19,17 +19,42 @@
                   <Insets left="5.0" top="10.0" />
                </HBox.margin>
             </Label>
-            <ComboBox fx:id="searchItemCmb1" prefWidth="150.0">
+            <Label text="برند محصول:">
+               <HBox.margin>
+                  <Insets left="5.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <ComboBox fx:id="productBrandCmb" prefWidth="120.0">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ComboBox>
-            <ComboBox fx:id="searchItemCmb2" prefWidth="150.0" visible="false">
+            <Label layoutX="106.0" layoutY="20.0" text="عملیات:">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <ComboBox fx:id="transactionTypeCmb" prefWidth="120.0">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ComboBox>
-            <TextField fx:id="searchItemTxt" visible="false">
+            <Label layoutX="333.0" layoutY="20.0" text="نام کاربر:">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="usernameTxt" prefWidth="120.0">
+               <HBox.margin>
+                  <Insets left="5.0" top="5.0" />
+               </HBox.margin>
+            </TextField>
+            <Label layoutX="535.0" layoutY="20.0" text="تامین کننده:">
+               <HBox.margin>
+                  <Insets left="10.0" top="10.0" />
+               </HBox.margin>
+            </Label>
+            <TextField fx:id="supplierNameTxt" layoutX="581.0" layoutY="15.0" prefWidth="120.0">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
@@ -39,12 +64,12 @@
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="excelBtn" mnemonicParsing="false" text="خروجی اکسل">
+            <Button fx:id="cancleBtn" layoutX="278.0" layoutY="15.0" mnemonicParsing="false" text="لغو">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </Button>
-            <Button fx:id="cancleBtn" layoutX="278.0" layoutY="15.0" mnemonicParsing="false" text="لغو">
+            <Button fx:id="excelBtn" mnemonicParsing="false" text="خروجی اکسل">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>

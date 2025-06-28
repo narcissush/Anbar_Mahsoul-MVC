@@ -108,5 +108,5 @@ from TRANSACTIONS t -- برای جداول اسم مستعار as ندارد
 
 
 
-select * from transactions_report where products_brand='Apple';
+
 

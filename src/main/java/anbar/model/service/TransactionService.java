@@ -48,27 +48,9 @@ public class TransactionService {
     }
 
 
-    public static List<Transaction> findByProductBrand(Brand brand) throws Exception {
+    public static List<Transaction> findByFilters(Brand brand,TransactionType transactionType,String username,String supplierName) throws Exception {
         try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            return transactionRepository.findByProductBrand(brand);
-        }
-    }
-
-    public static List<Transaction> findByTransactionType(TransactionType Transactiontype) throws Exception {
-        try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            return transactionRepository.findByTransactionType(Transactiontype);
-        }
-    }
-
-    public static List<Transaction> findByUserName(String username) throws Exception {
-        try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            return transactionRepository.findByUserName(username);
-        }
-    }
-
-    public static List<Transaction> findBySupplierName(String supplierName) throws Exception {
-        try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            return transactionRepository.findBySupplierName(supplierName);
+            return transactionRepository.findByFilters(brand,transactionType,username,supplierName);
         }
     }
 
