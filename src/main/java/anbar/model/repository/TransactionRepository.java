@@ -98,7 +98,7 @@ public class TransactionRepository implements AutoCloseable {
         }
     }
 
-    public List<Transaction> findByFilters(Brand brand,TransactionType transactionType,String username,String supplierName) throws SQLException {
+    public List<Transaction> findByFilters(Brand brand, TransactionType transactionType, String username, String supplierName) throws SQLException {
         List<Transaction> transactionList = new ArrayList<>();
         StringBuilder queryBuilder = new StringBuilder("SELECT * FROM transactions_report WHERE 1=1");
         List<Object> parameters = new ArrayList<>();
@@ -133,8 +133,6 @@ public class TransactionRepository implements AutoCloseable {
         }
         return transactionList;
     }
-
-
 
 
     @Override
