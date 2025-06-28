@@ -24,12 +24,12 @@
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ComboBox>
-            <ComboBox fx:id="searchItemCmb2" prefWidth="150.0">
+            <ComboBox fx:id="searchItemCmb2" prefWidth="150.0" visible="false">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
             </ComboBox>
-            <TextField fx:id="searchItemTxt">
+            <TextField fx:id="searchItemTxt" visible="false">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>

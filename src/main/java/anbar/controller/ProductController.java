@@ -218,7 +218,6 @@ public class ProductController implements Initializable {
         });
 
 
-
         productsTable.setOnMouseReleased(tableChangeEvent);
         productsTable.setOnKeyReleased(tableChangeEvent);
 
@@ -287,74 +286,75 @@ public class ProductController implements Initializable {
                 secondStage.setScene(scene);
                 secondStage.setTitle("ورود کالا");
                 secondStage.show();
-            }catch (Exception e) {
+            } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
             }
         });
     }
 
-        //fillTable--------------------------------------------------------------
-        private void fillProductTable (List<Product> productList) {
-            ObservableList<Product> observableList = FXCollections.observableArrayList(productList);
-            productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
-            productCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
-            productModelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
-            productBrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
-            productOsCol.setCellValueFactory(new PropertyValueFactory<>("os"));
-            hasChargerCol.setCellValueFactory(new PropertyValueFactory<>("hasCharger"));
-            hasHeadsetCol.setCellValueFactory(new PropertyValueFactory<>("hasHeadset"));
-            productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
-            productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-            productQuantityCol.setCellValueFactory(new PropertyValueFactory<>("totalQuantity"));
-            productsTable.setItems(observableList);
-
-        }
-        //Reset Form------------------------------------------
-        private void resetProductForm () {
-            productCategoryCmb.getSelectionModel().clearSelection();
-            productBrandCmb.getSelectionModel().clearSelection();
-            productModelTxt.clear();
-            productOsCmb.getSelectionModel().clearSelection();
-            headsetChk.setSelected(false);
-            chargerChk.setSelected(false);
-            productSerialTxt.clear();
-            productPriceTxt.clear();
-            productQuantityTxt.clear();
-            productIdTxt.clear();
-            productCategoryCmb.getSelectionModel().clearSelection();
-            productBrandCmb.getSelectionModel().clearSelection();
-            productModelTxt.clear();
-            productOsCmb.getSelectionModel().clearSelection();
-            headsetChk.setSelected(false);
-            chargerChk.setSelected(false);
-            productSerialTxt.clear();
-            productPriceTxt.clear();
-            productQuantityTxt.clear();
-            try {
-                fillProductTable(ProductService.findAll());
-            } catch (Exception e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
-                alert.show();
-            }
-            productIdTxt.setDisable(true);
-            productCategoryCmb.setDisable(true);
-            productBrandCmb.setDisable(true);
-            productModelTxt.setDisable(true);
-            productOsCmb.setDisable(true);
-            headsetChk.setDisable(true);
-            chargerChk.setDisable(true);
-            productSerialTxt.setDisable(true);
-            productPriceTxt.setDisable(true);
-            productQuantityTxt.setDisable(true);
-            productSaveBtn.setDisable(true);
-            productItem1Txt.setVisible(false);
-            productItem2Txt.setVisible(false);
-            productSearchByCmb.setVisible(false);
-
-        }
+    //fillTable--------------------------------------------------------------
+    private void fillProductTable(List<Product> productList) {
+        ObservableList<Product> observableList = FXCollections.observableArrayList(productList);
+        productIdCol.setCellValueFactory(new PropertyValueFactory<>("id"));
+        productCategoryCol.setCellValueFactory(new PropertyValueFactory<>("category"));
+        productModelCol.setCellValueFactory(new PropertyValueFactory<>("model"));
+        productBrandCol.setCellValueFactory(new PropertyValueFactory<>("brand"));
+        productOsCol.setCellValueFactory(new PropertyValueFactory<>("os"));
+        hasChargerCol.setCellValueFactory(new PropertyValueFactory<>("hasCharger"));
+        hasHeadsetCol.setCellValueFactory(new PropertyValueFactory<>("hasHeadset"));
+        productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
+        productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        productQuantityCol.setCellValueFactory(new PropertyValueFactory<>("totalQuantity"));
+        productsTable.setItems(observableList);
 
     }
+
+    //Reset Form------------------------------------------
+    private void resetProductForm() {
+        productCategoryCmb.getSelectionModel().clearSelection();
+        productBrandCmb.getSelectionModel().clearSelection();
+        productModelTxt.clear();
+        productOsCmb.getSelectionModel().clearSelection();
+        headsetChk.setSelected(false);
+        chargerChk.setSelected(false);
+        productSerialTxt.clear();
+        productPriceTxt.clear();
+        productQuantityTxt.clear();
+        productIdTxt.clear();
+        productCategoryCmb.getSelectionModel().clearSelection();
+        productBrandCmb.getSelectionModel().clearSelection();
+        productModelTxt.clear();
+        productOsCmb.getSelectionModel().clearSelection();
+        headsetChk.setSelected(false);
+        chargerChk.setSelected(false);
+        productSerialTxt.clear();
+        productPriceTxt.clear();
+        productQuantityTxt.clear();
+        try {
+            fillProductTable(ProductService.findAll());
+        } catch (Exception e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+            alert.show();
+        }
+        productIdTxt.setDisable(true);
+        productCategoryCmb.setDisable(true);
+        productBrandCmb.setDisable(true);
+        productModelTxt.setDisable(true);
+        productOsCmb.setDisable(true);
+        headsetChk.setDisable(true);
+        chargerChk.setDisable(true);
+        productSerialTxt.setDisable(true);
+        productPriceTxt.setDisable(true);
+        productQuantityTxt.setDisable(true);
+        productSaveBtn.setDisable(true);
+        productItem1Txt.setVisible(false);
+        productItem2Txt.setVisible(false);
+        productSearchByCmb.setVisible(false);
+
+    }
+
+}
 
 
 

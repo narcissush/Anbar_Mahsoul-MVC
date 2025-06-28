@@ -2,6 +2,7 @@ package anbar.controller;
 
 import anbar.model.entity.*;
 import anbar.model.entity.enums.*;
+import anbar.model.service.ProductService;
 import anbar.model.service.TransactionService;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -16,16 +17,18 @@ import javafx.scene.control.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TransactionReportController implements Initializable {
 
     @FXML
-    private ComboBox<?> searchItemCmb1;
+    private ComboBox<TransactionSearchList> searchItemCmb1;
 
     @FXML
-    private ComboBox<?> searchItemCmb2;
+    private ComboBox<Enum<?>> searchItemCmb2;
 
     @FXML
     private TextField searchItemTxt;
@@ -80,7 +83,65 @@ public class TransactionReportController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         resetForm();
+        AtomicInteger i = new AtomicInteger();
+        searchItemCmb1.getItems().addAll(TransactionSearchList.values());
 
+        searchItemCmb1.setOnAction(event -> {
+
+            if ("برند".equals(searchItemCmb1.getSelectionModel().getSelectedItem().toString())) {
+                searchItemCmb2.setVisible(true);
+                searchItemCmb2.getItems().clear();
+                searchItemCmb2.getItems().addAll(Brand.values());
+                searchItemTxt.setVisible(false);
+                i.set(1);
+
+            } else if ("عملیات".equals(searchItemCmb1.getSelectionModel().getSelectedItem().toString())) {
+                searchItemCmb2.setVisible(true);
+                searchItemCmb2.getItems().clear();
+                searchItemCmb2.getItems().addAll(TransactionType.values());
+                searchItemTxt.setVisible(false);
+                i.set(2);
+
+            } else if ("کاربر".equals(searchItemCmb1.getSelectionModel().getSelectedItem().toString())) {
+                searchItemCmb2.setVisible(false);
+                searchItemTxt.setVisible(true);
+                i.set(3);
+            }
+            else if ("تامینکننده".equals(searchItemCmb1.getSelectionModel().getSelectedItem().toString())) {
+                searchItemCmb2.setVisible(false);
+                searchItemTxt.setVisible(true);
+                i.set(4);
+            }
+        });
+
+
+//Search-Btn-------------------------------------------------
+
+        searchBtn.setOnAction(event -> {
+            List<Transaction> transactionList = new ArrayList<>();
+            try {
+                if (i.get() == 1) {
+                    transactionList = TransactionService.findByProductBrand(Brand.valueOf(searchItemCmb2.getSelectionModel().getSelectedItem().toString()));
+                    fillTransactionTable(transactionList);
+                } else if (i.get() == 2) {
+                    transactionList = TransactionService.findByTransactionType(TransactionType.valueOf(searchItemCmb2.getSelectionModel().getSelectedItem().toString()));
+                    fillTransactionTable(transactionList);
+                } else if (i.get() == 3) {
+                    transactionList = TransactionService.findByUserName(searchItemTxt.getText());
+                    fillTransactionTable(transactionList);
+                }
+                else if (i.get() == 4) {
+                    transactionList = TransactionService.findBySupplierName(searchItemTxt.getText());
+                    fillTransactionTable(transactionList);
+                }
+            } catch (Exception e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+                alert.show();
+            }
+        });
+        cancleBtn.setOnAction(event -> {
+            resetForm();
+        });
     }
 
     //fillTable--------------------------------------------------------------
@@ -124,7 +185,6 @@ public class TransactionReportController implements Initializable {
         transactionTableView.setItems(observableList);
 
     }
-
 
     private void resetForm()
     {

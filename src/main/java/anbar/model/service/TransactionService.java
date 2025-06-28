@@ -2,6 +2,7 @@ package anbar.model.service;
 
 import anbar.model.entity.Transaction;
 import anbar.model.entity.enums.Brand;
+import anbar.model.entity.enums.TransactionType;
 import anbar.model.repository.TransactionRepository;
 
 import java.util.List;
@@ -50,6 +51,24 @@ public class TransactionService {
     public static List<Transaction> findByProductBrand(Brand brand) throws Exception {
         try (TransactionRepository transactionRepository = new TransactionRepository()) {
             return transactionRepository.findByProductBrand(brand);
+        }
+    }
+
+    public static List<Transaction> findByTransactionType(TransactionType Transactiontype) throws Exception {
+        try (TransactionRepository transactionRepository = new TransactionRepository()) {
+            return transactionRepository.findByTransactionType(Transactiontype);
+        }
+    }
+
+    public static List<Transaction> findByUserName(String username) throws Exception {
+        try (TransactionRepository transactionRepository = new TransactionRepository()) {
+            return transactionRepository.findByUserName(username);
+        }
+    }
+
+    public static List<Transaction> findBySupplierName(String supplierName) throws Exception {
+        try (TransactionRepository transactionRepository = new TransactionRepository()) {
+            return transactionRepository.findBySupplierName(supplierName);
         }
     }
 
