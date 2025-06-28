@@ -52,17 +52,17 @@ public class TransactionController implements Initializable {
 
         transactionSaveBtn.setOnAction(event -> {
             try {
-//            Product selectedProduct = new Product();
-//            Supplier selectedSupplier = new Supplier();
+
                 RadioButton selectedtransactionTypeRdo = (RadioButton) transactionTypeToggle.getSelectedToggle();
                 Boolean result = false;
+
                 Transaction transaction = Transaction.builder()
                         .id(1)
-                        .productId(transactionProductCmb.getSelectionModel().getSelectedItem().getId())
-                        .supplierId(transactionSupplierCmb.getSelectionModel().getSelectedItem().getId())
-                        .userId(UserService.getLoginUser().getId())
+                        .product(transactionProductCmb.getSelectionModel().getSelectedItem())
+                        .supplier(transactionSupplierCmb.getSelectionModel().getSelectedItem())
+                        .user(UserService.getLoginUser())
                         .transactionType(TransactionType.valueOf(selectedtransactionTypeRdo.getText()))
-                        .quantity(Integer.parseInt(transactionQuantityTxt.getText()))
+                        .transactionQuantity(Integer.parseInt(transactionQuantityTxt.getText()))
                         .transactionDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
                         .build();
 

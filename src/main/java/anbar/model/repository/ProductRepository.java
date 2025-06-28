@@ -10,7 +10,6 @@ import lombok.Data;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 @Data
 
@@ -41,12 +40,12 @@ public class ProductRepository implements AutoCloseable {
         preparedStatement.setBoolean(7, product.isHasHeadset());
         preparedStatement.setString(8, product.getSerialNumber());
         preparedStatement.setInt(9, product.getPrice());
-        preparedStatement.setInt(10, product.getQuantity());
+        preparedStatement.setInt(10, product.getTotalQuantity());
         preparedStatement.execute();
     }
 
     public void edit(Product product) throws SQLException {
-        preparedStatement = connection.prepareStatement("update Products set CATEGORY=?, brand=?,model=?,os=?,has_charger=?,has_headset=?,SERIAL_NUMBER=?,price=?,quantity=? where id=?");
+        preparedStatement = connection.prepareStatement("update Products set CATEGORY=?, brand=?,model=?,os=?,has_charger=?,has_headset=?,SERIAL_NUMBER=?,price=?,TOTAL_QUANTITY=? where id=?");
         preparedStatement.setString(1, product.getCategory().name());
         preparedStatement.setString(2, product.getBrand().name());
         preparedStatement.setString(3, product.getModel());
@@ -55,7 +54,7 @@ public class ProductRepository implements AutoCloseable {
         preparedStatement.setBoolean(6, product.isHasHeadset());
         preparedStatement.setString(7, product.getSerialNumber());
         preparedStatement.setInt(8, product.getPrice());
-        preparedStatement.setInt(9, product.getQuantity());
+        preparedStatement.setInt(9, product.getTotalQuantity());
         preparedStatement.setInt(10, product.getId());
         preparedStatement.execute();
     }
@@ -63,15 +62,15 @@ public class ProductRepository implements AutoCloseable {
     public boolean editQuantity(int id, int quantity, int n) throws SQLException {
         int currentQuantity;
         boolean result = false;
-        preparedStatement = connection.prepareStatement("select QUANTITY from Products where id=?");
+        preparedStatement = connection.prepareStatement("select TOTAL_QUANTITY from Products where id=?");
         preparedStatement.setInt(1, id);
 
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
-            currentQuantity = resultSet.getInt("quantity");
+            currentQuantity = resultSet.getInt("total_quantity");
             if (n == 1) {
                 currentQuantity = (currentQuantity + quantity);
-                preparedStatement = connection.prepareStatement("update Products set quantity=? where id=?");
+                preparedStatement = connection.prepareStatement("update Products set TOTAL_QUANTITY=? where id=?");
                 preparedStatement.setInt(1, currentQuantity);
                 preparedStatement.setInt(2, id);
                 preparedStatement.execute();
@@ -82,7 +81,7 @@ public class ProductRepository implements AutoCloseable {
                     result = false;
                 } else {
                     currentQuantity = (currentQuantity - quantity);
-                    preparedStatement = connection.prepareStatement("update Products set quantity=? where id=?");
+                    preparedStatement = connection.prepareStatement("update Products set TOTAL_QUANTITY=? where id=?");
                     preparedStatement.setInt(1, currentQuantity);
                     preparedStatement.setInt(2, id);
                     preparedStatement.execute();

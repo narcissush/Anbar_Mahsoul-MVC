@@ -155,7 +155,7 @@ public class ProductController implements Initializable {
                                     .hasCharger(chargerChk.isSelected())
                                     .serialNumber(productSerialTxt.getText())
                                     .price(Integer.parseInt(productPriceTxt.getText()))
-                                    .quantity(Integer.parseInt(productQuantityTxt.getText()))
+                                    .totalQuantity(Integer.parseInt(productQuantityTxt.getText()))
                                     .build();
 
                     ProductService.save(product);
@@ -172,7 +172,7 @@ public class ProductController implements Initializable {
                                     .hasCharger(chargerChk.isSelected())
                                     .serialNumber(productSerialTxt.getText())
                                     .price(Integer.parseInt(productPriceTxt.getText()))
-                                    .quantity(Integer.parseInt(productQuantityTxt.getText()))
+                                    .totalQuantity(Integer.parseInt(productQuantityTxt.getText()))
                                     .build();
                     ProductService.edit(product);
                     resetProductForm();
@@ -213,7 +213,7 @@ public class ProductController implements Initializable {
                 chargerChk.setSelected(selected.isHasCharger());
                 productSerialTxt.setText(selected.getSerialNumber());
                 productPriceTxt.setText(String.valueOf(selected.getPrice()));
-                productQuantityTxt.setText(String.valueOf(selected.getQuantity()));
+                productQuantityTxt.setText(String.valueOf(selected.getTotalQuantity()));
             }
         });
 
@@ -306,7 +306,7 @@ public class ProductController implements Initializable {
             hasHeadsetCol.setCellValueFactory(new PropertyValueFactory<>("hasHeadset"));
             productSerialCol.setCellValueFactory(new PropertyValueFactory<>("serialNumber"));
             productPriceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
-            productQuantityCol.setCellValueFactory(new PropertyValueFactory<>("quantity"));
+            productQuantityCol.setCellValueFactory(new PropertyValueFactory<>("totalQuantity"));
             productsTable.setItems(observableList);
 
         }

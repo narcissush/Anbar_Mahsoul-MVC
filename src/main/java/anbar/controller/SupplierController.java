@@ -3,7 +3,6 @@ package anbar.controller;
 import anbar.model.entity.Supplier;
 import anbar.model.entity.enums.*;
 import anbar.model.service.SupplierService;
-import com.google.gson.JsonArray;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
@@ -120,7 +119,7 @@ public class SupplierController implements Initializable {
                             Supplier.builder()
                                     //.id(Integer.parseInt(supplierIdTxt.getText()))
                                     .personType(Person.valueOf(selectedPersonRdo.getText()))
-                                    .name(supplierNameTxt.getText())
+                                    .supplierName(supplierNameTxt.getText())
                                     .nationalId(supplierNationalIdTxt.getText())
                                     .postalCode(supplierPostalCodeTxt.getText())
                                     .phoneNumber(supplierPhoneNumberTxt.getText())
@@ -135,7 +134,7 @@ public class SupplierController implements Initializable {
                             Supplier.builder()
                                     .id(Integer.parseInt(supplierIdTxt.getText()))
                                     .personType(Person.valueOf(selectedPersonRdo.getText()))
-                                    .name(supplierNameTxt.getText())
+                                    .supplierName(supplierNameTxt.getText())
                                     .nationalId(supplierNationalIdTxt.getText())
                                     .postalCode(supplierPostalCodeTxt.getText())
                                     .phoneNumber(supplierPhoneNumberTxt.getText())
@@ -168,7 +167,7 @@ public class SupplierController implements Initializable {
             Supplier selected = supplierTable.getSelectionModel().getSelectedItem();
             if (selected != null) {
                 supplierIdTxt.setText(String.valueOf(selected.getId()));
-                supplierNameTxt.setText(selected.getName());
+                supplierNameTxt.setText(selected.getSupplierName());
                 supplierNationalIdTxt.setText(selected.getNationalId());
                 supplierPostalCodeTxt.setText(selected.getPostalCode());
                 supplierPhoneNumberTxt.setText(selected.getPhoneNumber());
@@ -242,7 +241,7 @@ public class SupplierController implements Initializable {
         supplierPostalCodeCol.setCellValueFactory(new PropertyValueFactory<>("postalCode"));
         supplierPhoneNumberCol.setCellValueFactory(new PropertyValueFactory<>("phoneNumber"));
         supplierMobileCol.setCellValueFactory(new PropertyValueFactory<>("mobileNumber"));
-        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        supplierNameCol.setCellValueFactory(new PropertyValueFactory<>("supplierName"));
         supplierTable.setItems(observableList);
     }
 

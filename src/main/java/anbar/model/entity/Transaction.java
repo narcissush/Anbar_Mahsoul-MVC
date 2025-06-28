@@ -13,11 +13,12 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Transaction implements Serializable {
 
+
     private int id;
-    private int productId;
-    private int supplierId;
-    private int userId;
+    private Product product;
+    private Supplier supplier;
+    private User user;
     private TransactionType transactionType;
-    private int quantity;
+    private int transactionQuantity;
     private LocalDateTime transactionDate;
 }

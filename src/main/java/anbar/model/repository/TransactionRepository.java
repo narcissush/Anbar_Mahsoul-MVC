@@ -7,7 +7,6 @@ import anbar.tools.ConnectionProvider;
 import anbar.tools.EntityMapper;
 
 import java.sql.*;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,22 +29,22 @@ public class TransactionRepository implements AutoCloseable {
         transaction.setId(nextId());
         preparedStatement = connection.prepareStatement("insert into transactions  values (?,?,?,?,?,?,?)");
         preparedStatement.setInt(1, transaction.getId());
-        preparedStatement.setInt(2, transaction.getProductId());
-        preparedStatement.setInt(3, transaction.getSupplierId());
-        preparedStatement.setInt(4, transaction.getUserId());
+        preparedStatement.setInt(2, transaction.getProduct().getId());
+        preparedStatement.setInt(3, transaction.getSupplier().getId());
+        preparedStatement.setInt(4, transaction.getUser().getId());
         preparedStatement.setString(5, transaction.getTransactionType().name());
-        preparedStatement.setInt(6, transaction.getQuantity());
+        preparedStatement.setInt(6, transaction.getTransactionQuantity());
         preparedStatement.setTimestamp(7,Timestamp.valueOf(transaction.getTransactionDate()));
         preparedStatement.execute();
     }
 
     public void edit(Transaction transaction) throws SQLException {
-        preparedStatement = connection.prepareStatement("update transactions set products_id=?, SUPPLIERS_ID=?,USERS_ID=?,transaction_type=?,quantity=?, transaction_date=? where id=?");
-        preparedStatement.setInt(1, transaction.getProductId());
-        preparedStatement.setInt(2, transaction.getSupplierId());
-        preparedStatement.setInt(3, transaction.getUserId());
+        preparedStatement = connection.prepareStatement("update transactions set products_id=?, SUPPLIERS_ID=?,USERS_ID=?,transaction_type=?,Transaction_QUANTITY=?, transaction_date=? where id=?");
+        preparedStatement.setInt(1, transaction.getProduct().getId());
+        preparedStatement.setInt(2, transaction.getSupplier().getId());
+        preparedStatement.setInt(3, transaction.getUser().getId());
         preparedStatement.setString(4, transaction.getTransactionType().name());
-        preparedStatement.setInt(5, transaction.getQuantity());
+        preparedStatement.setInt(5, transaction.getTransactionQuantity());
         preparedStatement.setTimestamp(7,Timestamp.valueOf(transaction.getTransactionDate()));
         preparedStatement.setInt(7, transaction.getId());
         preparedStatement.execute();
@@ -69,8 +68,25 @@ public class TransactionRepository implements AutoCloseable {
     }
 
     public List<Transaction> findAll() throws SQLException {
+        String sql =   "SELECT "
+                + "t.id AS transaction_id, t.products_id, "
+                + "p.category AS products_category, p.brand AS products_brand, p.model AS products_model, "
+                + "p.os AS products_os, p.has_charger AS products_has_charger, p.has_headset AS products_has_headset, "
+                + "p.serial_number AS products_serial_number, p.price AS products_price, p.TOTAL_QUANTITY AS products_total_Quantity, "
+                + "t.suppliers_id, "
+                + "s.person_type AS suppliers_person_type, s.name AS suppliers_name, s.national_id AS suppliers_national_id, "
+                + "s.postalcode AS suppliers_postalcode, s.phone_number AS suppliers_phone_number, s.mobile_number AS suppliers_mobile_number, "
+                + "t.users_id, "
+                + "u.national_id AS users_national_id, u.name AS users_name, u.family AS users_family, u.gender AS users_gender, "
+                + "u.birth_date AS users_birthDate, u.username AS users_username, u.password AS users_password, "
+                + "t.transaction_type, t.transaction_quantity, t.transaction_date "
+                + "FROM transactions t "
+                + "JOIN products p ON t.products_id = p.id "
+                + "JOIN suppliers s ON t.suppliers_id = s.id "
+                + "JOIN users u ON t.users_id = u.id";
+
         List<Transaction> transactionList = new ArrayList<>();
-        preparedStatement = connection.prepareStatement("select * from transactions_report");
+        preparedStatement = connection.prepareStatement(sql);
         ResultSet resultSet = preparedStatement.executeQuery();
         while (resultSet.next()) {
             transactionList.add(EntityMapper.transactionMapper(resultSet));

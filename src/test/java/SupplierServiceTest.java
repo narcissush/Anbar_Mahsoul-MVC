@@ -12,7 +12,7 @@ public class SupplierServiceTest {
                 .postalCode("00")
                 .phoneNumber("00")
                 .mobileNumber("00")
-                .name("n")
+                .supplierName("n")
                 .build();
         SupplierService.save(supplier);
         //StorekeeperService.edit(storekeeper);

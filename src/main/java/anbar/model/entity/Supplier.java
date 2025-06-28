@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Supplier implements Serializable {
     private int id;
     private Person personType;
-    private String name;
+    private String supplierName;
     private String nationalId;
     private String postalCode;
     private String phoneNumber;
