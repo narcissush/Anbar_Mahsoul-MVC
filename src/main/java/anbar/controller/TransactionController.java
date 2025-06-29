@@ -43,12 +43,7 @@ public class TransactionController implements Initializable {
                 throw new Exception("Supplier or product is null");
             }
 
-            productTxt.setText(
-                    String.format(
-                            "%s (%s) - %s",
-                            AppState.product.getModel(), AppState.product.getBrand().name(), AppState.product.getSerialNumber()
-                    )
-            );
+            productTxt.setText( AppState.product.productInfo());
 
             supplierTxt.setText(AppState.supplier.getSupplierName());
 

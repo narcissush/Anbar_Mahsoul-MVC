@@ -41,5 +41,12 @@ public class AppController implements Initializable {
 
     }
 
+    public void setSupplier() {
+        selectSupplierLbl.setText(AppState.supplier.getSupplierName());
+    }
+
+    public void setProduct() {
+        selectedProductLbl.setText(AppState.product.productInfo());
+    }
 
 }

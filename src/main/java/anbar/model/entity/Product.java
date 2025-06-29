@@ -1,5 +1,6 @@
 package anbar.model.entity;
 
+import anbar.controller.AppState;
 import anbar.model.entity.enums.Brand;
 import anbar.model.entity.enums.Category;
 import anbar.model.entity.enums.Os;
@@ -25,5 +26,10 @@ public class Product implements Serializable {
     private int price;
     private int totalQuantity;
 
-
+    public String productInfo() {
+        return String.format(
+                "%s (%s) - %s",
+                AppState.product.getModel(), AppState.product.getBrand().name(), AppState.product.getSerialNumber()
+        );
+    }
 }
