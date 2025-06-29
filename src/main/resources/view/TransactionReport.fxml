@@ -44,7 +44,7 @@
                   <Insets left="10.0" top="10.0" />
                </HBox.margin>
             </Label>
-            <TextField fx:id="usernameTxt" prefWidth="120.0">
+            <TextField fx:id="userNameTxt" prefWidth="120.0">
                <HBox.margin>
                   <Insets left="5.0" top="5.0" />
                </HBox.margin>
@@ -78,35 +78,35 @@
       </HBox>
       <TableView fx:id="transactionTableView" prefHeight="592.0" prefWidth="1115.0">
         <columns>
-          <TableColumn fx:id="id" prefWidth="75.0" text="ردیف" />
-            <TableColumn fx:id="productId" prefWidth="75.0" text="کد محصول" />
-          <TableColumn fx:id="category" prefWidth="75.0" text="دسته بندی محصول" />
-            <TableColumn fx:id="brand" prefWidth="75.0" text="برند" />
-            <TableColumn fx:id="model" prefWidth="75.0" text="مدل" />
-            <TableColumn fx:id="os" prefWidth="75.0" text="مدل" />
-            <TableColumn fx:id="hasCharger" prefWidth="75.0" text="مدل" />
-            <TableColumn fx:id="hasHeadset" prefWidth="75.0" text="مدل" />
-            <TableColumn fx:id="serialNumber" prefWidth="75.0" text="مدل" />
-            <TableColumn fx:id="price" prefWidth="75.0" text="قیمت" />
-            <TableColumn fx:id="totalQuantity" prefWidth="75.0" text="تعداد" />
-            <TableColumn fx:id="supplierId" prefWidth="75.0" text="کد تامین کننده" />
-            <TableColumn fx:id="supplierName" prefWidth="75.0" text="تامین کننده" />
-            <TableColumn fx:id="personType" prefWidth="75.0" text="شخص" />
-            <TableColumn fx:id="supplierNationalId" prefWidth="75.0" text="کدملی" />
-            <TableColumn fx:id="postalcode" prefWidth="75.0" text="کدملی" />
-            <TableColumn fx:id="phoneNumber" prefWidth="75.0" text="شماره تماس" />
-            <TableColumn fx:id="mobileNumber" prefWidth="75.0" text="شماره موبایل" />
-            <TableColumn fx:id="userId" prefWidth="75.0" text="کدکاربر" />
-            <TableColumn fx:id="userNationalId" prefWidth="75.0" text="کدکاربر" />
-            <TableColumn fx:id="userFirstName" prefWidth="75.0" text="نام کاربر" />
-            <TableColumn fx:id="userFamily" prefWidth="75.0" text="نام خانوادگی" />
-            <TableColumn fx:id="userGender" prefWidth="75.0" text="جنسیت" />
-            <TableColumn fx:id="userBirthDate" prefWidth="75.0" text="تاریخ تولد" />
-            <TableColumn fx:id="userName" prefWidth="75.0" text="یوزرنیم" />
-            <TableColumn fx:id="password" prefWidth="75.0" text="پسورد" />
-            <TableColumn fx:id="transactionType" prefWidth="75.0" text="نوع عملیات" />
-            <TableColumn fx:id="transactionQuantity" prefWidth="75.0" text="نعداد" />
-            <TableColumn fx:id="transactionDate" prefWidth="75.0" text="تاریخ ثبت" />
+          <TableColumn fx:id="idCol" prefWidth="75.0" text="ردیف" />
+            <TableColumn fx:id="productIdCol" prefWidth="75.0" text="کد محصول" />
+          <TableColumn fx:id="categoryCol" prefWidth="75.0" text="دسته بندی محصول" />
+            <TableColumn fx:id="brandCol" prefWidth="75.0" text="برند" />
+            <TableColumn fx:id="modelCol" prefWidth="75.0" text="مدل" />
+            <TableColumn fx:id="osCol" prefWidth="75.0" text="مدل" />
+            <TableColumn fx:id="hasChargerCol" prefWidth="75.0" text="مدل" />
+            <TableColumn fx:id="hasHeadsetCol" prefWidth="75.0" text="مدل" />
+            <TableColumn fx:id="serialNumberCol" prefWidth="75.0" text="مدل" />
+            <TableColumn fx:id="priceCol" prefWidth="75.0" text="قیمت" />
+            <TableColumn fx:id="totalQuantityCol" prefWidth="75.0" text="تعداد" />
+            <TableColumn fx:id="supplierIdCol" prefWidth="75.0" text="کد تامین کننده" />
+            <TableColumn fx:id="supplierNameCol" prefWidth="75.0" text="تامین کننده" />
+            <TableColumn fx:id="personTypeCol" prefWidth="75.0" text="شخص" />
+            <TableColumn fx:id="supplierNationalIdCol" prefWidth="75.0" text="کدملی" />
+            <TableColumn fx:id="postalcodeCol" prefWidth="75.0" text="کدملی" />
+            <TableColumn fx:id="phoneNumberCol" prefWidth="75.0" text="شماره تماس" />
+            <TableColumn fx:id="mobileNumberCol" prefWidth="75.0" text="شماره موبایل" />
+            <TableColumn fx:id="userIdCol" prefWidth="75.0" text="کدکاربر" />
+            <TableColumn fx:id="userNationalIdCol" prefWidth="75.0" text="کدکاربر" />
+            <TableColumn fx:id="userNameCol" prefWidth="75.0" text="نام کاربر" />
+            <TableColumn fx:id="userFamilyCol" prefWidth="75.0" text="نام خانوادگی" />
+            <TableColumn fx:id="userGenderCol" prefWidth="75.0" text="جنسیت" />
+            <TableColumn fx:id="userBirthDateCol" prefWidth="75.0" text="تاریخ تولد" />
+            <TableColumn fx:id="usernameCol" prefWidth="75.0" text="یوزرنیم" />
+            <TableColumn fx:id="passwordCol" prefWidth="75.0" text="پسورد" />
+            <TableColumn fx:id="transactionTypeCol" prefWidth="75.0" text="نوع عملیات" />
+            <TableColumn fx:id="transactionQuantityCol" prefWidth="75.0" text="نعداد" />
+            <TableColumn fx:id="transactionDateCol" prefWidth="75.0" text="تاریخ ثبت" />
         </columns>
       </TableView>
    </children>

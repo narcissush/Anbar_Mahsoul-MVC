@@ -45,10 +45,6 @@ public class UserController implements Initializable {
     private Button userEditBtn, userQuitBtn;
     User loginUser = new User();
 
-    @FXML
-    private Label validationNationalIdLbl,validationNameLbl,validationFamilyLbl,validationUserNameLbl,validationPasswordLbl,validationPasswordReapeatLbl;
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
@@ -63,7 +59,6 @@ public class UserController implements Initializable {
             if (validate()) {
                 try {
                     RadioButton selectedGenderRdo = (RadioButton) genderToggle.getSelectedToggle();
-
                     User user = User.builder()
                             .id(Integer.parseInt(userIdTxt.getText()))
                             .nationalId(userNationalIdTxt.getText())

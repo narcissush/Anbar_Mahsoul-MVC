@@ -98,11 +98,12 @@ public class ProductController implements Initializable {
     private ImageView productRefreshImg;
     @FXML
     private ComboBox<Enum<?>> productSearchByCmb;
+    int i;
 
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        AtomicInteger i = new AtomicInteger();
+       // AtomicInteger i = new AtomicInteger();
         productBrandCmb.getItems().addAll(Brand.values());
         productCategoryCmb.getItems().addAll(Category.values());
         productOsCmb.getItems().addAll(Os.values());
@@ -217,13 +218,11 @@ public class ProductController implements Initializable {
             }
         });
 
-
         productsTable.setOnMouseReleased(tableChangeEvent);
         productsTable.setOnKeyReleased(tableChangeEvent);
 
 
 //productSearchItem------------------------------------------------------
-
         productSearchItemCmb.setOnAction(event -> {
 
             if ("دسته".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
@@ -232,7 +231,7 @@ public class ProductController implements Initializable {
                 productItem2Txt.setVisible(false);
                 productSearchByCmb.getItems().addAll(Category.values());
                 productSearchByCmb.setVisible(true);
-                i.set(1);
+                i=1;
 
             } else if ("برند".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
@@ -240,29 +239,28 @@ public class ProductController implements Initializable {
                 productItem2Txt.setVisible(false);
                 productSearchByCmb.getItems().addAll(Brand.values());
                 productSearchByCmb.setVisible(true);
-                i.set(2);
+                i=2;
             } else if ("قیمت".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
                 productSearchByCmb.setVisible(false);
                 productItem1Txt.setVisible(true);
                 productItem2Txt.setVisible(true);
-                i.set(3);
+                i=3;
             }
         });
 
 
-//Search-Btn-------------------------------------------------
-
+        //Search-Btn-------------------------------------------------
         productSearchBtn.setOnAction(event -> {
             List<Product> productList = new ArrayList<>();
             try {
-                if (i.get() == 1) {
+                if (i == 1) {
                     productList = ProductService.findByCategory(productSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillProductTable(productList);
-                } else if (i.get() == 2) {
+                } else if (i == 2) {
                     productList = ProductService.findByBrand(productSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillProductTable(productList);
-                } else if (i.get() == 3) {
+                } else if (i == 3) {
                     productList = ProductService.findByPrice(Integer.parseInt(productItem1Txt.getText()), Integer.parseInt(productItem2Txt.getText()));
                     fillProductTable(productList);
                 }
@@ -273,7 +271,7 @@ public class ProductController implements Initializable {
         });
 
 
-//RefreshImg-----------------------------------
+        //RefreshImg-----------------------------------
         productRefreshImg.setOnMouseClicked(event -> {
             resetProductForm();
         });

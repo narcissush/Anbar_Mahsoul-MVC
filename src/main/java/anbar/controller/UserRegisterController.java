@@ -3,7 +3,7 @@ package anbar.controller;
 import anbar.controller.validation.UserValidation;
 import anbar.model.entity.User;
 import anbar.model.entity.enums.Gender;
-import anbar.model.service.UserRegisterService;
+import anbar.model.service.UserService;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -57,7 +57,7 @@ resetForm();
                             .username(usernameTxt.getText())
                             .password(passwordTxt.getText())
                             .build();
-                    UserRegisterService.save(user);
+                    UserService.save(user);
                     resetForm();
                     new Alert(Alert.AlertType.INFORMATION, "user is created", ButtonType.OK).show();
                 } catch (Exception e) {

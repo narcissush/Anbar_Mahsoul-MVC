@@ -81,13 +81,12 @@ public class SupplierController implements Initializable {
     @FXML
     private TableColumn<Supplier, String> supplierMobileCol;
 
-
+    int i;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
         resetSupplierForm();
-        AtomicInteger i = new AtomicInteger();
         supplierSearchItemCmb.getItems().addAll(supplierSearchList.values());
         supplierNewBtn.setOnAction(event -> {
             resetSupplierForm();
@@ -187,20 +186,19 @@ public class SupplierController implements Initializable {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(false);
                 supplierSearchItem1Txt.setVisible(true);
-                i.set(1);
+                i=1;
 
             } else if ("نام".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(false);
                 supplierSearchItem1Txt.setVisible(true);
-                i.set(2);
+                i=2;
             } else if ("شخص".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(true);
                 supplierSearchItem1Txt.setVisible(false);
                 supplierSearchByCmb.getItems().addAll(Person.values());
-
-                i.set(3);
+                i=3;
             }
         });
 
@@ -208,16 +206,16 @@ public class SupplierController implements Initializable {
         supplierSearchBtn.setOnAction(event -> {
             List<Supplier> supplierList = new ArrayList<>();
             try {
-                if (i.get() == 1) {
+                if (i == 1) {
                     supplierList = SupplierService.findByNationalId(supplierSearchItem1Txt.getText());
                     fillSupplierTable(supplierList);
 
-                } else if (i.get() == 2) {
+                } else if (i == 2) {
 
                     supplierList = SupplierService.findByName(supplierSearchItem1Txt.getText());
                     fillSupplierTable(supplierList);
 
-                } else if (i.get() == 3) {
+                } else if (i == 3) {
                     supplierList = SupplierService.findByPerson(supplierSearchByCmb.getSelectionModel().getSelectedItem().toString());
                     fillSupplierTable(supplierList);
                 }
@@ -263,7 +261,6 @@ public class SupplierController implements Initializable {
         supplierIdTxt.setDisable(true);
         naturalPersonRdo.setDisable(true);
         legalPersonRdo.setDisable(true);
-
         supplierNameTxt.setDisable(true);
         supplierNationalIdTxt.setDisable(true);
         supplierPostalCodeTxt.setDisable(true);

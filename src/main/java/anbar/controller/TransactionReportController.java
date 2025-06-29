@@ -31,7 +31,7 @@ public class TransactionReportController implements Initializable {
     private ComboBox<TransactionType> transactionTypeCmb;
 
     @FXML
-    private TextField usernameTxt, supplierNameTxt;
+    private TextField userNameTxt, supplierNameTxt;
 
     @FXML
     private Button searchBtn;
@@ -46,71 +46,67 @@ public class TransactionReportController implements Initializable {
     private TableView<Transaction> transactionTableView;
 
     @FXML
-    private TableColumn<Transaction, Integer> id;
+    private TableColumn<Transaction, Integer> idCol;
     @FXML
-    private TableColumn<Transaction, Integer> productId;
+    private TableColumn<Transaction, Integer> productIdCol;
     @FXML
-    private TableColumn<Transaction, Category> category;
+    private TableColumn<Transaction, Category> categoryCol;
     @FXML
-    private TableColumn<Transaction, Brand> brand;
+    private TableColumn<Transaction, Brand> brandCol;
     @FXML
-    private TableColumn<Transaction, String> model;
+    private TableColumn<Transaction, String> modelCol;
     @FXML
-    private TableColumn<Transaction, Os> os;
+    private TableColumn<Transaction, Os> osCol;
     @FXML
-    private TableColumn<Transaction, Boolean> hasCharger;
+    private TableColumn<Transaction, Boolean> hasChargerCol;
     @FXML
-    private TableColumn<Transaction, Boolean> hasHeadset;
+    private TableColumn<Transaction, Boolean> hasHeadsetCol;
     @FXML
-    private TableColumn<Transaction, String> serialNumber;
+    private TableColumn<Transaction, String> serialNumberCol;
     @FXML
-    private TableColumn<Transaction, Integer> price;
+    private TableColumn<Transaction, Integer> priceCol;
     @FXML
-    private TableColumn<Transaction, Integer> totalQuantity;
+    private TableColumn<Transaction, Integer> totalQuantityCol;
 
     @FXML
-    private TableColumn<Transaction, Integer> supplierId;
+    private TableColumn<Transaction, Integer> supplierIdCol;
     @FXML
-    private TableColumn<Transaction, String> supplierName;
+    private TableColumn<Transaction, String> supplierNameCol;
     @FXML
-    private TableColumn<Transaction, Person> personType;
+    private TableColumn<Transaction, Person> personTypeCol;
     @FXML
-    private TableColumn<Transaction, String> supplierNationalId;
+    private TableColumn<Transaction, String> supplierNationalIdCol;
     @FXML
-    private TableColumn<Transaction, String> postalcode;
+    private TableColumn<Transaction, String> postalcodeCol;
     @FXML
-    private TableColumn<Transaction, String> phoneNumber;
+    private TableColumn<Transaction, String> phoneNumberCol;
     @FXML
-    private TableColumn<Transaction, String> mobileNumber;
+    private TableColumn<Transaction, String> mobileNumberCol;
 
     @FXML
-    private TableColumn<Transaction, Integer> userId;
+    private TableColumn<Transaction, Integer> userIdCol;
     @FXML
-    private TableColumn<Transaction, String> userNationalId;
+    private TableColumn<Transaction, String> userNationalIdCol;
     @FXML
-    private TableColumn<Transaction, String> userFirstName;
+    private TableColumn<Transaction, String> userNameCol;
     @FXML
-    private TableColumn<Transaction, String> userFamily;
+    private TableColumn<Transaction, String> userFamilyCol;
     @FXML
-    private TableColumn<Transaction, Gender> userGender;
+    private TableColumn<Transaction, Gender> userGenderCol;
     @FXML
-    private TableColumn<Transaction, LocalDate> userBirthDate;
+    private TableColumn<Transaction, LocalDate> userBirthDateCol;
     @FXML
-    private TableColumn<Transaction, String> userName;
+    private TableColumn<Transaction, String> usernameCol;
     @FXML
-    private TableColumn<Transaction, String> password;
+    private TableColumn<Transaction, String> passwordCol;
 
     @FXML
-    private TableColumn<Transaction, TransactionType> transactionType;
+    private TableColumn<Transaction, TransactionType> transactionTypeCol;
     @FXML
-    private TableColumn<Transaction, Integer> transactionQuantity;
+    private TableColumn<Transaction, Integer> transactionQuantityCol;
     @FXML
-    private TableColumn<Transaction, LocalDateTime> transactionDate;
+    private TableColumn<Transaction, LocalDateTime> transactionDateCol;
 
-    Brand selectedBrand = null;
-    TransactionType selectedType = null;
-    String selectedUsername = null;
-    String selectedSupplierName = null;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -120,17 +116,32 @@ public class TransactionReportController implements Initializable {
 //Search-Btn-------------------------------------------------
         searchBtn.setOnAction(event -> {
             List<Transaction> transactionList = new ArrayList<>();
+
+                Brand selectedBrand = productBrandCmb.getSelectionModel().getSelectedItem() != null
+                        ? Brand.valueOf(productBrandCmb.getSelectionModel().getSelectedItem().toString())
+                        : null;
+
+            TransactionType selectedType = transactionTypeCmb.getSelectionModel().getSelectedItem()!=null
+                    ? TransactionType.valueOf(transactionTypeCmb.getSelectionModel().getSelectedItem().toString())
+                    : null;
+
+                String selectedUserName = userNameTxt.getText()!=null
+                        ? userNameTxt.getText()
+                        : null;
+
+                String selectedSupplierName = supplierNameTxt.getText() !=null
+                        ? supplierNameTxt.getText()
+                        : null;
+
             try {
-                selectedBrand = Brand.valueOf(productBrandCmb.getSelectionModel().getSelectedItem().toString());
-                selectedType = TransactionType.valueOf(transactionTypeCmb.getSelectionModel().getSelectedItem().toString());
-                selectedUsername = usernameTxt.getText();
-                selectedSupplierName = supplierNameTxt.getText();
-                fillTransactionTable(TransactionService.findByFilters(selectedBrand, selectedType, selectedUsername, selectedSupplierName));
+                fillTransactionTable(TransactionService.findByFilters(selectedBrand, selectedType, selectedUserName, selectedSupplierName));
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
             }
         });
+
+
         cancleBtn.setOnAction(event -> {
             resetForm();
         });
@@ -140,39 +151,39 @@ public class TransactionReportController implements Initializable {
     private void fillTransactionTable(List<Transaction> transaction) {
         ObservableList<Transaction> observableList = FXCollections.observableArrayList(transaction);
 
-        id.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getId()).asObject());
+        idCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getId()).asObject());
 
-        productId.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getProduct().getId()).asObject());
-        category.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getProduct().getCategory()));
-        brand.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getProduct().getBrand()));
-        model.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProduct().getModel()));
-        os.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getProduct().getOs()));
-        hasCharger.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getProduct().isHasCharger()).asObject());
-        hasHeadset.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getProduct().isHasHeadset()).asObject());
-        serialNumber.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProduct().getSerialNumber()));
-        price.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getProduct().getPrice()).asObject());
-        totalQuantity.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getProduct().getTotalQuantity()).asObject());
+        productIdCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getProduct().getId()).asObject());
+        categoryCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getProduct().getCategory()));
+        brandCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getProduct().getBrand()));
+        modelCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProduct().getModel()));
+        osCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getProduct().getOs()));
+        hasChargerCol.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getProduct().isHasCharger()).asObject());
+        hasHeadsetCol.setCellValueFactory(c -> new SimpleBooleanProperty(c.getValue().getProduct().isHasHeadset()).asObject());
+        serialNumberCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getProduct().getSerialNumber()));
+        priceCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getProduct().getPrice()).asObject());
+        totalQuantityCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getProduct().getTotalQuantity()).asObject());
 
-        supplierId.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getSupplier().getId()).asObject());
-        supplierName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getSupplierName()));
-        personType.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getSupplier().getPersonType()));
-        supplierNationalId.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getNationalId()));
-        postalcode.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getPostalCode()));
-        phoneNumber.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getPhoneNumber()));
-        mobileNumber.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getMobileNumber()));
+        supplierIdCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getSupplier().getId()).asObject());
+        supplierNameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getSupplierName()));
+        personTypeCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getSupplier().getPersonType()));
+        supplierNationalIdCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getNationalId()));
+        postalcodeCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getPostalCode()));
+        phoneNumberCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getPhoneNumber()));
+        mobileNumberCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getMobileNumber()));
 
-        userId.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getUser().getId()).asObject());
-        userNationalId.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getNationalId()));
-        userFirstName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getName()));
-        userFamily.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getFamily()));
-        userGender.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getUser().getGender()));
-        userBirthDate.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getUser().getBirthDate()));
-        userName.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getUsername()));
-        password.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getPassword()));
+        userIdCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getUser().getId()).asObject());
+        userNationalIdCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getNationalId()));
+        userNameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getName()));
+        userFamilyCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getFamily()));
+        userGenderCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getUser().getGender()));
+        userBirthDateCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getUser().getBirthDate()));
+        usernameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getUsername()));
+        passwordCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getUser().getPassword()));
 
-        transactionType.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getTransactionType()));
-        transactionQuantity.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getTransactionQuantity()).asObject());
-        transactionDate.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getTransactionDate()));
+        transactionTypeCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getTransactionType()));
+        transactionQuantityCol.setCellValueFactory(c -> new SimpleIntegerProperty(c.getValue().getTransactionQuantity()).asObject());
+        transactionDateCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getTransactionDate()));
 
         transactionTableView.setItems(observableList);
 
@@ -184,7 +195,7 @@ public class TransactionReportController implements Initializable {
         productBrandCmb.getItems().addAll(Brand.values());
         transactionTypeCmb.getItems().addAll(TransactionType.values());
         supplierNameTxt.clear();
-        usernameTxt.clear();
+        userNameTxt.clear();
 
         try {
             fillTransactionTable(TransactionService.findAll());

@@ -48,9 +48,9 @@ public class TransactionService {
     }
 
 
-    public static List<Transaction> findByFilters(Brand brand,TransactionType transactionType,String username,String supplierName) throws Exception {
+    public static List<Transaction> findByFilters(Brand brand,TransactionType transactionType,String userName,String supplierName) throws Exception {
         try (TransactionRepository transactionRepository = new TransactionRepository()) {
-            return transactionRepository.findByFilters(brand,transactionType,username,supplierName);
+            return transactionRepository.findByFilters(brand,transactionType,userName,supplierName);
         }
     }
 

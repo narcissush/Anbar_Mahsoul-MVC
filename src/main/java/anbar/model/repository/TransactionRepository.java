@@ -6,6 +6,7 @@ import anbar.model.entity.enums.Brand;
 import anbar.model.entity.enums.TransactionType;
 import anbar.tools.ConnectionProvider;
 import anbar.tools.EntityMapper;
+import javafx.scene.control.Alert;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -98,27 +99,29 @@ public class TransactionRepository implements AutoCloseable {
         }
     }
 
-    public List<Transaction> findByFilters(Brand brand, TransactionType transactionType, String username, String supplierName) throws SQLException {
+    public List<Transaction> findByFilters(Brand brand, TransactionType transactionType, String userName, String supplierName) throws SQLException {
+
         List<Transaction> transactionList = new ArrayList<>();
         StringBuilder queryBuilder = new StringBuilder("SELECT * FROM transactions_report WHERE 1=1");
         List<Object> parameters = new ArrayList<>();
 
         if (brand != null) {
-            queryBuilder.append(" AND PRODUCTS_BRAND = ?");
-            parameters.add(brand.name());
+                queryBuilder.append(" AND PRODUCTS_BRAND = ?");
+                parameters.add(brand.name());
         }
         if (transactionType != null) {
             queryBuilder.append(" AND TRANSACTION_TYPE = ?");
             parameters.add(transactionType.name());
         }
-        if (username != null && !username.isEmpty()) {
-            queryBuilder.append(" AND USERS_USERNAME = ?");
-            parameters.add(username);
+        if (userName != null && !userName.isEmpty()) {
+            queryBuilder.append(" AND USERS_NAME = ?");
+            parameters.add(userName);
         }
         if (supplierName != null && !supplierName.isEmpty()) {
             queryBuilder.append(" AND SUPPLIERS_NAME = ?");
             parameters.add(supplierName);
         }
+
         connection = ConnectionProvider.getConnectionProvider().getconnection();
         preparedStatement = connection.prepareStatement(queryBuilder.toString());
 
