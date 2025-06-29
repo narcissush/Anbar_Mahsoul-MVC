@@ -110,6 +110,7 @@
                         <TextField fx:id="supplierPhoneNumberTxt" layoutX="115.0" layoutY="215.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                         <TextField fx:id="supplierMobileTxt" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                         <Button fx:id="supplierSaveBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="ذخیره" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                        <Button fx:id="selectSupplierBtn" mnemonicParsing="false" prefHeight="31.0" prefWidth="189.0" text="انتخاب کردن" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                      </children>
                   </GridPane>
                </children>

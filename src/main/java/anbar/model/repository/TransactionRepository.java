@@ -67,7 +67,7 @@ public class TransactionRepository implements AutoCloseable {
                 + "p.serial_number AS products_serial_number, p.price AS products_price, p.TOTAL_QUANTITY AS products_total_Quantity, "
                 + "t.suppliers_id, "
                 + "s.person_type AS suppliers_person_type, s.name AS suppliers_name, s.national_id AS suppliers_national_id, "
-                + "s.postalcode AS suppliers_postalcode, s.phone_number AS suppliers_phone_number, s.mobile_number AS suppliers_mobile_number, "
+                + "s.postal_code AS suppliers_postal_code, s.phone_number AS suppliers_phone_number, s.mobile_number AS suppliers_mobile_number, "
                 + "t.users_id, "
                 + "u.national_id AS users_national_id, u.name AS users_name, u.family AS users_family, u.gender AS users_gender, "
                 + "u.birth_date AS users_birthDate, u.username AS users_username, u.password AS users_password, "

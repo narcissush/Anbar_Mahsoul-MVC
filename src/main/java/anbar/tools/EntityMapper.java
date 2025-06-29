@@ -16,7 +16,7 @@ public class EntityMapper {
                 .supplierName(resultSet.getString("name"))
                 .personType(Person.valueOf(resultSet.getString("person_type")))
                 .nationalId(resultSet.getString("national_id"))
-                .postalCode(resultSet.getString("postalcode"))
+                .postalCode(resultSet.getString("postal_code"))
                 .phoneNumber(resultSet.getString("phone_number"))
                 .mobileNumber(resultSet.getString("mobile_number"))
                 .build();
@@ -63,7 +63,7 @@ public class EntityMapper {
                 .supplierName(resultSet.getString("suppliers_name"))
                 .personType(Person.valueOf(resultSet.getString("suppliers_person_type")))
                 .nationalId(resultSet.getString("suppliers_national_id"))
-                .postalCode(resultSet.getString("suppliers_postalcode"))
+                .postalCode(resultSet.getString("suppliers_postal_code"))
                 .phoneNumber(resultSet.getString("suppliers_phone_number"))
                 .mobileNumber(resultSet.getString("suppliers_mobile_number"))
                 .build();

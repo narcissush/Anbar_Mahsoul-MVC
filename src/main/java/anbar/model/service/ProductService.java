@@ -1,7 +1,9 @@
 package anbar.model.service;
 
+import anbar.controller.exceptions.OutOfProductException;
 import anbar.model.entity.Product;
 import anbar.model.entity.Transaction;
+import anbar.model.entity.enums.TransactionType;
 import anbar.model.repository.ProductRepository;
 import anbar.model.repository.TransactionRepository;
 
@@ -25,10 +27,15 @@ public class ProductService {
         }
     }
 
-    public static boolean editQuantity(int id, int quantity , int n) throws Exception {
+    public static void editQuantity(int productId, int quantity, TransactionType transactionType) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {
-              boolean result = productRepository.editQuantity(id, quantity , n);
-              return result;
+            if (transactionType.equals(TransactionType.فروش)) {
+                if (productRepository.findById(productId).getTotalQuantity() < quantity) {
+                    throw new OutOfProductException();
+                }
+                quantity = -quantity;
+            }
+            productRepository.editQuantity(productId, quantity);
         }
     }
 
@@ -65,12 +72,12 @@ public class ProductService {
             return productRepository.findByPrice(price1, price2);
         }
     }
+
     public static List<Product> findByBrand(String brand) throws Exception {
         try (ProductRepository productRepository = new ProductRepository()) {
             return productRepository.findByBrand(brand);
         }
     }
-
 
 
 }

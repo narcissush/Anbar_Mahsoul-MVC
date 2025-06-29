@@ -1,15 +1,17 @@
 package anbar.model.service;
 
+import anbar.controller.exceptions.DuplicateUsernameException;
+import anbar.controller.exceptions.UserNotFoundException;
 import anbar.model.entity.User;
 import anbar.model.repository.UserRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public class UserService {
-    public static User loginUser=new User();
-
     public static void save(User user) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
+//            Optional<User> foundUser = Optional.ofNullable( userRepository.findByUsername(user.getUsername()));
             userRepository.save(user);
         }
     }
@@ -17,7 +19,7 @@ public class UserService {
 
     public static void edit(User user) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
-                userRepository.edit(user);
+            userRepository.edit(user);
         }
     }
 
@@ -58,13 +60,8 @@ public class UserService {
 
     public static User findByUserAndPassword(String username, String password) throws Exception {
         try (UserRepository userRepository = new UserRepository()) {
-            loginUser= userRepository.findByUsernameAndPassword(username, password);
-            return loginUser;
-        }
-    }
-    public static User getLoginUser() throws Exception {
-        try (UserRepository userRepository = new UserRepository()) {
-        return loginUser;
+            Optional<User> loginUser = Optional.ofNullable(userRepository.findByUsernameAndPassword(username, password));
+            return loginUser.orElseThrow(UserNotFoundException::new);
         }
     }
 
@@ -73,7 +70,6 @@ public class UserService {
             return userRepository.findByUsername(username);
         }
     }
-
 
 
 }

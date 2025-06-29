@@ -48,7 +48,7 @@ public class UserController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            loginUser = UserService.getLoginUser();
+            loginUser = AppState.user;
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
             alert.show();
@@ -86,7 +86,7 @@ public class UserController implements Initializable {
                 secondStage.show();
 
                 Stage currentStage = (Stage) userQuitBtn.getScene().getWindow();
-                UserService.loginUser = null;
+                AppState.user = null;
                 currentStage.close();
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
@@ -97,7 +97,7 @@ public class UserController implements Initializable {
 
     private void fillUserForm() {
         try {
-            User user = UserService.getLoginUser();
+            User user = AppState.user;
             userIdTxt.setText(String.valueOf(user.getId()));
             userNationalIdTxt.setText(String.valueOf(user.getNationalId()));
             userFirstNameTxt.setText(String.valueOf(user.getName()));

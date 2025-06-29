@@ -93,7 +93,7 @@
             <TableColumn fx:id="supplierNameCol" prefWidth="75.0" text="تامین کننده" />
             <TableColumn fx:id="personTypeCol" prefWidth="75.0" text="شخص" />
             <TableColumn fx:id="supplierNationalIdCol" prefWidth="75.0" text="کدملی" />
-            <TableColumn fx:id="postalcodeCol" prefWidth="75.0" text="کدملی" />
+            <TableColumn fx:id="postal_codeCol" prefWidth="75.0" text="کدملی" />
             <TableColumn fx:id="phoneNumberCol" prefWidth="75.0" text="شماره تماس" />
             <TableColumn fx:id="mobileNumberCol" prefWidth="75.0" text="شماره موبایل" />
             <TableColumn fx:id="userIdCol" prefWidth="75.0" text="کدکاربر" />

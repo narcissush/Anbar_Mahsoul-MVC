@@ -23,7 +23,7 @@ create table suppliers
     name          nvarchar2(30),
     person_type   nvarchar2(10),
     national_id   nvarchar2(10) not null,
-    postalcode    nvarchar2(10),
+    postal_code    nvarchar2(10),
     phone_number  nvarchar2(15),
     mobile_number nvarchar2(15)
 
@@ -81,7 +81,7 @@ select t.id as          transaction_id,
        s.person_type    suppliers_person_type,
        s.NAME           suppliers_name,
        s.national_id    suppliers_national_id,
-       s.postalcode     suppliers_postalcode,
+       s.postal_code     suppliers_postal_code,
        s.phone_number   suppliers_phone_number,
        s.mobile_number  suppliers_mobile_number,
 

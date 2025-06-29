@@ -93,7 +93,7 @@ public class ProductController implements Initializable {
     @FXML
     private TextField productItem2Txt;
     @FXML
-    private Button productSearchBtn;
+    private Button productSearchBtn, selectProductBtn;
     @FXML
     private ImageView productRefreshImg;
     @FXML
@@ -103,13 +103,28 @@ public class ProductController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-       // AtomicInteger i = new AtomicInteger();
+        // AtomicInteger i = new AtomicInteger();
         productBrandCmb.getItems().addAll(Brand.values());
         productCategoryCmb.getItems().addAll(Category.values());
         productOsCmb.getItems().addAll(Os.values());
         productSearchItemCmb.getItems().addAll(ProductSearchList.values());
         resetProductForm();
 
+        selectProductBtn.setOnAction(event -> {
+            AppState.product =
+                    Product.builder()
+                            .id(Integer.parseInt(productIdTxt.getText()))
+                            .category(productCategoryCmb.getSelectionModel().getSelectedItem())
+                            .brand(productBrandCmb.getSelectionModel().getSelectedItem())
+                            .model(productModelTxt.getText())
+                            .os(productOsCmb.getSelectionModel().getSelectedItem())
+                            .hasHeadset(headsetChk.isSelected())
+                            .hasCharger(chargerChk.isSelected())
+                            .serialNumber(productSerialTxt.getText())
+                            .price(Integer.parseInt(productPriceTxt.getText()))
+                            .totalQuantity(Integer.parseInt(productQuantityTxt.getText()))
+                            .build();
+        });
 
         productNewBtn.setOnAction(event -> {
             resetProductForm();
@@ -125,7 +140,6 @@ public class ProductController implements Initializable {
             productSaveBtn.setDisable(false);
 
         });
-
 
 //Edit-------------------------------
 
@@ -190,8 +204,11 @@ public class ProductController implements Initializable {
 //Delete----------------------------------------------------------------------
         productDeleteBtn.setOnAction(event -> {
             try {
-                ProductService.delete(Integer.parseInt(productIdTxt.getText()));
-                resetProductForm();
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Are You Sure?", ButtonType.YES, ButtonType.NO);
+                if (alert.showAndWait().get() == ButtonType.YES) {
+                    ProductService.delete(Integer.parseInt(productIdTxt.getText()));
+                    resetProductForm();
+                }
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
@@ -231,7 +248,7 @@ public class ProductController implements Initializable {
                 productItem2Txt.setVisible(false);
                 productSearchByCmb.getItems().addAll(Category.values());
                 productSearchByCmb.setVisible(true);
-                i=1;
+                i = 1;
 
             } else if ("برند".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
@@ -239,13 +256,13 @@ public class ProductController implements Initializable {
                 productItem2Txt.setVisible(false);
                 productSearchByCmb.getItems().addAll(Brand.values());
                 productSearchByCmb.setVisible(true);
-                i=2;
+                i = 2;
             } else if ("قیمت".equals(productSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 productSearchByCmb.getItems().clear();
                 productSearchByCmb.setVisible(false);
                 productItem1Txt.setVisible(true);
                 productItem2Txt.setVisible(true);
-                i=3;
+                i = 3;
             }
         });
 

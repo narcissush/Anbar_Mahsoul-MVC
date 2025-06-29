@@ -22,28 +22,37 @@ import java.util.ResourceBundle;
 
 public class TransactionController implements Initializable {
     @FXML
-    private ComboBox<Product> transactionProductCmb;
-    @FXML
-    private ComboBox<Supplier> transactionSupplierCmb;
-    @FXML
-    private TextField transactionQuantityTxt;
-    @FXML
-    private TextField transactionUserTxt;
+    private TextField transactionQuantityTxt, productTxt, supplierTxt, transactionUserTxt;
+
     @FXML
     private DatePicker transactionDate;
+
     @FXML
-    private RadioButton transactionBuyerRdo,transactionSellerRdo;
+    private RadioButton transactionBuyerRdo, transactionSellerRdo;
+
     @FXML
     private Button transactionSaveBtn;
+
     @FXML
     private ToggleGroup transactionTypeToggle;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         try {
-            transactionProductCmb.getItems().addAll(ProductService.findAll());
-            transactionSupplierCmb.getItems().addAll(SupplierService.findAll());
-            transactionUserTxt.setText(String.valueOf(UserService.getLoginUser().getName()) +" "+String.valueOf(UserService.getLoginUser().getFamily()) );
+            if (AppState.supplier == null || AppState.product == null) {
+                throw new Exception("Supplier or product is null");
+            }
+
+            productTxt.setText(
+                    String.format(
+                            "%s (%s) - %s",
+                            AppState.product.getModel(), AppState.product.getBrand().name(), AppState.product.getSerialNumber()
+                    )
+            );
+
+            supplierTxt.setText(AppState.supplier.getSupplierName());
+
+            transactionUserTxt.setText(AppState.user.getFullName());
             transactionDate.setValue(LocalDate.now());
         } catch (Exception e) {
             Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
@@ -53,44 +62,40 @@ public class TransactionController implements Initializable {
         transactionSaveBtn.setOnAction(event -> {
             try {
 
-                RadioButton selectedtransactionTypeRdo = (RadioButton) transactionTypeToggle.getSelectedToggle();
+                RadioButton selectedTransactionTypeRdo = (RadioButton) transactionTypeToggle.getSelectedToggle();
                 Boolean result = false;
 
                 Transaction transaction = Transaction.builder()
                         .id(1)
-                        .product(transactionProductCmb.getSelectionModel().getSelectedItem())
-                        .supplier(transactionSupplierCmb.getSelectionModel().getSelectedItem())
-                        .user(UserService.getLoginUser())
-                        .transactionType(TransactionType.valueOf(selectedtransactionTypeRdo.getText()))
+                        .product(AppState.product)
+                        .supplier(AppState.supplier)
+                        .user(AppState.user)
+                        .transactionType(TransactionType.valueOf(selectedTransactionTypeRdo.getText()))
                         .transactionQuantity(Integer.parseInt(transactionQuantityTxt.getText()))
                         .transactionDate(Timestamp.valueOf(LocalDateTime.now()).toLocalDateTime())
                         .build();
 
-                if (selectedtransactionTypeRdo.getText().equals("خرید"))
-                {
-                    result=ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 1);
-                }
-                else if(selectedtransactionTypeRdo.getText().equals("فروش"))
-                {
-                    result= ProductService.editQuantity(transactionProductCmb.getSelectionModel().getSelectedItem().getId(), Integer.parseInt(transactionQuantityTxt.getText()), 2);
-                }
-                if(result){
-                    TransactionService.save(transaction);
-                    new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
-                    Stage currentStage = (Stage) transactionSaveBtn.getScene().getWindow();
-                    currentStage.close();
-                }
-            }catch (Exception e){
+                ProductService.editQuantity(
+                        AppState.product.getId(),
+                        Integer.parseInt(transactionQuantityTxt.getText()),
+                        selectedTransactionTypeRdo.getText().equals("خرید")?TransactionType.خرید:TransactionType.فروش);
+
+                TransactionService.save(transaction);
+                new Alert(Alert.AlertType.INFORMATION, "Supplier Saved", ButtonType.OK).show();
+                Stage currentStage = (Stage) transactionSaveBtn.getScene().getWindow();
+                currentStage.close();
+
+            } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
-
             }
         });
 
     }
+
     private void resetTransactionForm() throws Exception {
         transactionQuantityTxt.clear();
-        transactionUserTxt.setText(String.valueOf(UserService.getLoginUser().getName()) +" "+String.valueOf(UserService.getLoginUser().getFamily()) );
+        transactionUserTxt.setText(AppState.user.getFullName());
         transactionDate.setValue(LocalDate.now());
     }
 

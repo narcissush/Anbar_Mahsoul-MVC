@@ -20,36 +20,17 @@ import java.util.ResourceBundle;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class SupplierController implements Initializable {
-    // فیلدهای  تامین کننده
     @FXML
-    private TextField supplierIdTxt;
-    @FXML
-    private RadioButton naturalPersonRdo;
-    @FXML
-    private RadioButton legalPersonRdo;
+    private RadioButton naturalPersonRdo, legalPersonRdo;
+
     @FXML
     private ToggleGroup personToggle;
-    @FXML
-    private TextField supplierNameTxt;
-    @FXML
-    private TextField supplierNationalIdTxt;
-    @FXML
-    private TextField supplierPostalCodeTxt;
-    @FXML
-    private TextField supplierPhoneNumberTxt;
-    @FXML
-    private TextField supplierMobileTxt;
-    @FXML
-    private Button supplierSaveBtn;
-    @FXML
-    private Button supplierNewBtn;
-    @FXML
-    private Button supplierEditBtn;
-    @FXML
-    private Button supplierDeleteBtn;
-    @FXML
-    private Button supplierReportsBtn;
 
+    @FXML
+    private TextField supplierIdTxt, supplierNameTxt, supplierNationalIdTxt, supplierPostalCodeTxt, supplierPhoneNumberTxt, supplierMobileTxt;
+
+    @FXML
+    private Button supplierSaveBtn, supplierNewBtn, supplierEditBtn, supplierDeleteBtn, supplierReportsBtn, selectSupplierBtn;
 
     //جستجو تامین کننده
     @FXML
@@ -97,6 +78,20 @@ public class SupplierController implements Initializable {
             supplierPostalCodeTxt.setDisable(false);
             supplierPhoneNumberTxt.setDisable(false);
             supplierMobileTxt.setDisable(false);
+        });
+
+        selectSupplierBtn.setOnAction(event -> {
+
+            AppState.supplier =
+                    Supplier.builder()
+                            .id(Integer.parseInt(supplierIdTxt.getText()))
+                            .personType(Person.valueOf(((RadioButton) personToggle.getSelectedToggle()).getText()))
+                            .supplierName(supplierNameTxt.getText())
+                            .nationalId(supplierNationalIdTxt.getText())
+                            .postalCode(supplierPostalCodeTxt.getText())
+                            .phoneNumber(supplierPhoneNumberTxt.getText())
+                            .mobileNumber(supplierMobileTxt.getText())
+                            .build();
         });
 
         supplierEditBtn.setOnAction(event -> {
@@ -186,19 +181,19 @@ public class SupplierController implements Initializable {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(false);
                 supplierSearchItem1Txt.setVisible(true);
-                i=1;
+                i = 1;
 
             } else if ("نام".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(false);
                 supplierSearchItem1Txt.setVisible(true);
-                i=2;
+                i = 2;
             } else if ("شخص".equals(supplierSearchItemCmb.getSelectionModel().getSelectedItem().toString())) {
                 supplierSearchByCmb.getItems().clear();
                 supplierSearchByCmb.setVisible(true);
                 supplierSearchItem1Txt.setVisible(false);
                 supplierSearchByCmb.getItems().addAll(Person.values());
-                i=3;
+                i = 3;
             }
         });
 

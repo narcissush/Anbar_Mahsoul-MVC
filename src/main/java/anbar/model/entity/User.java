@@ -19,4 +19,8 @@ public class User implements Serializable {
     private LocalDate birthDate;
     private String username;
     private String password;
+
+    public String getFullName() {
+        return name + " " + family;
+    }
 }

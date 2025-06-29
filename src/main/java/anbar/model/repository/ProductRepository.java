@@ -59,37 +59,11 @@ public class ProductRepository implements AutoCloseable {
         preparedStatement.execute();
     }
 
-    public boolean editQuantity(int id, int quantity, int n) throws SQLException {
-        int currentQuantity;
-        boolean result = false;
-        preparedStatement = connection.prepareStatement("select TOTAL_QUANTITY from Products where id=?");
-        preparedStatement.setInt(1, id);
-
-        ResultSet resultSet = preparedStatement.executeQuery();
-        while (resultSet.next()) {
-            currentQuantity = resultSet.getInt("total_quantity");
-            if (n == 1) {
-                currentQuantity = (currentQuantity + quantity);
-                preparedStatement = connection.prepareStatement("update Products set TOTAL_QUANTITY=? where id=?");
-                preparedStatement.setInt(1, currentQuantity);
-                preparedStatement.setInt(2, id);
-                preparedStatement.execute();
-                result = true;
-            } else if (n == 2) {
-                if (currentQuantity < quantity) {
-                    new Alert(Alert.AlertType.INFORMATION, "مقدار وارد شده بیشتر از مقدار موجود می باشد", ButtonType.OK).show();
-                    result = false;
-                } else {
-                    currentQuantity = (currentQuantity - quantity);
-                    preparedStatement = connection.prepareStatement("update Products set TOTAL_QUANTITY=? where id=?");
-                    preparedStatement.setInt(1, currentQuantity);
-                    preparedStatement.setInt(2, id);
-                    preparedStatement.execute();
-                    result = true;
-                }
-            }
-        }
-        return result;
+    public void editQuantity(int id, int quantity) throws SQLException {
+        preparedStatement = connection.prepareStatement("update PRODUCTS set TOTAL_QUANTITY = TOTAL_QUANTITY + ? where id=?");
+        preparedStatement.setInt(1, quantity);
+        preparedStatement.setInt(2, id);
+        preparedStatement.execute();
     }
 
     public void delete(int id) throws SQLException {
