@@ -136,9 +136,6 @@ public class UserRepository implements AutoCloseable {
         }
     }
 
-
-
-
     @Override
     public void close() throws Exception {
 

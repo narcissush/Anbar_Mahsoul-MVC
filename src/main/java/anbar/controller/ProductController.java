@@ -1,5 +1,6 @@
 package anbar.controller;
 
+import anbar.FormManager;
 import anbar.model.entity.Product;
 import anbar.model.entity.enums.*;
 
@@ -103,7 +104,6 @@ public class ProductController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // AtomicInteger i = new AtomicInteger();
         productBrandCmb.getItems().addAll(Brand.values());
         productCategoryCmb.getItems().addAll(Category.values());
         productOsCmb.getItems().addAll(Os.values());
@@ -124,6 +124,7 @@ public class ProductController implements Initializable {
                             .price(Integer.parseInt(productPriceTxt.getText()))
                             .totalQuantity(Integer.parseInt(productQuantityTxt.getText()))
                             .build();
+            FormManager.mainFormController.setProduct();
         });
 
         productNewBtn.setOnAction(event -> {
@@ -296,11 +297,8 @@ public class ProductController implements Initializable {
         //Transaction-------------------------------
         transactionBtn.setOnAction(event -> {
             try {
-                Stage secondStage = new Stage();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/Transaction.fxml")));
-                secondStage.setScene(scene);
-                secondStage.setTitle("ورود کالا");
-                secondStage.show();
+                FormManager formManager = new FormManager();
+                formManager.showTransactionController();
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();

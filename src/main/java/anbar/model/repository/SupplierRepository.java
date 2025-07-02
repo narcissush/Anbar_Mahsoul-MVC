@@ -38,7 +38,7 @@ public class SupplierRepository implements AutoCloseable {
     }
 
     public void edit(Supplier supplier) throws SQLException {
-        preparedStatement = connection.prepareStatement("update suppliers set NAME=?,PERSON_TYPE=?,NATIONAL_ID=?,POSTALCODE=?,PHONE_NUMBER=?,MOBILE_NUMBER=? where id = ?");
+        preparedStatement = connection.prepareStatement("update suppliers set NAME=?,PERSON_TYPE=?,NATIONAL_ID=?,POSTAL_CODE=?,PHONE_NUMBER=?,MOBILE_NUMBER=? where id = ?");
         preparedStatement.setString(1, supplier.getSupplierName());
         preparedStatement.setString(2,supplier.getPersonType().name());
         preparedStatement.setString(3,supplier.getNationalId());

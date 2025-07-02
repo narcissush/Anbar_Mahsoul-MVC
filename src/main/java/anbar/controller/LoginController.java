@@ -1,6 +1,7 @@
 package anbar.controller;
 
 
+import anbar.FormManager;
 import anbar.model.entity.User;
 import anbar.model.service.UserService;
 import javafx.fxml.FXML;
@@ -31,12 +32,8 @@ public class LoginController implements Initializable {
             try {
                 User user = UserService.findByUserAndPassword(userLoginTxt.getText(), passwordLoginTxt.getText());
                 AppState.user = user;
-                Stage secondStage = new Stage();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/appForm.fxml")));
-                secondStage.setScene(scene);
-                secondStage.setTitle("نرم افزار انبارداری");
-                secondStage.setResizable(false);
-                secondStage.show();
+                FormManager formManager = new FormManager();
+                formManager.showMainFormController();
 
                 Stage currentStage = (Stage) loginBtn.getScene().getWindow();
                 currentStage.close();
@@ -49,16 +46,12 @@ public class LoginController implements Initializable {
 
         registerBtn.setOnAction(event -> {
             try {
-                Stage secondStage = new Stage();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/UserRegisterForm.fxml")));
-                secondStage.setScene(scene);
-                secondStage.setTitle("ثبت نام کاربر");
-                secondStage.show();
+                FormManager formManager = new FormManager();
+                formManager.showUserRegisterController();
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
             }
         });
-
     }
 }

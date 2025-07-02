@@ -1,6 +1,7 @@
 package anbar.controller;
 
 
+import anbar.FormManager;
 import anbar.controller.validation.UserValidation;
 import anbar.model.entity.User;
 import anbar.model.entity.enums.Gender;
@@ -79,11 +80,8 @@ public class UserController implements Initializable {
         });
         userQuitBtn.setOnAction(event -> {
             try {
-                Stage secondStage = new Stage();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/LoginForm.fxml")));
-                secondStage.setScene(scene);
-                secondStage.setTitle("ورود");
-                secondStage.show();
+                FormManager formManager = new FormManager();
+                formManager.showLoginController();
 
                 Stage currentStage = (Stage) userQuitBtn.getScene().getWindow();
                 AppState.user = null;

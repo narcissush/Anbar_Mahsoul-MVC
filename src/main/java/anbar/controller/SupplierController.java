@@ -1,5 +1,6 @@
 package anbar.controller;
 
+import anbar.FormManager;
 import anbar.model.entity.Supplier;
 import anbar.model.entity.enums.*;
 import anbar.model.service.SupplierService;
@@ -81,7 +82,6 @@ public class SupplierController implements Initializable {
         });
 
         selectSupplierBtn.setOnAction(event -> {
-
             AppState.supplier =
                     Supplier.builder()
                             .id(Integer.parseInt(supplierIdTxt.getText()))
@@ -92,6 +92,7 @@ public class SupplierController implements Initializable {
                             .phoneNumber(supplierPhoneNumberTxt.getText())
                             .mobileNumber(supplierMobileTxt.getText())
                             .build();
+            FormManager.mainFormController.setSupplier();
         });
 
         supplierEditBtn.setOnAction(event -> {

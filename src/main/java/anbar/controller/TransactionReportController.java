@@ -77,7 +77,7 @@ public class TransactionReportController implements Initializable {
     @FXML
     private TableColumn<Transaction, String> supplierNationalIdCol;
     @FXML
-    private TableColumn<Transaction, String> postal_codeCol;
+    private TableColumn<Transaction, String> postalcodeCol;
     @FXML
     private TableColumn<Transaction, String> phoneNumberCol;
     @FXML
@@ -168,7 +168,7 @@ public class TransactionReportController implements Initializable {
         supplierNameCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getSupplierName()));
         personTypeCol.setCellValueFactory(c -> new SimpleObjectProperty<>(c.getValue().getSupplier().getPersonType()));
         supplierNationalIdCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getNationalId()));
-        postal_codeCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getPostalCode()));
+        postalcodeCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getPostalCode()));
         phoneNumberCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getPhoneNumber()));
         mobileNumberCol.setCellValueFactory(c -> new SimpleStringProperty(c.getValue().getSupplier().getMobileNumber()));
 

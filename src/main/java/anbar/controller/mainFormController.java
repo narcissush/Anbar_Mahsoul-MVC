@@ -1,6 +1,6 @@
 package anbar.controller;
 
-import anbar.App;
+import anbar.FormManager;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -12,7 +12,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 
-public class AppController implements Initializable {
+public class mainFormController implements Initializable {
     @FXML
     private Menu transactionMenu, helpMenu;
 
@@ -27,18 +27,15 @@ public class AppController implements Initializable {
         userLbl.setText(AppState.user.getName() + " " + AppState.user.getFamily());
         transactionReport.setOnAction(event -> {
             try {
-                Stage secondStage = new Stage();
-                Scene scene = new Scene(FXMLLoader.load(getClass().getResource("/view/TransactionReport.fxml")));
-                secondStage.setScene(scene);
-                secondStage.setTitle("گزارشات انبارگردانی");
-                secondStage.show();
+
+                FormManager formManager = new FormManager();
+                formManager.showTransactionReportController();
+
             } catch (Exception e) {
                 Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
                 alert.show();
             }
         });
-
-
     }
 
     public void setSupplier() {
